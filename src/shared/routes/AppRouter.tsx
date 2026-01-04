@@ -2,21 +2,23 @@ import { Suspense,lazy } from "react";
 import {Routes,Route} from 'react-router-dom'
 
 const Index = lazy(()=>import('./../../pages/index'))
-const About = lazy(()=>import('./../../pages/about'))
+const Page404 = lazy(()=>import('@/shared/components/Page404'))
 
 export function AppRouter(){
   return <>
   <Suspense fallback={<p>Cargando...</p>}>
+
     <Routes>
       <Route
       path="/"
       element={<Index/>}
       />
       <Route
-      path='/about'
-      element={<About/>}
+      path="*"
+      element={<Page404/>}
       />
     </Routes>
+
   </Suspense>
   </>
 }
