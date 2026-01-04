@@ -1,0 +1,40 @@
+import {
+  Stepper,
+  StepperIndicator,
+  StepperItem,
+  StepperNav,
+  StepperSeparator,
+  StepperTrigger,
+} from '@/shared/components/ui/stepper';
+import type { ReactNode } from 'react';
+
+interface Props {
+  value:number,
+  onValueChange:((value: number) => void) | undefined,
+  children:ReactNode,
+  steps:number[],
+  className?:string
+}
+
+export default function FormStepper({value,onValueChange,className,children,steps}:Props) {
+
+  return (
+    <Stepper value={value} onValueChange={onValueChange} className={`space-y-8 ${className}`}>
+      <StepperNav>
+        {steps.map((step) => (
+          <StepperItem key={step} step={step}>
+            <StepperTrigger asChild>
+              <StepperIndicator className="data-[state=completed]:bg-green-500 data-[state=completed]:text-white data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=inactive]:text-gray-500">
+                {step}
+              </StepperIndicator>
+            </StepperTrigger>
+            {steps.length > step && <StepperSeparator className="group-data-[state=completed]/step:bg-green-500" />}
+          </StepperItem>
+        ))}
+      </StepperNav>
+
+      {children}
+       
+    </Stepper>
+  );
+}

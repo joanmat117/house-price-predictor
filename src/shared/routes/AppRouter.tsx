@@ -2,7 +2,8 @@ import { Suspense,lazy } from "react";
 import {Routes,Route} from 'react-router-dom'
 
 const Index = lazy(()=>import('@/pages/index'))
-const Page404 = lazy(()=>import('@/shared/components/Page404'))
+const Predict = lazy(()=>import('@/pages/predict'))
+const NotFound = lazy(()=>import('@/pages/notFound'))
 const Layout = lazy(()=>import('@/shared/layouts/Layout'))
 
 export function AppRouter(){
@@ -17,8 +18,12 @@ export function AppRouter(){
         element={<Index/>}
         />
         <Route
+        path="/predict"
+        element={<Predict/>}
+        />
+        <Route
         path="*"
-        element={<Page404/>}
+        element={<NotFound/>}
         />
 
       </Route>

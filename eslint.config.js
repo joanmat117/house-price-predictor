@@ -19,5 +19,15 @@ export default defineConfig([
       ecmaVersion: 2020,
       globals: globals.browser,
     },
+    rules: {
+      // Desactivar completamente la regla de variables no usadas
+      '@typescript-eslint/no-unused-vars': 'off',
+      
+      // Mantener otras reglas importantes
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+    },
   },
 ])

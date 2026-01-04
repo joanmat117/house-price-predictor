@@ -7,5 +7,26 @@
     "cta": {
       "button":"Empezar"
     }
+  },
+  "languageSelector":{
+    "title":"Idioma",
+    "spanish":"Español",
+    "english":"Inglés"
+  },
+  "themeSelector":{
+    "title":"Tema",
+    "dark":"Oscuro",
+    "light":"Claro",
+    "system":"Sistema"
+  },
+  "notfound":{
+    "title":"Ups, algo se perdió",
+    "description":"Lo sentimos, no podemos encontrar esta paginá",
+    "button":"Regresar al inicio"
+  },
+  "buttons":{
+    "out":"Salir",
+    "previous":"Anterior",
+    "next":"Siguiente"
   }
 }

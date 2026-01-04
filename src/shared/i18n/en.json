@@ -1,3 +1,21 @@
 {
-
+  "hero": {
+    "title": "Housing Price Estimator - Aburrá Valley",
+    "description": "Estimation based on real real estate market data.",
+    "accuracy": " ±10% error on average.",
+    "cost": "free",
+    "cta": {
+      "button": "Get Started"
+    }
+  },
+  "languageSelector": {
+    "title": "Language",
+    "spanish": "Spanish",
+    "english": "English"
+  },
+  "notfound": {
+    "title": "Oops, something went missing",
+    "description": "Sorry, we can't find this page",
+    "button": "Back to Home"
+  }
 }

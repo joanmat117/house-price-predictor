@@ -5,6 +5,7 @@ import { Button } from "@/shared/components/ui/button";
 import { useTranslations } from "@/shared/hooks/useTranslations";
 import heroImage from '@/assets/hero.jpg'
 import { Calculator } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const Hero = () => {
   
@@ -13,8 +14,8 @@ export const Hero = () => {
 
   return (
     <section className={cn("overflow-hidden py-15")}>
-      <div className="container">
-        <div className="flex flex-col gap-5">
+      <div className="container mx-auto">
+        <div className="flex flex-col w-full gap-5">
           <div className="relative flex flex-col gap-5 px-3">
             <div
               style={{
@@ -37,9 +38,9 @@ export const Hero = () => {
             </p>
             <div className="flex flex-col items-center justify-center gap-3 pt-3 pb-12">
               <Button size="lg" variant={'default'} asChild>
-                <a href={'/predict'}>
+                <Link to={'/predict'}>
                   {t.hero.cta.button} <Calculator className="size-4"/> 
-                </a>
+                </Link>
               </Button>
               {t.hero.accuracy && (
                 <div className="text-xs text-muted-foreground">{t.hero.accuracy}</div>
