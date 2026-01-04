@@ -1,0 +1,11 @@
+{
+  "hero":{
+    "title":"Estimador de Precio de Vivienda - Valle de Aburrá",
+    "description":"Estimación basada en datos reales del mercado inmobiliario.",
+    "accuracy":" Error del ±10% en promedio.",
+    "cost":"gratis",
+    "cta": {
+      "button":"Empezar"
+    }
+  }
+}

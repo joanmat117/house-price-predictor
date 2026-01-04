@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
 
-export function Layout(){
+export default function Layout(){
   return <>
-  <div className="mx-auto min-h-dvh max-w-[800px]">
+  <div className="mx-auto min-h-dvh max-w-[900px]">
   <Outlet/>
   </div>
   </>
