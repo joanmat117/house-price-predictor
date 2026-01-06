@@ -1,8 +1,8 @@
 {
   "hero": {
     "title": "Housing Price Estimator - Aburrá Valley",
-    "description": "Estimation based on real estate market data.",
-    "accuracy": "Average error of ±10%.",
+    "description": "Estimation based on real real estate market data.",
+    "accuracy": "±10% error on average.",
     "cost": "free",
     "cta": {
       "button": "Get Started"
@@ -22,11 +22,92 @@
   "notfound": {
     "title": "Oops, something went missing",
     "description": "Sorry, we can't find this page",
-    "button": "Back to Home"
+    "button": "Return to Home"
   },
   "buttons": {
-    "out": "Back to Home",
+    "out": "Log Out",
     "previous": "Previous",
     "next": "Next"
+  },
+  "form": {
+    "city": {
+      "label": "Select your city",
+      "notFound": "City not available"
+    }
+  },
+  "validations": {
+    "city": {
+      "invalid": "Invalid city",
+      "required": "City is required"
+    },
+    "property_type": {
+      "required": "Select a property type",
+      "invalid": "Invalid property type"
+    },
+    "strata": {
+      "integer": "Must be an integer",
+      "min": "Minimum strata is 1",
+      "max": "Maximum strata is 6",
+      "required": "Strata is required"
+    },
+    "area": {
+      "min": "Minimum 30 m²",
+      "max": "Maximum 10,000 m²",
+      "required": "Total area is required",
+      "number": "Area must be a valid number"
+    },
+    "built_area": {
+      "min": "Minimum 30 m²",
+      "max": "Maximum 5,000 m²",
+      "max_total": "Built area cannot be larger than total area",
+      "required": "Built area is required",
+      "number": "Built area must be a valid number"
+    },
+    "rooms": {
+      "integer": "Must be an integer",
+      "min": "Minimum 1 room",
+      "max": "Maximum 9 rooms",
+      "required": "Number of rooms is required"
+    },
+    "bathrooms": {
+      "integer": "Must be an integer",
+      "min": "Minimum 1 bathroom",
+      "max": "Maximum 9 bathrooms",
+      "required": "Number of bathrooms is required"
+    },
+    "parking_spots": {
+      "integer": "Must be an integer",
+      "min": "Minimum 0 parking spots",
+      "max": "Maximum 9 parking spots",
+      "required": "Number of parking spots is required"
+    },
+    "antiquity": {
+      "integer": "Must be an integer",
+      "min": "Minimum 1 year",
+      "max": "Maximum 5 years",
+      "required": "Antiquity is required"
+    },
+    "latitude": {
+      "out_of_range": "Latitude out of range (6.0-6.5)",
+      "min": "Minimum latitude is 6.0",
+      "max": "Maximum latitude is 6.5",
+      "required": "Latitude is required",
+      "number": "Latitude must be a valid number"
+    },
+    "longitude": {
+      "out_of_range": "Longitude out of range (-75.6 to -75.3)",
+      "min": "Minimum longitude is -75.6",
+      "max": "Maximum longitude is -75.3",
+      "required": "Longitude is required",
+      "number": "Longitude must be a valid number"
+    },
+    "has_sauna_jacuzzi_or_turkish_bath": {
+      "required": "This field is required",
+      "boolean": "Must be true or false"
+    },
+    "has_pool": {
+      "required": "This field is required",
+      "boolean": "Must be true or false"
+    }
   }
 }
