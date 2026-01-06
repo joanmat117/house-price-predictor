@@ -1,0 +1,34 @@
+import { Button } from "@/shared/components/ui/button"
+import { useStepperStore } from "@/shared/hooks/useStepperStore"
+import { useTranslations } from "@/shared/hooks/useTranslations"
+import { ArrowBigLeft, ArrowBigRight } from "lucide-react"
+
+interface Props {
+  onPrevClick:()=>void,
+  onNextClick:()=>void
+}
+
+export function StepperNavigation({onNextClick,onPrevClick}:Props){
+
+  const t = useTranslations()
+
+  const {currentStep,maxStep} = useStepperStore()
+
+  return <>
+    <div className="flex items-center justify-between gap-2.5">
+      <Button variant="outline" onClick={()=>onPrevClick()} disabled={currentStep === 1}>
+          <ArrowBigLeft className="size-4"/>
+        {t.buttons.previous}
+      </Button>
+      <Button
+        variant="outline"
+        onClick={()=>onNextClick()}
+        disabled={currentStep === maxStep}
+      >
+        {t.buttons.next}
+        <ArrowBigRight className="size-4" />
+      </Button>
+    </div>
+
+  </>
+}

@@ -2,7 +2,7 @@ import FormStepper from "@/features/FormStepper";
 import { Button } from "@/shared/components/ui/button";
 import { StepperContent, StepperPanel } from "@/shared/components/ui/stepper";
 import { useTranslations } from "@/shared/hooks/useTranslations";
-import { ArrowBigLeft, ArrowBigRight, CornerLeftUp} from "lucide-react";
+import { CornerLeftUp} from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -34,22 +34,7 @@ export default function Predict(){
     </StepperPanel>
 
 
-    {/* Stepper Navigation */}
 
-    <div className="flex items-center justify-between gap-2.5">
-      <Button variant="outline" onClick={() => setCurrentStep((prev) => prev - 1)} disabled={currentStep === 1}>
-          <ArrowBigLeft className="size-4"/>
-        {t.buttons.previous}
-      </Button>
-      <Button
-        variant="outline"
-        onClick={() => setCurrentStep((prev) => prev + 1)}
-        disabled={currentStep === steps.length}
-      >
-        {t.buttons.next}
-        <ArrowBigRight className="size-4" />
-      </Button>
-    </div>
-  </FormStepper>
+      </FormStepper>
   </section>
 }

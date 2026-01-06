@@ -29,12 +29,13 @@ interface Props {
   triggerClassName?:string,
   popoverClassName?:string,
   popoverItemClassName:string,
-  onValueChange?:(value:string)=>void
+  onValueChange?:(value:string)=>void,
+  defaultValue?:string
 }
 
-export function Combobox({label,notFound,options,onValueChange,triggerClassName,popoverItemClassName,popoverClassName}:Props) {
+export function Combobox({label,defaultValue,notFound,options,onValueChange,triggerClassName,popoverItemClassName,popoverClassName}:Props) {
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState("")
+  const [value, setValue] = useState(defaultValue || '')
 
   useEffect(()=>{
     if(onValueChange) onValueChange(value)

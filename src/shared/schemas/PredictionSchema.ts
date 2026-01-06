@@ -4,7 +4,7 @@ import { CITIES, PROPERTY_TYPE } from '@/config';
 const CitiesValues = CITIES.map(city=>city.value)
 
 export function createPredictionSchema(translations: any) {
-  const t = translations; // Alias para claridad
+  const t = translations
   
   return z.object({
     city: z.enum(CitiesValues, {error: t.validations.city.invalid}),
