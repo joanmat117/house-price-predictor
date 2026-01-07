@@ -1,5 +1,5 @@
 import {useForm} from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod' //Is not installed
+import { zodResolver } from '@hookform/resolvers/zod'
 import { type PredictionSchemaMask } from "@/shared/types/PredictionSchemaMask"
 import { usePredictionSchema } from "@/shared/hooks/usePredictionSchema"
 import { useFormPersist } from "./useFormPersist"
@@ -45,7 +45,7 @@ export function useFormPrediction(step:Steps){
     resolver:zodResolver(stepSchema)
   })
   
-  useFormPersist({
+  useFormPersist(step,{
     watch:formUtils.watch,
     reset:formUtils.reset
   })

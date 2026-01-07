@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { UseFormWatch, UseFormReset } from 'react-hook-form';
+import { type UseFormWatch, type UseFormReset } from 'react-hook-form';
 
 type FormValues = Record<string, any>;
 
@@ -18,7 +18,7 @@ export function useFormPersist<T extends FormValues>(
     const savedData = localStorage.getItem(storageKey);
     if (savedData) {
       try {
-        const data = JSON.parse(savedData) as Partial<T>;
+        const data = JSON.parse(savedData) as T
         reset(data);
       } catch (error) {
         console.error('Error parsing saved form data:', error);
