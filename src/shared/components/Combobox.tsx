@@ -15,31 +15,22 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/shared/components/ui/popover"
-import { useEffect, useState } from "react"
-
-interface ComboBoxOption {
-  value:string,
-  label:string
-}
+import { useState } from "react"
 
 interface Props {
   label:string,
   notFound:string,
-  options:ComboBoxOption[],
+  options:string[],
   triggerClassName?:string,
   popoverClassName?:string,
-  popoverItemClassName:string,
+  popoverItemClassName?:string,
+  optionsTranslation:Record<string,string>
   onValueChange?:(value:string)=>void,
-  defaultValue?:string
+  value:string
 }
 
-export function Combobox({label,defaultValue,notFound,options,onValueChange,triggerClassName,popoverItemClassName,popoverClassName}:Props) {
+export function Combobox({label,value,notFound,optionsTranslation,options,onValueChange,triggerClassName,popoverItemClassName,popoverClassName}:Props) {
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState(defaultValue || '')
-
-  useEffect(()=>{
-    if(onValueChange) onValueChange(value)
-  },[value])
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -51,7 +42,7 @@ export function Combobox({label,defaultValue,notFound,options,onValueChange,trig
           className={`justify-between ${triggerClassName}`}
         >
           {value
-            ? options.find((option) => option.value === value)?.label
+            ? optionsTranslation[value]
             : label}
           <ChevronsUpDown className="opacity-50" />
         </Button>
@@ -64,19 +55,19 @@ export function Combobox({label,defaultValue,notFound,options,onValueChange,trig
             <CommandGroup>
               {options.map((option) => (
                 <CommandItem
-                  key={option.value}
-                  value={option.value}
+                  key={option}
+                  value={option}
                   className={`${popoverItemClassName}`}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue)
+                    if(onValueChange)onValueChange(currentValue) 
                     setOpen(false)
                   }}
                 >
-                  {option.label}
+                  {optionsTranslation[option]}
                   <Check
                     className={cn(
                       "ml-auto",
-                      value === option.value ? "opacity-100" : "opacity-0"
+                      value === option ? "opacity-100" : "opacity-0"
                     )}
                   />
                 </CommandItem>

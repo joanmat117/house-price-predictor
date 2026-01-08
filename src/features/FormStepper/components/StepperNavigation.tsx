@@ -4,8 +4,8 @@ import { useTranslations } from "@/shared/hooks/useTranslations"
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react"
 
 interface Props {
-  onPrevClick:()=>void,
-  onNextClick:()=>void
+  onPrevClick?:()=>void,
+  onNextClick?:()=>void
 }
 
 export function StepperNavigation({onNextClick,onPrevClick}:Props){
@@ -16,13 +16,13 @@ export function StepperNavigation({onNextClick,onPrevClick}:Props){
 
   return <>
     <div className="flex items-center justify-between gap-2.5">
-      <Button variant="outline" onClick={()=>onPrevClick()} disabled={currentStep === 1}>
+      <Button variant="outline" onClick={onPrevClick?()=>onPrevClick():undefined} disabled={currentStep === 1}>
           <ArrowBigLeft className="size-4"/>
         {t.buttons.previous}
       </Button>
       <Button
         variant="outline"
-        onClick={()=>onNextClick()}
+        onClick={onNextClick ? ()=>onNextClick() : undefined}
         disabled={currentStep === maxStep}
       >
         {t.buttons.next}

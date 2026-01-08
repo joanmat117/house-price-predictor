@@ -1,21 +1,23 @@
 import FormStepper from "@/features/FormStepper";
+import { Step1 } from "@/features/FormSteps/components/Step1";
 import { Button } from "@/shared/components/ui/button";
 import { StepperContent, StepperPanel } from "@/shared/components/ui/stepper";
+import { useStepperStore } from "@/shared/hooks/useStepperStore";
 import { useTranslations } from "@/shared/hooks/useTranslations";
 import { CornerLeftUp} from "lucide-react";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const steps = [1, 2, 3, 4, 5, 6, 7, 8];
 
 export default function Predict(){
 
   const t = useTranslations()
 
-  const [currentStep,setCurrentStep] = useState<number>(1)
+  const {maxStep,currentStep} = useStepperStore()
+
+  const steps = Array.from({length:maxStep},(_,i)=>i+1)
 
   return <section className=' px-5'>
-  <FormStepper className="py-5" onValueChange={setCurrentStep} steps={steps} value={currentStep}>
+  <FormStepper className="py-5" onValueChange={()=>{}} steps={steps} value={currentStep}>
   <Link to='/' >
     <Button variant={'outline'} size='sm' >
       <CornerLeftUp className='size-4'/>
@@ -28,7 +30,7 @@ export default function Predict(){
     <StepperPanel className="text-sm">
       {steps.map((step) => (
         <StepperContent className="w-full flex items-center justify-center" key={step} value={step}>
-          Step {step} content
+            {step===1 && <Step1/>}
         </StepperContent>
       ))}
     </StepperPanel>

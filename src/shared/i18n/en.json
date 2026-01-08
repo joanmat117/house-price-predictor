@@ -1,9 +1,9 @@
 {
   "hero": {
-    "title": "Housing Price Estimator - Aburrá Valley",
-    "description": "Estimation based on real real estate market data.",
-    "accuracy": "±10% error on average.",
-    "cost": "free",
+    "title": "Aburrá Valley Housing Price Estimator",
+    "description": "Estimation based on real estate market data.",
+    "accuracy": " Average ±10% error.",
+    "cost": "Free",
     "cta": {
       "button": "Get Started"
     }
@@ -22,92 +22,224 @@
   "notfound": {
     "title": "Oops, something went missing",
     "description": "Sorry, we can't find this page",
-    "button": "Return to Home"
+    "button": "Back to Home"
   },
   "buttons": {
-    "out": "Log Out",
+    "out": "Exit",
     "previous": "Previous",
     "next": "Next"
   },
   "form": {
     "city": {
       "label": "Select your city",
-      "notFound": "City not available"
+      "notFound": "City unavailable"
+    },
+    "town": {
+      "label": "Select the neighborhood",
+      "notFound": "Neighborhood unavailable"
+    },
+    "property_type": {
+      "label": "Select the property type",
+      "notFound": "Property type unavailable"
+    },
+    "latitude": {
+      "label": "Enter latitude"
+    },
+    "longitude": {
+      "label": "Enter longitude"
+    },
+    "area": {
+      "label": "Total lot area (m²)"
+    },
+    "built_area": {
+      "label": "Built area (m²)"
+    },
+    "rooms": {
+      "label": "Number of bedrooms"
+    },
+    "bathrooms": {
+      "label": "Number of bathrooms"
+    },
+    "parking_spots": {
+      "label": "Number of parking spots"
+    },
+    "strata": {
+      "label": "Socioeconomic stratum"
+    },
+    "antiquity": {
+      "label": "Property age (years)"
+    },
+    "has_sauna_jacuzzi_or_turkish_bath": {
+      "label": "Does it have a sauna, jacuzzi, or Turkish bath?"
+    },
+    "has_pool": {
+      "label": "Does it have a pool?"
+    },
+    "is_in_construction": {
+      "label": "Is the property under construction?"
+    },
+    "relation_with_property": {
+      "label": "What is your relationship with the property?",
+      "notFound": "Role unavailable"
+    },
+    "property_status": {
+      "label": "Current property status",
+      "notFound": "Status unavailable"
+    },
+    "selling_motives": {
+      "label": "Why do you want to sell?",
+      "notFound": "Motive unavailable"
+    },
+    "buying_motives": {
+      "label": "Why do you want to buy?",
+      "notFound": "Motive unavailable"
+    },
+    "willing_price": {
+      "label": "Willing price ($)"
+    }
+  },
+  "steps": {
+    "step1": {
+      "title": "Location and Type"
+    },
+    "step2": {
+      "title": "Dimensions"
+    },
+    "step3": {
+      "title": "Features"
+    },
+    "step4": {
+      "title": "Role in Transaction"
+    },
+    "step5": {
+      "title": "Additional Information"
     }
   },
   "validations": {
     "city": {
-      "invalid": "Invalid city",
-      "required": "City is required"
+      "invalid": "Invalid city"
     },
-    "property_type": {
-      "required": "Select a property type",
+    "town": {
+      "invalid": "Invalid neighborhood"
+    },
+    "propertyType": {
       "invalid": "Invalid property type"
     },
     "strata": {
-      "integer": "Must be an integer",
-      "min": "Minimum strata is 1",
-      "max": "Maximum strata is 6",
-      "required": "Strata is required"
+      "min": "Stratum must be at least 1",
+      "max": "Stratum cannot be greater than 6"
     },
     "area": {
-      "min": "Minimum 30 m²",
-      "max": "Maximum 10,000 m²",
-      "required": "Total area is required",
-      "number": "Area must be a valid number"
+      "min": "Area must be at least 30 m²",
+      "max": "Area cannot exceed 10,000 m²"
     },
-    "built_area": {
-      "min": "Minimum 30 m²",
-      "max": "Maximum 5,000 m²",
-      "max_total": "Built area cannot be larger than total area",
-      "required": "Built area is required",
-      "number": "Built area must be a valid number"
+    "builtArea": {
+      "min": "Built area must be at least 30 m²",
+      "max": "Built area cannot exceed 5,000 m²"
     },
     "rooms": {
-      "integer": "Must be an integer",
-      "min": "Minimum 1 room",
-      "max": "Maximum 9 rooms",
-      "required": "Number of rooms is required"
+      "gt": "Must have at least 1 bedroom",
+      "lt": "Cannot have more than 9 bedrooms"
     },
     "bathrooms": {
-      "integer": "Must be an integer",
-      "min": "Minimum 1 bathroom",
-      "max": "Maximum 9 bathrooms",
-      "required": "Number of bathrooms is required"
+      "gt": "Must have at least 1 bathroom",
+      "lt": "Cannot have more than 9 bathrooms"
     },
-    "parking_spots": {
-      "integer": "Must be an integer",
-      "min": "Minimum 0 parking spots",
-      "max": "Maximum 9 parking spots",
-      "required": "Number of parking spots is required"
+    "parkingSpots": {
+      "min": "Number of parking spots cannot be negative",
+      "lt": "Cannot have more than 9 parking spots"
+    },
+    "hasSauna": {
+      "required": "This field is required",
+      "invalid_type": "Must be true or false"
+    },
+    "hasPool": {
+      "required": "This field is required",
+      "invalid_type": "Must be true or false"
     },
     "antiquity": {
-      "integer": "Must be an integer",
-      "min": "Minimum 1 year",
-      "max": "Maximum 5 years",
-      "required": "Antiquity is required"
+      "min": "Age must be at least 1 year",
+      "max": "Age cannot exceed 5 years"
     },
     "latitude": {
-      "out_of_range": "Latitude out of range (6.0-6.5)",
-      "min": "Minimum latitude is 6.0",
-      "max": "Maximum latitude is 6.5",
-      "required": "Latitude is required",
-      "number": "Latitude must be a valid number"
+      "min": "Minimum latitude: 6.0",
+      "max": "Maximum latitude: 6.5"
     },
     "longitude": {
-      "out_of_range": "Longitude out of range (-75.6 to -75.3)",
-      "min": "Minimum longitude is -75.6",
-      "max": "Maximum longitude is -75.3",
-      "required": "Longitude is required",
-      "number": "Longitude must be a valid number"
+      "min": "Minimum longitude: -75.6",
+      "max": "Maximum longitude: -75.3"
     },
-    "has_sauna_jacuzzi_or_turkish_bath": {
-      "required": "This field is required",
-      "boolean": "Must be true or false"
+    "relationWithProperty": {
+      "invalid": "Invalid property relationship"
     },
-    "has_pool": {
+    "propertyStatus": {
+      "invalid": "Invalid property status",
+      "required": "Property status is required for sellers"
+    },
+    "sellingMotives": {
+      "invalid": "Invalid selling motive",
+      "required": "Selling motive is required for sellers"
+    },
+    "buyingMotives": {
+      "invalid": "Invalid buying motive",
+      "required": "Buying motive is required for buyers"
+    },
+    "willingPrice": {
+      "min": "Price must be at least $50,000,000",
+      "max": "Price cannot exceed $10,000,000,000,000",
+      "required": "Price is required"
+    },
+    "isInConstruction": {
       "required": "This field is required",
-      "boolean": "Must be true or false"
+      "invalid_type": "Must be true or false"
+    }
+  },
+  "enums": {
+    "cities": {
+      "medellin": "Medellín",
+      "bello": "Bello",
+      "itagui": "Itagüí",
+      "envigado": "Envigado",
+      "sabaneta": "Sabaneta",
+      "la-estrella": "La Estrella",
+      "caldas": "Caldas",
+      "copacabana": "Copacabana",
+      "girardota": "Girardota",
+      "barbosa": "Barbosa"
+    },
+    "propertyTypes": {
+      "apartment": "Apartment",
+      "house": "House",
+      "townhouse": "Country House",
+      "commercial": "Commercial Space"
+    },
+    "relationsWithProperty": {
+      "sells": "I'm Selling",
+      "buys": "I'm Buying",
+      "agent": "I'm a Real Estate Agent"
+    },
+    "propertyStatuses": {
+      "unoccupied": "Unoccupied",
+      "rented": "Rented",
+      "inhabitates it": "Currently Inhabited"
+    },
+    "sellingMotives": {
+      "house change": "Moving to a new house",
+      "settle a debt": "Settle a debt",
+      "business opportunity": "Business opportunity",
+      "browsing offers": "Browsing offers",
+      "investment for studies or travel": "Investment for studies or travel",
+      "Change city or live in the countryside": "Change city or live in the countryside",
+      "I don't want to keep renting": "I don't want to keep renting",
+      "property division": "Property division"
+    },
+    "buyingMotives": {
+      "proximity to work and schools": "Proximity to work and schools",
+      "investment opportunity": "Investment opportunity",
+      "affordability and financing options": "Affordability and financing options",
+      "interest in newer home": "Interest in a newer home",
+      "bigger house": "Bigger house",
+      "desire for a move-in ready home": "Desire for a move-in ready home"
     }
   }
 }

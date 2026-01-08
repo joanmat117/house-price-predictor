@@ -1,3 +1,4 @@
+import { TOTAL_STEPS } from '@/config'
 import {create} from 'zustand'
 
 interface StepperStoreType {
@@ -10,7 +11,7 @@ interface StepperStoreType {
 
 export const StepperStore = create<StepperStoreType>((set,get)=>({
   currentStep:1,
-  maxStep:8,
+  maxStep:TOTAL_STEPS,
   goNextStep:()=>{
     const {maxStep,currentStep} = get()
     

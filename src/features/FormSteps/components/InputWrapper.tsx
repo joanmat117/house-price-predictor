@@ -3,7 +3,7 @@ import type { HTMLProps, ReactNode } from "react"
 interface Props extends HTMLProps<HTMLParagraphElement> {
   children:ReactNode,
   labelHeading:ReactNode,
-  error:string
+  error:any|undefined
 }
 
 export function InputWrapper({labelHeading,error,children,...headingProps}:Props){
@@ -11,7 +11,7 @@ export function InputWrapper({labelHeading,error,children,...headingProps}:Props
   <label className="flex flex-col gap-1">
   <p {...headingProps}>{labelHeading}</p>
   {children}
-  <span className="text-destructive text-sm border border-destructive">{error}</span>
+  <span className="text-destructive text-sm border border-destructive">{error|| ""}</span>
   </label>
   </>
 }

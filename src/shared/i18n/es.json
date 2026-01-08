@@ -1,113 +1,245 @@
 {
-  "hero":{
-    "title":"Estimador de Precio de Vivienda - Valle de Aburrá",
-    "description":"Estimación basada en datos reales del mercado inmobiliario.",
-    "accuracy":" Error del ±10% en promedio.",
-    "cost":"gratis",
+  "hero": {
+    "title": "Estimador de Precio de Vivienda - Valle de Aburrá",
+    "description": "Estimación basada en datos reales del mercado inmobiliario.",
+    "accuracy": " Error del ±10% en promedio.",
+    "cost": "gratis",
     "cta": {
-      "button":"Empezar"
+      "button": "Empezar"
     }
   },
-  "languageSelector":{
-    "title":"Idioma",
-    "spanish":"Español",
-    "english":"Inglés"
+  "languageSelector": {
+    "title": "Idioma",
+    "spanish": "Español",
+    "english": "Inglés"
   },
-  "themeSelector":{
-    "title":"Tema",
-    "dark":"Oscuro",
-    "light":"Claro",
-    "system":"Sistema"
+  "themeSelector": {
+    "title": "Tema",
+    "dark": "Oscuro",
+    "light": "Claro",
+    "system": "Sistema"
   },
-  "notfound":{
-    "title":"Ups, algo se perdió",
-    "description":"Lo sentimos, no podemos encontrar esta paginá",
-    "button":"Regresar al inicio"
+  "notfound": {
+    "title": "Ups, algo se perdió",
+    "description": "Lo sentimos, no podemos encontrar esta página",
+    "button": "Regresar al inicio"
   },
-  "buttons":{
-    "out":"Salir",
-    "previous":"Anterior",
-    "next":"Siguiente"
+  "buttons": {
+    "out": "Salir",
+    "previous": "Anterior",
+    "next": "Siguiente"
   },
-  "form":{
-    "city":{
-      "label":"Selecciona tu ciudad",
-      "notFound":"Ciudad no disponible"
+  "form": {
+    "city": {
+      "label": "Selecciona tu ciudad",
+      "notFound": "Ciudad no disponible"
+    },
+    "town": {
+      "label": "Selecciona el barrio",
+      "notFound": "Barrio no disponible"
+    },
+    "property_type": {
+      "label": "Selecciona el tipo de propiedad",
+      "notFound": "Tipo de propiedad no disponible"
+    },
+    "latitude": {
+      "label": "Ingresa la latitud"
+    },
+    "longitude": {
+      "label": "Ingresa la longitud"
+    },
+    "area": {
+      "label": "Área total del terreno (m²)"
+    },
+    "built_area": {
+      "label": "Área construida (m²)"
+    },
+    "rooms": {
+      "label": "Número de habitaciones"
+    },
+    "bathrooms": {
+      "label": "Número de baños"
+    },
+    "parking_spots": {
+      "label": "Número de parqueaderos"
+    },
+    "strata": {
+      "label": "Estrato socioeconómico"
+    },
+    "antiquity": {
+      "label": "Antigüedad de la propiedad (años)"
+    },
+    "has_sauna_jacuzzi_or_turkish_bath": {
+      "label": "¿Tiene sauna, jacuzzi o baño turco?"
+    },
+    "has_pool": {
+      "label": "¿Tiene piscina?"
+    },
+    "is_in_construction": {
+      "label": "¿La propiedad está en construcción?"
+    },
+    "relation_with_property": {
+      "label": "¿Cuál es tu relación con la propiedad?",
+      "notFound": "Rol no disponible"
+    },
+    "property_status": {
+      "label": "Estado actual de la propiedad",
+      "notFound": "Estado no disponible"
+    },
+    "selling_motives": {
+      "label": "¿Por qué quieres vender?",
+      "notFound": "Motivo no disponible"
+    },
+    "buying_motives": {
+      "label": "¿Por qué quieres comprar?",
+      "notFound": "Motivo no disponible"
+    },
+    "willing_price": {
+      "label": "Precio dispuesto ($)"
+    }
+  },
+  "steps": {
+    "step1": {
+      "title": "Ubicación y Tipo"
+    },
+    "step2": {
+      "title": "Dimensiones"
+    },
+    "step3": {
+      "title": "Características"
+    },
+    "step4": {
+      "title": "Rol en la Transacción"
+    },
+    "step5": {
+      "title": "Información Adicional"
     }
   },
   "validations": {
     "city": {
-      "invalid": "Ciudad no válida",
-      "required": "La ciudad es requerida"
+      "invalid": "Ciudad no válida"
     },
-    "property_type": {
-      "required": "Selecciona un tipo de propiedad",
+    "town": {
+      "invalid": "Barrio no válido"
+    },
+    "propertyType": {
       "invalid": "Tipo de propiedad no válido"
     },
     "strata": {
-      "integer": "Debe ser un número entero",
-      "min": "El estrato mínimo es 1",
-      "max": "El estrato máximo es 6",
-      "required": "El estrato es requerido"
+      "min": "El estrato debe ser al menos 1",
+      "max": "El estrato no puede ser mayor a 6"
     },
     "area": {
-      "min": "Mínimo 30 m²",
-      "max": "Máximo 10,000 m²",
-      "required": "El área total es requerida",
-      "number": "El área debe ser un número válido"
+      "min": "El área debe ser al menos 30 m²",
+      "max": "El área no puede exceder 10,000 m²"
     },
-    "built_area": {
-      "min": "Mínimo 30 m²",
-      "max": "Máximo 5,000 m²",
-      "max_total": "El área construida no puede ser mayor que el área total",
-      "required": "El área construida es requerida",
-      "number": "El área construida debe ser un número válido"
+    "builtArea": {
+      "min": "El área construida debe ser al menos 30 m²",
+      "max": "El área construida no puede exceder 5,000 m²"
     },
     "rooms": {
-      "integer": "Debe ser un número entero",
-      "min": "Mínimo 1 habitación",
-      "max": "Máximo 9 habitaciones",
-      "required": "El número de habitaciones es requerido"
+      "gt": "Debe tener al menos 1 habitación",
+      "lt": "No puede tener más de 9 habitaciones"
     },
     "bathrooms": {
-      "integer": "Debe ser un número entero",
-      "min": "Mínimo 1 baño",
-      "max": "Máximo 9 baños",
-      "required": "El número de baños es requerido"
+      "gt": "Debe tener al menos 1 baño",
+      "lt": "No puede tener más de 9 baños"
     },
-    "parking_spots": {
-      "integer": "Debe ser un número entero",
-      "min": "Mínimo 0 parqueaderos",
-      "max": "Máximo 9 parqueaderos",
-      "required": "El número de parqueaderos es requerido"
+    "parkingSpots": {
+      "min": "El número de parqueaderos no puede ser negativo",
+      "lt": "No puede tener más de 9 parqueaderos"
+    },
+    "hasSauna": {
+      "required": "Este campo es requerido",
+      "invalid_type": "Debe ser verdadero o falso"
+    },
+    "hasPool": {
+      "required": "Este campo es requerido",
+      "invalid_type": "Debe ser verdadero o falso"
     },
     "antiquity": {
-      "integer": "Debe ser un número entero",
-      "min": "Mínimo 1 año",
-      "max": "Máximo 5 años",
-      "required": "La antigüedad es requerida"
+      "min": "La antigüedad debe ser al menos 1 año",
+      "max": "La antigüedad no puede exceder 5 años"
     },
     "latitude": {
-      "out_of_range": "Latitud fuera de rango (6.0-6.5)",
-      "min": "La latitud mínima es 6.0",
-      "max": "La latitud máxima es 6.5",
-      "required": "La latitud es requerida",
-      "number": "La latitud debe ser un número válido"
+      "min": "Latitud mínima: 6.0",
+      "max": "Latitud máxima: 6.5"
     },
     "longitude": {
-      "out_of_range": "Longitud fuera de rango (-75.6 a -75.3)",
-      "min": "La longitud mínima es -75.6",
-      "max": "La longitud máxima es -75.3",
-      "required": "La longitud es requerida",
-      "number": "La longitud debe ser un número válido"
+      "min": "Longitud mínima: -75.6",
+      "max": "Longitud máxima: -75.3"
     },
-    "has_sauna_jacuzzi_or_turkish_bath": {
-      "required": "Este campo es requerido",
-      "boolean": "Debe ser verdadero o falso"
+    "relationWithProperty": {
+      "invalid": "Relación con la propiedad no válida"
     },
-    "has_pool": {
+    "propertyStatus": {
+      "invalid": "Estado de la propiedad no válido",
+      "required": "El estado de la propiedad es requerido para vendedores"
+    },
+    "sellingMotives": {
+      "invalid": "Motivo de venta no válido",
+      "required": "El motivo de venta es requerido para vendedores"
+    },
+    "buyingMotives": {
+      "invalid": "Motivo de compra no válido",
+      "required": "El motivo de compra es requerido para compradores"
+    },
+    "willingPrice": {
+      "min": "El precio debe ser al menos $50,000,000",
+      "max": "El precio no puede exceder $10,000,000,000,000",
+      "required": "El precio es requerido"
+    },
+    "isInConstruction": {
       "required": "Este campo es requerido",
-      "boolean": "Debe ser verdadero o falso"
+      "invalid_type": "Debe ser verdadero o falso"
+    }
+  },
+  "enums": {
+    "cities": {
+      "medellin": "Medellín",
+      "bello": "Bello",
+      "itagui": "Itagüí",
+      "envigado": "Envigado",
+      "sabaneta": "Sabaneta",
+      "la-estrella": "La Estrella",
+      "caldas": "Caldas",
+      "copacabana": "Copacabana",
+      "girardota": "Girardota",
+      "barbosa": "Barbosa"
+    },
+    "propertyTypes": {
+      "apartment": "Apartamento",
+      "house": "Casa",
+      "townhouse": "Casa Campestre",
+      "commercial": "Local Comercial"
+    },
+    "relationsWithProperty": {
+      "sells": "Vendo",
+      "buys": "Compro",
+      "agent": "Soy Agente Inmobiliario"
+    },
+    "propertyStatuses": {
+      "unoccupied": "Desocupada",
+      "rented": "Arrendada",
+      "inhabitates it": "La habito actualmente"
+    },
+    "sellingMotives": {
+      "house change": "Cambio de casa",
+      "settle a debt": "Liquidar una deuda",
+      "business opportunity": "Oportunidad de negocio",
+      "browsing offers": "Consultando ofertas",
+      "investment for studies or travel": "Inversión para estudios o viajes",
+      "Change city or live in the countryside": "Cambio de ciudad o vivir en el campo",
+      "I don't want to keep renting": "No quiero seguir arrendando",
+      "property division": "División de propiedades"
+    },
+    "buyingMotives": {
+      "proximity to work and schools": "Cercanía al trabajo y colegios",
+      "investment opportunity": "Oportunidad de inversión",
+      "affordability and financing options": "Accesibilidad y opciones de financiación",
+      "interest in newer home": "Interés en casa más nueva",
+      "bigger house": "Casa más grande",
+      "desire for a move-in ready home": "Deseo de una casa lista para habitar"
     }
   }
 }

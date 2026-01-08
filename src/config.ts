@@ -2,21 +2,28 @@ export const AVALIABLE_LANGUAGES = ['es','en']
 
 export const SESSION_STORAGE_CITY_KEY = "hero-city-value"
 
-export const CITIES = [
-  { label: 'Medellín', value: 'medellin' },
-  { label: 'Bello', value: 'bello' },
-  { label: 'Itagüí', value: 'itagui' },
-  { label: 'Envigado', value: 'envigado' },
-  { label: 'Sabaneta', value: 'sabaneta' },
-  { label: 'La Estrella', value: 'la-estrella' },
-  { label: 'Caldas', value: 'caldas' },
-  { label: 'Copacabana', value: 'copacabana' },
-  { label: 'Girardota', value: 'girardota' },
-  { label: 'Barbosa', value: 'barbosa' }
-]
+export const TOTAL_STEPS = 5
 
-export const PROPERTY_TYPE = [
-  'apartment',
-  'house',
-  'farm'
+export const CITIES = ['medellin','bello','itagui','envigado','sabaneta','la-estrella','caldas','copacabana','girardota','barbosa']
+
+export const PROPERTY_TYPES = ["apartment", "house", "townhouse", "commercial"]
+export const RELATION_WITH_PROPERTY = ["sells", "buys", "agent"]
+export const PROPERTY_STATUSES = ["unoccupied", "rented", "inhabitates it"]
+export const SELLING_MOTIVES = [
+  "house change",
+  "settle a debt",
+  "business opportunity",
+  "browsing offers",
+  "investment for studies or travel",
+  "Change city or live in the countryside",
+  "I don't want to keep renting",
+  "property division"
+] 
+export const BUYING_MOTIVES = [
+  "proximity to work and schools",
+  "investment opportunity",
+  "affordability and financing options",
+  "interest in newer home",
+  "bigger house",
+  "desire for a move-in ready home"
 ]
