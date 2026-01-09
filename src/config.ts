@@ -29,3 +29,38 @@ export const BUYING_MOTIVES = [
   "bigger house",
   "desire for a move-in ready home"
 ]
+
+export const STRATA = {
+  min:1,
+  max:5
+}
+
+export const AREA = {
+  min:30,
+  max:10000
+}
+
+export const BUILT_AREA = {
+  min:30,
+  max:5000
+}
+
+export const ROOMS = {
+  min:1,
+  max:9
+}
+
+export const BATHROOMS = {
+  min:1,
+  max:9
+}
+
+export const PARKING_SPOTS = {
+  min:1,
+  max:9
+}
+
+export const ANTIQUITY = {
+  min:1,
+  max:5
+} 

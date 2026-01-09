@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { BUYING_MOTIVES, CITIES, PROPERTY_STATUSES, PROPERTY_TYPES, RELATION_WITH_PROPERTY, SELLING_MOTIVES } from '@/config';
+import { ANTIQUITY, AREA, BATHROOMS, BUILT_AREA, BUYING_MOTIVES, CITIES, PARKING_SPOTS, PROPERTY_STATUSES, PROPERTY_TYPES, RELATION_WITH_PROPERTY, ROOMS, SELLING_MOTIVES, STRATA } from '@/config';
 
 export function createPredictionSchema(translations: any) {
   const t = translations
@@ -10,28 +10,28 @@ export function createPredictionSchema(translations: any) {
   property_type: z.enum(PROPERTY_TYPES,{error:t.validations.propertyType.invalid}),
   
   strata: z.coerce.number()
-    .min(1, { message: t.validations.strata.min })
-    .max(6, { message: t.validations.strata.max }),
+    .min(STRATA.min, { message: t.validations.strata.min })
+    .max(STRATA.max, { message: t.validations.strata.max }),
   
   area: z.coerce.number()
-    .min(30, { message: t.validations.area.min })
-    .max(10000, { message: t.validations.area.max }),
+    .min(AREA.min, { message: t.validations.area.min })
+    .max(AREA.max, { message: t.validations.area.max }),
   
   built_area: z.coerce.number()
-    .min(30, { message: t.validations.builtArea.min })
-    .max(5000, { message: t.validations.builtArea.max }),
+    .min(BUILT_AREA.min, { message: t.validations.builtArea.min })
+    .max(BUILT_AREA.max, { message: t.validations.builtArea.max }),
   
   rooms: z.coerce.number()
-    .gt(0, { message: t.validations.rooms.gt })
-    .lt(10, { message: t.validations.rooms.lt }),
+    .min(ROOMS.min, { message: t.validations.rooms.gt })
+    .max(ROOMS.max, { message: t.validations.rooms.lt }),
   
   bathrooms: z.coerce.number()
-    .gt(0, { message: t.validations.bathrooms.gt })
-    .lt(10, { message: t.validations.bathrooms.lt }),
+    .min(BATHROOMS.min, { message: t.validations.bathrooms.gt })
+    .max(BATHROOMS.max, { message: t.validations.bathrooms.lt }),
   
   parking_spots: z.coerce.number()
-    .min(0, { message: t.validations.parkingSpots.min })
-    .lt(10, { message: t.validations.parkingSpots.lt }),
+    .min(PARKING_SPOTS.min, { message: t.validations.parkingSpots.min })
+    .max(PARKING_SPOTS.max, { message: t.validations.parkingSpots.lt }),
   
   has_sauna_jacuzzi_or_turkish_bath: z.boolean({
     error: t.validations.hasSauna.required,
@@ -42,8 +42,8 @@ export function createPredictionSchema(translations: any) {
   }),
   
   antiquity: z.coerce.number()
-    .min(1, { message: t.validations.antiquity.min })
-    .max(5, { message: t.validations.antiquity.max }),
+    .min(ANTIQUITY.min, { message: t.validations.antiquity.min })
+    .max(ANTIQUITY.max, { message: t.validations.antiquity.max }),
   
   latitude: z.coerce.number()
     .min(6, { message: t.validations.latitude.min })//Min should be 6
