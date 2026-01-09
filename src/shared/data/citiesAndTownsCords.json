@@ -1,20 +1,16 @@
 {
   "medellin": {
-    "popular": {
-      "latitude": 6.2919,
-      "longitude": -75.5575
-    },
-    "santa cruz": {
-      "latitude": 6.2814,
-      "longitude": -75.5728
-    },
-    "manrique": {
-      "latitude": 6.2747,
-      "longitude": -75.5528
-    },
     "aranjuez": {
       "latitude": 6.2828,
       "longitude": -75.5622
+    },
+    "belen": {
+      "latitude": 6.2241,
+      "longitude": -75.5987
+    },
+    "buenos aires": {
+      "latitude": 6.2425,
+      "longitude": -75.5749
     },
     "castilla": {
       "latitude": 6.2892,
@@ -24,17 +20,17 @@
       "latitude": 6.2906,
       "longitude": -75.5883
     },
-    "robledo": {
-      "latitude": 6.2746,
-      "longitude": -75.5932
+    "el poblado": {
+      "latitude": 6.2081,
+      "longitude": -75.5671
     },
-    "villa hermosa": {
-      "latitude": 6.2442,
-      "longitude": -75.5642
+    "guayabal": {
+      "latitude": 6.2236,
+      "longitude": -75.6075
     },
-    "buenos aires": {
-      "latitude": 6.2425,
-      "longitude": -75.5749
+    "la america": {
+      "latitude": 6.2597,
+      "longitude": -75.605
     },
     "la candelaria": {
       "latitude": 6.2475,
@@ -44,74 +40,90 @@
       "latitude": 6.2479,
       "longitude": -75.5898
     },
-    "la america": {
-      "latitude": 6.2597,
-      "longitude": -75.6050
+    "manrique": {
+      "latitude": 6.2747,
+      "longitude": -75.5528
+    },
+    "popular": {
+      "latitude": 6.2919,
+      "longitude": -75.5575
+    },
+    "robledo": {
+      "latitude": 6.2746,
+      "longitude": -75.5932
     },
     "san javier": {
       "latitude": 6.2356,
-      "longitude": -75.6250
+      "longitude": -75.625
     },
-    "el poblado": {
-      "latitude": 6.2081,
-      "longitude": -75.5671
+    "santa cruz": {
+      "latitude": 6.2814,
+      "longitude": -75.5728
     },
-    "guayabal": {
-      "latitude": 6.2236,
-      "longitude": -75.6075
-    },
-    "belen": {
-      "latitude": 6.2241,
-      "longitude": -75.5987
+    "villa hermosa": {
+      "latitude": 6.2442,
+      "longitude": -75.5642
     }
   },
   "bello": {
-    "niquia": {
-      "latitude": 6.3344,
-      "longitude": -75.5589
+    "acevedo": {
+      "latitude": 6.3186,
+      "longitude": -75.5453
+    },
+    "andaluz": {
+      "latitude": 6.3203,
+      "longitude": -75.57
     },
     "bellavista": {
       "latitude": 6.3451,
       "longitude": -75.5623
     },
-    "paris": {
-      "latitude": 6.3317,
-      "longitude": -75.5432
+    "cabañas": {
+      "latitude": 6.3533,
+      "longitude": -75.5425
     },
     "fontibon": {
       "latitude": 6.3269,
       "longitude": -75.5358
     },
-    "acevedo": {
-      "latitude": 6.3186,
-      "longitude": -75.5453
+    "la miel": {
+      "latitude": 6.3667,
+      "longitude": -75.5569
     },
     "miraflores": {
       "latitude": 6.3106,
       "longitude": -75.5533
     },
-    "andaluz": {
-      "latitude": 6.3203,
-      "longitude": -75.5700
+    "niquia": {
+      "latitude": 6.3344,
+      "longitude": -75.5589
     },
-    "sucre": {
-      "latitude": 6.3486,
-      "longitude": -75.5731
-    },
-    "cabañas": {
-      "latitude": 6.3533,
-      "longitude": -75.5425
-    },
-    "la miel": {
-      "latitude": 6.3667,
-      "longitude": -75.5569
+    "paris": {
+      "latitude": 6.3317,
+      "longitude": -75.5432
     },
     "quito": {
       "latitude": 6.3375,
       "longitude": -75.5283
+    },
+    "sucre": {
+      "latitude": 6.3486,
+      "longitude": -75.5731
     }
   },
   "itagui": {
+    "la aldea": {
+      "latitude": 6.1583,
+      "longitude": -75.6056
+    },
+    "san javier": {
+      "latitude": 6.1619,
+      "longitude": -75.6186
+    },
+    "san pedro": {
+      "latitude": 6.1778,
+      "longitude": -75.5989
+    },
     "santa maria": {
       "latitude": 6.1667,
       "longitude": -75.6083
@@ -119,18 +131,6 @@
     "simon bolivar": {
       "latitude": 6.1725,
       "longitude": -75.6142
-    },
-    "san javier": {
-      "latitude": 6.1619,
-      "longitude": -75.6186
-    },
-    "la aldea": {
-      "latitude": 6.1583,
-      "longitude": -75.6056
-    },
-    "san pedro": {
-      "latitude": 6.1778,
-      "longitude": -75.5989
     }
   },
   "envigado": {
@@ -138,65 +138,65 @@
       "latitude": 6.1694,
       "longitude": -75.5806
     },
-    "zuniga": {
-      "latitude": 6.1625,
-      "longitude": -75.5917
-    },
     "las vegas": {
       "latitude": 6.1556,
       "longitude": -75.5833
     },
-    "san marcos": {
-      "latitude": 6.1764,
-      "longitude": -75.5750
-    },
     "milan": {
       "latitude": 6.1833,
       "longitude": -75.5694
+    },
+    "san marcos": {
+      "latitude": 6.1764,
+      "longitude": -75.575
+    },
+    "zuniga": {
+      "latitude": 6.1625,
+      "longitude": -75.5917
     }
   },
   "sabaneta": {
     "el castillo": {
-      "latitude": 6.1500,
+      "latitude": 6.15,
       "longitude": -75.6083
-    },
-    "la florida": {
-      "latitude": 6.1417,
-      "longitude": -75.6167
-    },
-    "sabaneta centro": {
-      "latitude": 6.1514,
-      "longitude": -75.6000
     },
     "julio rincon": {
       "latitude": 6.1361,
       "longitude": -75.6028
     },
+    "la florida": {
+      "latitude": 6.1417,
+      "longitude": -75.6167
+    },
     "parque sabaneta": {
       "latitude": 6.1433,
-      "longitude": -75.6100
+      "longitude": -75.61
+    },
+    "sabaneta centro": {
+      "latitude": 6.1514,
+      "longitude": -75.6
     }
   },
   "la estrella": {
+    "el pedregal": {
+      "latitude": 6.1417,
+      "longitude": -75.65
+    },
+    "el socorro": {
+      "latitude": 6.15,
+      "longitude": -75.6583
+    },
+    "la esperanza": {
+      "latitude": 6.175,
+      "longitude": -75.6417
+    },
     "la tablaza": {
       "latitude": 6.1583,
       "longitude": -75.6417
     },
-    "el pedregal": {
-      "latitude": 6.1417,
-      "longitude": -75.6500
-    },
-    "el socorro": {
-      "latitude": 6.1500,
-      "longitude": -75.6583
-    },
     "san jose": {
       "latitude": 6.1667,
       "longitude": -75.6333
-    },
-    "la esperanza": {
-      "latitude": 6.1750,
-      "longitude": -75.6417
     }
   }
 }
