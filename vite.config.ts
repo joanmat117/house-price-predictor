@@ -12,4 +12,15 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://estimator-backend-service-715130931308.us-central1.run.app',
+        changeOrigin: true,
+        secure: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      }
+    }
+  }
 })

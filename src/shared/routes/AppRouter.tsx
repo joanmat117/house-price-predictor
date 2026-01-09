@@ -4,6 +4,7 @@ import {Routes,Route} from 'react-router-dom'
 const Index = lazy(()=>import('@/pages/index'))
 const Predict = lazy(()=>import('@/pages/predict'))
 const NotFound = lazy(()=>import('@/pages/notFound'))
+const GoogleCallback = lazy(()=>import('@/pages/googleCallback'))
 const Layout = lazy(()=>import('@/shared/layouts/Layout'))
 
 export function AppRouter(){
@@ -11,6 +12,11 @@ export function AppRouter(){
   <Suspense >
 
     <Routes>
+      <Route
+        path="/google/callback"
+        element={<GoogleCallback/>}
+      />
+
       <Route element={<Layout/>}>
 
         <Route
