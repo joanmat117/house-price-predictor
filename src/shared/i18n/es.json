@@ -201,7 +201,7 @@
       "itagui": "Itagüí",
       "envigado": "Envigado",
       "sabaneta": "Sabaneta",
-      "la-estrella": "La Estrella"
+      "la_estrella": "La Estrella"
     },
     "propertyTypes": {
       "apartment": "Apartamento",
