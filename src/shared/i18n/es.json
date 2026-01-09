@@ -1,29 +1,3 @@
-/**
- * Archivo de Traducciones en Español
- *
- * Contiene todo el texto visible al usuario para la aplicación de predicción
- * de precios de vivienda. Soporta internacionalización (i18n) con traducciones
- * en inglés en en.json.
- *
- * Secciones Principales:
- * - hero: Contenido de la página de inicio
- * - buttons: Etiquetas comunes de botones de UI
- * - form: Etiquetas de campos del formulario y mensajes de validación
- * - steps: Títulos de pasos para el formulario multi-paso
- * - validations: Mensajes de error para validación de formularios
- * - enums: Mapeos de traducción para opciones de dropdown y botones radio
- *
- * Adiciones Recientes (Implementación de Formulario Multi-Paso):
- * - Agregadas traducciones Sí/No para botones
- * - Agregado campo estrato (estrato socioeconómico)
- * - Agregado campo antigüedad (edad de la propiedad)
- * - Agregados campos de amenidades (sauna, piscina, estado de construcción)
- * - Agregadas opciones de relación con la propiedad (vendedor, comprador, agente)
- * - Agregados campos condicionales (estado propiedad, motivos venta/compra)
- * - Agregado campo precio dispuesto
- * - Agregadas traducciones completas de enums para todas las opciones seleccionables
- * - Agregada etiqueta para número exacto en selecciones de 5+
- */
 {
   "hero": {
     "title": "Estimador de Precio de Vivienda - Valle de Aburrá",

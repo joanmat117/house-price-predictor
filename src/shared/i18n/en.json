@@ -1,28 +1,3 @@
-/**
- * English Translation File
- *
- * Contains all user-facing text for the house price prediction application.
- * Supports internationalization (i18n) with Spanish translations in es.json.
- *
- * Key Sections:
- * - hero: Landing page content
- * - buttons: Common UI button labels
- * - form: Form field labels and validation messages
- * - steps: Step titles for the multi-step form
- * - validations: Error messages for form validation
- * - enums: Translation mappings for dropdown options and radio buttons
- *
- * Recent Additions (Multi-Step Form Implementation):
- * - Added Yes/No button translations
- * - Added strata (socioeconomic stratum) field
- * - Added antiquity (property age) field
- * - Added amenity fields (sauna, pool, construction status)
- * - Added relationship with property options (seller, buyer, agent)
- * - Added conditional fields (property status, selling/buying motives)
- * - Added willing price field
- * - Added comprehensive enum translations for all selectable options
- * - Added exact number label for 5+ count selections
- */
 {
   "hero": {
     "title": "Aburrá Valley Housing Price Estimator",
