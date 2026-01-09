@@ -27,7 +27,9 @@
   "buttons": {
     "out": "Exit",
     "previous": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "yes": "Yes",
+    "no": "No"
   },
   "form": {
     "city": {
@@ -63,6 +65,7 @@
     "parking_spots": {
       "label": "Number of parking spots"
     },
+    "exact_number_label": "Specify exact number (5 or more)",
     "strata": {
       "label": "Socioeconomic stratum"
     },

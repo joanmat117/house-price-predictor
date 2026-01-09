@@ -27,7 +27,9 @@
   "buttons": {
     "out": "Salir",
     "previous": "Anterior",
-    "next": "Siguiente"
+    "next": "Siguiente",
+    "yes": "Sí",
+    "no": "No"
   },
   "form": {
     "city": {
@@ -63,6 +65,7 @@
     "parking_spots": {
       "label": "Número de parqueaderos"
     },
+    "exact_number_label": "Especifica el número exacto (5 o más)",
     "strata": {
       "label": "Estrato socioeconómico"
     },

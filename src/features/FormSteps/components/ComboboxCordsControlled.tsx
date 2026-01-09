@@ -13,7 +13,7 @@ export type TownKeys = {
 export type TownsWithCords = {
   latitude:number,
   longitude:number
-} 
+}
 
 interface Props {
   label:string,
@@ -25,25 +25,26 @@ interface Props {
 
 export function ComboboxCordsControlled({label,watch,setValue,city,notFound}:Props){
 
-  
   const lat = watch?.('latitude');
   const lon = watch?.('longitude');
 
+  const isValidCity = city && city in citiesAndTownsCords;
+
   const getCurrentValue = () => {
-    if (!city) return '';
-    
+    if (!isValidCity) return '';
+
     const fallbackValue = Object.keys(citiesAndTownsCords[city])[0] || '';
-    
+
     if (!lat || !lon) return fallbackValue;
 
     const town = Object.entries(citiesAndTownsCords[city]).find(([, cords]: any[]) => {
       return cords.latitude === lat && cords.longitude === lon;
     });
-   
+
     return town ? town[0] : fallbackValue;
   };
 
-  if (!city) {
+  if (!isValidCity) {
     return <Combobox
       notFound={notFound}
       label={label}
