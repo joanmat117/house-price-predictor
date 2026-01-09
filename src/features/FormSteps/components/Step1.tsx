@@ -1,38 +1,23 @@
 import { useTranslations } from "@/shared/hooks/useTranslations"
 import { useFormPrediction } from "../hooks/useFormPrediction"
 import { StepWrapper } from "./StepWrapper"
-import { useState } from "react"
 import { InputWrapper } from "./InputWrapper"
 import { CITIES, PROPERTY_TYPES } from "@/config"
 import { ComboboxControlled } from "./ComboboxControlled"
+import { BoxRadioInputControlled } from "./BoxRadioInputControlled"
+import { ComboboxCordsControlled } from "./ComboboxCordsControlled"
 
 export function Step1(){
-  const [canContinue,setCanContinue] = useState<boolean>(false)
   const t = useTranslations()
 
-  const {handleSubmit,watch,control,formState:{errors}} = useFormPrediction('step1')
+  const {handleSubmit,control,watch,setValue,formState:{errors}} = useFormPrediction('step1')
 
-  console.log(watch())
-  const continueFn = ()=>{
-    
-    const fn = handleSubmit(()=>{
-      console.log('Good form')
-      setCanContinue(true)
-    },()=>{
-        console.log('Bad form')
-      setCanContinue(false)
-    })
-
-    fn()
-
-    return canContinue
-  }
+  const city = watch('city')
 
   return <>
-  <StepWrapper
-  continueFn={continueFn}
-  stepTitle={t.steps.step1.title}
-  >
+  <StepWrapper handleContinue={handleSubmit}>
+
+    {/*City*/}
     <InputWrapper
     labelHeading={t.form.city.label}
     error={errors.city?.message}
@@ -43,23 +28,35 @@ export function Step1(){
       control={control}
       options={CITIES}
       notFound={t.form.city.notFound}
-      optionsTranslation={t.enums.cities}
       label={t.form.city.label}
       />
       </InputWrapper>
 
+    {/*Property Type*/}
     <InputWrapper
     labelHeading={t.form.property_type.label}
     error={errors.property_type?.message}
       >
-      <ComboboxControlled
+      <BoxRadioInputControlled
       name="property_type"
       control={control}
       options={PROPERTY_TYPES}
-      notFound={t.form.property_type.notFound}
       optionsTranslation={t.enums.propertyTypes}
-      label={t.form.property_type.label}
       />
+    </InputWrapper>
+
+    {/*Town*/}
+    <InputWrapper
+    labelHeading={t.form.town.label}
+    error={errors.latitude?.message}
+    >
+      <ComboboxCordsControlled
+      label={t.form.town.label}
+      city={city}
+      notFound={t.form.town.notFound}
+      setValue={setValue}
+      watch={watch}
+      /> 
     </InputWrapper>
     
   </StepWrapper>

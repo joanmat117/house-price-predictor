@@ -1,0 +1,202 @@
+{
+  "medellin": {
+    "popular": {
+      "latitude": 6.2919,
+      "longitude": -75.5575
+    },
+    "santa cruz": {
+      "latitude": 6.2814,
+      "longitude": -75.5728
+    },
+    "manrique": {
+      "latitude": 6.2747,
+      "longitude": -75.5528
+    },
+    "aranjuez": {
+      "latitude": 6.2828,
+      "longitude": -75.5622
+    },
+    "castilla": {
+      "latitude": 6.2892,
+      "longitude": -75.5936
+    },
+    "doce de octubre": {
+      "latitude": 6.2906,
+      "longitude": -75.5883
+    },
+    "robledo": {
+      "latitude": 6.2746,
+      "longitude": -75.5932
+    },
+    "villa hermosa": {
+      "latitude": 6.2442,
+      "longitude": -75.5642
+    },
+    "buenos aires": {
+      "latitude": 6.2425,
+      "longitude": -75.5749
+    },
+    "la candelaria": {
+      "latitude": 6.2475,
+      "longitude": -75.5656
+    },
+    "laureles - estadio": {
+      "latitude": 6.2479,
+      "longitude": -75.5898
+    },
+    "la america": {
+      "latitude": 6.2597,
+      "longitude": -75.6050
+    },
+    "san javier": {
+      "latitude": 6.2356,
+      "longitude": -75.6250
+    },
+    "el poblado": {
+      "latitude": 6.2081,
+      "longitude": -75.5671
+    },
+    "guayabal": {
+      "latitude": 6.2236,
+      "longitude": -75.6075
+    },
+    "belen": {
+      "latitude": 6.2241,
+      "longitude": -75.5987
+    }
+  },
+  "bello": {
+    "niquia": {
+      "latitude": 6.3344,
+      "longitude": -75.5589
+    },
+    "bellavista": {
+      "latitude": 6.3451,
+      "longitude": -75.5623
+    },
+    "paris": {
+      "latitude": 6.3317,
+      "longitude": -75.5432
+    },
+    "fontibon": {
+      "latitude": 6.3269,
+      "longitude": -75.5358
+    },
+    "acevedo": {
+      "latitude": 6.3186,
+      "longitude": -75.5453
+    },
+    "miraflores": {
+      "latitude": 6.3106,
+      "longitude": -75.5533
+    },
+    "andaluz": {
+      "latitude": 6.3203,
+      "longitude": -75.5700
+    },
+    "sucre": {
+      "latitude": 6.3486,
+      "longitude": -75.5731
+    },
+    "cabañas": {
+      "latitude": 6.3533,
+      "longitude": -75.5425
+    },
+    "la miel": {
+      "latitude": 6.3667,
+      "longitude": -75.5569
+    },
+    "quito": {
+      "latitude": 6.3375,
+      "longitude": -75.5283
+    }
+  },
+  "itagui": {
+    "santa maria": {
+      "latitude": 6.1667,
+      "longitude": -75.6083
+    },
+    "simon bolivar": {
+      "latitude": 6.1725,
+      "longitude": -75.6142
+    },
+    "san javier": {
+      "latitude": 6.1619,
+      "longitude": -75.6186
+    },
+    "la aldea": {
+      "latitude": 6.1583,
+      "longitude": -75.6056
+    },
+    "san pedro": {
+      "latitude": 6.1778,
+      "longitude": -75.5989
+    }
+  },
+  "envigado": {
+    "el dorado": {
+      "latitude": 6.1694,
+      "longitude": -75.5806
+    },
+    "zuniga": {
+      "latitude": 6.1625,
+      "longitude": -75.5917
+    },
+    "las vegas": {
+      "latitude": 6.1556,
+      "longitude": -75.5833
+    },
+    "san marcos": {
+      "latitude": 6.1764,
+      "longitude": -75.5750
+    },
+    "milan": {
+      "latitude": 6.1833,
+      "longitude": -75.5694
+    }
+  },
+  "sabaneta": {
+    "el castillo": {
+      "latitude": 6.1500,
+      "longitude": -75.6083
+    },
+    "la florida": {
+      "latitude": 6.1417,
+      "longitude": -75.6167
+    },
+    "sabaneta centro": {
+      "latitude": 6.1514,
+      "longitude": -75.6000
+    },
+    "julio rincon": {
+      "latitude": 6.1361,
+      "longitude": -75.6028
+    },
+    "parque sabaneta": {
+      "latitude": 6.1433,
+      "longitude": -75.6100
+    }
+  },
+  "la estrella": {
+    "la tablaza": {
+      "latitude": 6.1583,
+      "longitude": -75.6417
+    },
+    "el pedregal": {
+      "latitude": 6.1417,
+      "longitude": -75.6500
+    },
+    "el socorro": {
+      "latitude": 6.1500,
+      "longitude": -75.6583
+    },
+    "san jose": {
+      "latitude": 6.1667,
+      "longitude": -75.6333
+    },
+    "la esperanza": {
+      "latitude": 6.1750,
+      "longitude": -75.6417
+    }
+  }
+}

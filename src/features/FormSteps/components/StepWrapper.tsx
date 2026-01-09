@@ -1,30 +1,35 @@
 import { StepperNavigation } from "@/features/FormStepper/components/StepperNavigation";
 import { useStepperStore } from "@/shared/hooks/useStepperStore";
 import type { ReactNode } from "react";
+import type { UseFormHandleSubmit } from "react-hook-form";
 
 export function StepWrapper({
   children,
-  stepTitle,
-  continueFn
+  handleContinue
 }:{
-  children:ReactNode,
-  stepTitle:ReactNode,
-    continueFn:()=>boolean //if return true, go next step, else not
+  children?:ReactNode,
+    handleContinue:UseFormHandleSubmit<any, any> //function handleSubmit of react-hook-forms
 }){
   
   const {goPrevStep,goNextStep} = useStepperStore()
 
-  return <section className="">
-  <h2 className="text-center text-lg font-bold">
-      {stepTitle}
-  </h2>
+  return <section className=" w-full">
 
   {children}
   <StepperNavigation
     onPrevClick={goPrevStep}
     onNextClick={()=>{
-        const canContinue = continueFn()
-        if(canContinue) goNextStep()
+        (handleContinue(
+          //Case correct fields
+          ()=>{
+          console.log('Correct fields')
+          goNextStep() 
+          },
+          //Case invalid fields
+          (errors)=>{
+          console.log('Invalid fields: ',errors)
+          }
+        ))()
       }}
   />
   </section>

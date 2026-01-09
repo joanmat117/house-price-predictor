@@ -16,6 +16,7 @@ import {
   PopoverTrigger,
 } from "@/shared/components/ui/popover"
 import { useState } from "react"
+import { capitalize } from "../utils/capitalize"
 
 interface Props {
   label:string,
@@ -24,9 +25,9 @@ interface Props {
   triggerClassName?:string,
   popoverClassName?:string,
   popoverItemClassName?:string,
-  optionsTranslation:Record<string,string>
+  optionsTranslation?:Record<string,string>
   onValueChange?:(value:string)=>void,
-  value:string
+  value?:string
 }
 
 export function Combobox({label,value,notFound,optionsTranslation,options,onValueChange,triggerClassName,popoverItemClassName,popoverClassName}:Props) {
@@ -39,10 +40,10 @@ export function Combobox({label,value,notFound,optionsTranslation,options,onValu
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className={`justify-between ${triggerClassName}`}
+          className={`justify-between cursor-pointer ${triggerClassName}`}
         >
           {value
-            ? optionsTranslation[value]
+            ? (optionsTranslation? optionsTranslation[value] : capitalize(value))
             : label}
           <ChevronsUpDown className="opacity-50" />
         </Button>
@@ -63,7 +64,7 @@ export function Combobox({label,value,notFound,optionsTranslation,options,onValu
                     setOpen(false)
                   }}
                 >
-                  {optionsTranslation[option]}
+                  {optionsTranslation? optionsTranslation[option] : capitalize(option)}
                   <Check
                     className={cn(
                       "ml-auto",

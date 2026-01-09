@@ -1,17 +1,18 @@
 import type { HTMLProps, ReactNode } from "react"
 
-interface Props extends HTMLProps<HTMLParagraphElement> {
-  children:ReactNode,
+interface Props extends HTMLProps<HTMLLabelElement> {
+  children?:ReactNode,
   labelHeading:ReactNode,
-  error:any|undefined
+  error:any|undefined,
+  className?:string
 }
 
-export function InputWrapper({labelHeading,error,children,...headingProps}:Props){
+export function InputWrapper({labelHeading,error,className,children,...headingProps}:Props){
   return <>
-  <label className="flex flex-col gap-1">
-  <p {...headingProps}>{labelHeading}</p>
+  <article className="flex flex-col gap-1 mt-2">
+  <label {...headingProps} className={`font-black ${className}`}>{labelHeading}</label>
   {children}
-  <span className="text-destructive text-sm border border-destructive">{error|| ""}</span>
-  </label>
+  <span className="text-destructive text-sm ml-2 min-h-5">{error|| ""}</span>
+  </article>
   </>
 }

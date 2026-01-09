@@ -201,17 +201,11 @@
       "itagui": "Itagüí",
       "envigado": "Envigado",
       "sabaneta": "Sabaneta",
-      "la-estrella": "La Estrella",
-      "caldas": "Caldas",
-      "copacabana": "Copacabana",
-      "girardota": "Girardota",
-      "barbosa": "Barbosa"
+      "la-estrella": "La Estrella"
     },
     "propertyTypes": {
       "apartment": "Apartamento",
-      "house": "Casa",
-      "townhouse": "Casa Campestre",
-      "commercial": "Local Comercial"
+      "house": "Casa"
     },
     "relationsWithProperty": {
       "sells": "Vendo",

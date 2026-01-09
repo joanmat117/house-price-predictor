@@ -1,35 +1,34 @@
-import { useId, type ReactNode } from 'react'
+import { useId} from 'react'
 
 import { RadioGroup, RadioGroupItem } from '@/shared/components/ui/radio-group'
+import { capitalize } from '../utils/capitalize'
 
 interface Props {
-  items:{
-    value:string,
-    label:ReactNode,
-    disabled?:boolean
-  }[],
+  items:string[],
+  optionsTranslation:Record<string,string>,
   containerClassName?:string,
-  labelClassName?:string
+  labelClassName?:string,
+  value:string|null|undefined,
+  onValueChange: ((value: string) => void) | undefined
 }
 
-export const BoxRadioInput = ({items,containerClassName,labelClassName}:Props) => {
+export const BoxRadioInput = ({onValueChange,value,items,optionsTranslation,containerClassName,labelClassName}:Props) => {
   const id = useId()
 
   return (
-      <RadioGroup className={`grid grid-cols-3 gap-2 ${containerClassName}`} defaultValue='1'>
+      <RadioGroup value={value} onValueChange={onValueChange} className={`flex flex-wrap gap-2 ${containerClassName}`} defaultValue='1'>
         {items.map(item => (
           <label
-            key={`${id}-${item.value}`}
-            className={`border-input has-data-[state=checked]:border-primary/80 has-focus-visible:border-ring has-focus-visible:ring-ring/50 relative flex flex-col items-center gap-3 rounded-md border px-2 py-3 text-center shadow-xs transition-[color,box-shadow] outline-none has-focus-visible:ring-[3px] has-data-disabled:cursor-not-allowed has-data-disabled:opacity-50 ${labelClassName}`}
+            key={`${id}-${item}`}
+            className={`border-input flex-1 max-w-[300px] min-w-[90px] has-data-[state=checked]:border-primary/80 has-focus-visible:border-ring has-focus-visible:ring-ring/50 relative flex flex-col items-center gap-3 rounded-md border px-2 py-3 text-center cursor-pointer shadow-xs transition-[color,box-shadow] outline-none has-focus-visible:ring-[3px] has-data-disabled:cursor-not-allowed has-data-disabled:opacity-50 ${labelClassName}`}
           >
             <RadioGroupItem
-              id={`${id}-${item.value}`}
-              value={item.value}
+              id={`${id}-${item}`}
+              value={item}
               className='sr-only after:absolute after:inset-0'
-              aria-label={`size-radio-${item.value}`}
-              disabled={item.disabled}
+              aria-label={`size-radio-${item}`}
             />
-            <p className='text-foreground text-sm leading-none font-medium'>{item.label}</p>
+            <p className='text-foreground text-sm leading-none font-medium'>{optionsTranslation? optionsTranslation[item] : capitalize(item)}</p>
           </label>
         ))}
       </RadioGroup>

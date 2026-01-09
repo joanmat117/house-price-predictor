@@ -46,12 +46,12 @@ export function createPredictionSchema(translations: any) {
     .max(5, { message: t.validations.antiquity.max }),
   
   latitude: z.coerce.number()
-    .min(6, { message: t.validations.latitude.min })
-    .max(6.5, { message: t.validations.latitude.max }),
+    .min(6, { message: t.validations.latitude.min })//Min should be 6
+    .max(6.5, { message: t.validations.latitude.max }),//Max should be 6.5
   
   longitude: z.coerce.number()
-    .min(-75.6, { message: t.validations.longitude.min })
-    .max(-75.3, { message: t.validations.longitude.max }),
+    .min(-75.7, { message: t.validations.longitude.min })//Min should be -75.6
+    .max(-75.5, { message: t.validations.longitude.max }),//Max should be -75.3
   
   // Campos de Data Analysis
   relation_with_property: z.enum(RELATION_WITH_PROPERTY, {message: t.validations.relationWithProperty.invalid}).default("agent"),

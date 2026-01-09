@@ -4,7 +4,7 @@ import { useController } from "react-hook-form";
 interface Props {
   label:string,
   notFound:string,
-  optionsTranslation:Record<string,string>,
+  optionsTranslation?:Record<string,string>,
   options:string[],
   name:string,
   control:any
