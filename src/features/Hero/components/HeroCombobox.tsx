@@ -1,6 +1,7 @@
 import { CITIES, SESSION_STORAGE_CITY_KEY } from "@/config";
 import { Combobox } from "@/shared/components/Combobox";
 import { useTranslations } from "@/shared/hooks/useTranslations";
+import { toSnakeCase } from "@/shared/utils/toSnakeCase";
 import { useState } from "react";
 
 export function HeroCombobox(){
@@ -12,7 +13,7 @@ export function HeroCombobox(){
   return <Combobox
   label={t.form.city.label}
   notFound={t.form.city.notFound}
-  options={CITIES}
+  options={CITIES.map(toSnakeCase)}
   optionsTranslation={t.enums.cities}
   triggerClassName="border-none flex-1 md:w-sm text-lg h-full shadow-none"
   popoverItemClassName="text-lg"

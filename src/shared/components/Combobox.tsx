@@ -63,8 +63,8 @@ export function Combobox({label,value,notFound,optionsTranslation,options,onValu
                     if(onValueChange)onValueChange(currentValue) 
                     setOpen(false)
                   }}
-                >
-                  {optionsTranslation? optionsTranslation[option] : capitalize(option)}
+                > 
+                  {optionsTranslation && optionsTranslation[option] ? optionsTranslation[option] : capitalize(option)}
                   <Check
                     className={cn(
                       "ml-auto",
