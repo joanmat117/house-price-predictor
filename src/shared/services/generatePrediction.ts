@@ -13,7 +13,7 @@ export async function generatePrediction(fields:PredictionData,authToken:string)
 
     console.log('Response prediction: ',data)
 
-    if(typeof data !== 'string') throw new Error('Unexpected response')
+    if(typeof data !== 'number') throw new Error('Unexpected response')
 
     return data as any
 

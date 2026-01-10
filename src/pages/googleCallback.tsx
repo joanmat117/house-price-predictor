@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { exchangeCodeForToken } from '@/shared/services/googleOAuth';
-import { useRedirectAfterLogin } from '@/shared/hooks/useRedirectAfterLogin';
+import { UserForm } from '@/features/UserForm';
 
 /**
  * Google OAuth Callback Page
@@ -13,11 +13,12 @@ import { useRedirectAfterLogin } from '@/shared/hooks/useRedirectAfterLogin';
  */
 export default function GoogleCallback() {
   const navigate = useNavigate();
-  const {redirect} = useRedirectAfterLogin()
+  const [isLogin,setIsLogin] = useState(false)
 
   useEffect(() => {
     const handleCallback = async () => {
       try {
+        setIsLogin(true)
         // Extract all URL parameters from Google's callback
         const urlParams = new URLSearchParams(window.location.search);
         const code = urlParams.get('code');
@@ -54,19 +55,21 @@ export default function GoogleCallback() {
         newUrl.searchParams.delete('prompt');
         window.history.replaceState({}, document.title, newUrl.pathname);
 
-        redirect()
       } catch (err) {
         console.error('OAuth callback error:', err);
 
         // Redirect to home with error state
         navigate('/', { replace: true });
+      } finally {
+        setIsLogin(false)
       }
     };
 
     handleCallback();
   }, [navigate]);
 
-  return (
+  return <>
+    {isLogin &&
     <div className="min-h-screen flex items-center justify-center bg-background">
       <div className="text-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
@@ -74,5 +77,9 @@ export default function GoogleCallback() {
         <p className="text-muted-foreground">Please wait while we complete your authentication.</p>
       </div>
     </div>
-  );
+    }
+    {!isLogin &&
+    <UserForm/>
+    }
+  </>
 }

@@ -16,12 +16,16 @@ import {
 import { Input } from '@/shared/components/ui/input';
 import { Checkbox } from '@/shared/components/ui/checkbox';
 import { Loader2 } from 'lucide-react';
+import { useRedirectAfterLogin } from '@/shared/hooks/useRedirectAfterLogin';
 
 interface UserFormProps {
   onSuccess?: () => void;
 }
 
-export function UserForm({ onSuccess }: UserFormProps) {
+export function UserForm({}: UserFormProps) {
+
+  const {redirect} = useRedirectAfterLogin()
+
   const form = useForm({
     resolver: zodResolver(UserSchema as any),
     defaultValues: {
@@ -39,12 +43,12 @@ export function UserForm({ onSuccess }: UserFormProps) {
     onSuccess: () => {
       form.reset();
       
-      if (onSuccess) {
-        onSuccess();
-      }
+        redirect()
+
     },
     onError: (error: Error) => {
-    
+      console.log('Error registering: ',error)
+    alert('Error registering') 
     },
   });
 

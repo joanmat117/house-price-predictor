@@ -4,7 +4,7 @@ import { getAuthToken } from '../utils/getAuthToken';
 export const userService = {
   async registerUser(data: UserFormData): Promise<{ id: string }> {
     try {
-    const response = await fetch(`api/register?token=${getAuthToken()}`, {
+    const response = await fetch(`/api/register?token=${getAuthToken()}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -3,6 +3,7 @@ import { Button } from "@/shared/components/ui/button"
 import { useFormFieldsStore } from "@/shared/hooks/useFormFieldsStore"
 import { usePrediction } from "@/shared/hooks/usePrediction"
 import type { PredictionData } from "@/shared/types/PredictionSchema"
+import { formatCOP } from "@/shared/utils/formatCOP"
 import { LoaderIcon } from "lucide-react"
 import { useEffect } from "react"
 
@@ -10,7 +11,7 @@ export default function Results(){
 
   const {fields,resetFields} = useFormFieldsStore()
 
-  const {isLoading,data,error,fetchPrediction} = usePrediction(fields as PredictionData)
+  const {isLoading,isLatest,data,error,fetchPrediction} = usePrediction(fields as PredictionData)
   
  /* 
   const isLoading = false
@@ -31,11 +32,16 @@ export default function Results(){
       Resultados de la prediccion
     </h1>
 
-    <div className={`${isLoading?'animate-pulse':''} mx-auto ${error? 'bg-red-500':'bg-green-500'} font-black text-white/90 flex items-center justify-center  rounded-xl p-4 `}>
-    {data && !isLoading &&
+    <div className={`${isLoading?'animate-pulse':''} mx-auto ${error? 'bg-red-500':'bg-green-500'} font-black text-white/90 flex flex-col items-center justify-center  rounded-xl p-4 `}>
+    {data && !isLoading &&<>
+      {isLatest &&
+        <span>
+      {'Prediccion mas reciente'}
+    </span>}
     <p className="text-lg">
-    {data}
+    {formatCOP(data)}
     </p>
+    </>
     }
     {isLoading && <LoaderIcon className="animate-spin size-8"/>
     }
