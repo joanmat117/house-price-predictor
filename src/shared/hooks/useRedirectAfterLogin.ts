@@ -16,6 +16,7 @@ export function useRedirectAfterLogin(){
   }
 
   const setRedirectUrl = (url:string)=>{
+    console.log('Se seteo una redirect url')
     localStorage.setItem(REDIRECT_URL_STORAGE_KEY,url)
   }
 

@@ -4,6 +4,7 @@ import { exchangeCodeForToken } from '@/shared/services/googleOAuth';
 import { UserForm } from '@/features/UserForm';
 import { Loader } from '@/shared/components/icons/Loader';
 import { useTranslations } from '@/shared/hooks/useTranslations';
+import { useRedirectAfterLogin } from '@/shared/hooks/useRedirectAfterLogin';
 
 /**
  * Google OAuth Callback Page
@@ -15,6 +16,7 @@ import { useTranslations } from '@/shared/hooks/useTranslations';
  */
 export default function GoogleCallback() {
   const navigate = useNavigate();
+  const {redirect} = useRedirectAfterLogin()
   const t = useTranslations()
   const [isLogin,setIsLogin] = useState(false)
 
@@ -58,13 +60,17 @@ export default function GoogleCallback() {
         newUrl.searchParams.delete('prompt');
         window.history.replaceState({}, document.title, newUrl.pathname);
 
+        if(data.is_registered){
+          redirect()
+        } else {
+          setIsLogin(false)
+        }
+        
       } catch (err) {
         console.error('OAuth callback error:', err);
 
         // Redirect to home with error state
         navigate('/', { replace: true });
-      } finally {
-        setIsLogin(false)
       }
     };
 

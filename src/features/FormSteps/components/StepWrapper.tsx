@@ -13,7 +13,7 @@ export function StepWrapper({
   
   const {goPrevStep,goNextStep} = useStepperStore()
 
-  return <section className=" w-full">
+  return <section className="animate-fade-in w-full">
 
   {children}
   <StepperNavigation
@@ -22,12 +22,10 @@ export function StepWrapper({
         (handleContinue(
           //Case correct fields
           ()=>{
-          console.log('Correct fields')
           goNextStep() 
           },
           //Case invalid fields
-          (errors)=>{
-          console.log('Invalid fields: ',errors)
+          ()=>{
           }
         ))()
       }}

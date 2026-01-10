@@ -1,5 +1,6 @@
 import { CITIES, SESSION_STORAGE_CITY_KEY } from "@/config";
 import { Combobox } from "@/shared/components/Combobox";
+import { useFormFieldsStore } from "@/shared/hooks/useFormFieldsStore";
 import { useTranslations } from "@/shared/hooks/useTranslations";
 import { toSnakeCase } from "@/shared/utils/toSnakeCase";
 import { useState } from "react";
@@ -7,6 +8,7 @@ import { useState } from "react";
 export function HeroCombobox(){
 
   const [value,setValue] = useState('')
+  const {addFields} = useFormFieldsStore()
 
   const t = useTranslations()
 
@@ -20,7 +22,9 @@ export function HeroCombobox(){
   value={value}
   onValueChange={(value)=>{
       setValue(value)
-      sessionStorage.setItem(SESSION_STORAGE_CITY_KEY,value)
+      addFields({
+        city:value
+      })
     }}
   />
 }

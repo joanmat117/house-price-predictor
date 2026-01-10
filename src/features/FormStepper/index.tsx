@@ -6,7 +6,7 @@ import {
   StepperSeparator,
   StepperTrigger,
 } from '@/shared/components/ui/stepper';
-import type { ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
 
 interface Props {
   value:number,
@@ -17,6 +17,10 @@ interface Props {
 }
 
 export default function FormStepper({value,onValueChange,className,children,steps}:Props) {
+
+  useEffect(()=>{
+    window.scroll({top:0,behavior:'instant'})
+  },[value])
 
   return (
     <Stepper value={value} onValueChange={onValueChange} className={`space-y-8 ${className}`}>

@@ -1,12 +1,24 @@
 {
   "hero": {
-    "title": "Aburrá Valley Housing Price Estimator",
-    "description": "Estimation based on real estate market data.",
-    "accuracy": " Average ±10% error.",
-    "cost": "Free",
+    "title": "Housing Price Estimator - Aburrá Valley",
+    "description": "Estimation based on actual real estate market data.",
+    "accuracy": " ±10% error on average.",
+    "cost": "free",
     "cta": {
       "button": "Get Started"
     }
+  },
+  "header": {
+    "title": "Aburrá Properties"
+  },
+  "signIn": {
+    "title": "Signing In...",
+    "description": "Completing authentication, please wait."
+  },
+  "register": {
+    "title": "Complete Your Profile",
+    "submit": "Register",
+    "submitPending": "Registering..."
   },
   "languageSelector": {
     "title": "Language",
@@ -20,36 +32,36 @@
     "system": "System"
   },
   "notfound": {
-    "title": "Oops, something went missing",
+    "title": "Oops, something's missing",
     "description": "Sorry, we can't find this page",
-    "button": "Back to Home"
+    "button": "Return to Home"
   },
   "buttons": {
-    "out": "Exit",
+    "out": "Log Out",
     "previous": "Previous",
     "next": "Next",
     "yes": "Yes",
     "no": "No",
-    "getPrediction":"Calculate"
+    "getPrediction": "Calculate"
   },
   "form": {
     "city": {
       "label": "Select your city",
-      "notFound": "City unavailable"
+      "notFound": "City not available"
     },
     "town": {
       "label": "Select the neighborhood",
-      "notFound": "Neighborhood unavailable"
+      "notFound": "Neighborhood not available"
     },
     "property_type": {
       "label": "Select the property type",
-      "notFound": "Property type unavailable"
+      "notFound": "Property type not available"
     },
     "latitude": {
-      "label": "Enter latitude"
+      "label": "Enter the latitude"
     },
     "longitude": {
-      "label": "Enter longitude"
+      "label": "Enter the longitude"
     },
     "area": {
       "label": "Total lot area (m²)"
@@ -58,7 +70,7 @@
       "label": "Built area (m²)"
     },
     "rooms": {
-      "label": "Number of bedrooms"
+      "label": "Number of rooms"
     },
     "bathrooms": {
       "label": "Number of bathrooms"
@@ -66,7 +78,7 @@
     "parking_spots": {
       "label": "Number of parking spots"
     },
-    "exact_number_label": "Specify exact number (5 or more)",
+    "exact_number_label": "Specify the exact number (5 or more)",
     "strata": {
       "label": "Socioeconomic stratum"
     },
@@ -84,19 +96,19 @@
     },
     "relation_with_property": {
       "label": "What is your relationship with the property?",
-      "notFound": "Role unavailable"
+      "notFound": "Role not available"
     },
     "property_status": {
       "label": "Current property status",
-      "notFound": "Status unavailable"
+      "notFound": "Status not available"
     },
     "selling_motives": {
       "label": "Why do you want to sell?",
-      "notFound": "Motive unavailable"
+      "notFound": "Motive not available"
     },
     "buying_motives": {
       "label": "Why do you want to buy?",
-      "notFound": "Motive unavailable"
+      "notFound": "Motive not available"
     },
     "willing_price": {
       "label": "Willing price ($)"
@@ -113,7 +125,7 @@
       "title": "Features"
     },
     "step4": {
-      "title": "Role in Transaction"
+      "title": "Transaction Role"
     },
     "step5": {
       "title": "Additional Information"
@@ -142,8 +154,8 @@
       "max": "Built area cannot exceed 5,000 m²"
     },
     "rooms": {
-      "gt": "Must have at least 1 bedroom",
-      "lt": "Cannot have more than 9 bedrooms"
+      "gt": "Must have at least 1 room",
+      "lt": "Cannot have more than 9 rooms"
     },
     "bathrooms": {
       "gt": "Must have at least 1 bathroom",
@@ -174,7 +186,7 @@
       "max": "Maximum longitude: -75.3"
     },
     "relationWithProperty": {
-      "invalid": "Invalid property relationship"
+      "invalid": "Invalid relationship with property"
     },
     "propertyStatus": {
       "invalid": "Invalid property status",
@@ -205,30 +217,24 @@
       "itagui": "Itagüí",
       "envigado": "Envigado",
       "sabaneta": "Sabaneta",
-      "la_estrella": "La Estrella",
-      "caldas": "Caldas",
-      "copacabana": "Copacabana",
-      "girardota": "Girardota",
-      "barbosa": "Barbosa"
+      "la_estrella": "La Estrella"
     },
     "propertyTypes": {
       "apartment": "Apartment",
-      "house": "House",
-      "townhouse": "Country House",
-      "commercial": "Commercial Space"
+      "house": "House"
     },
     "relationsWithProperty": {
-      "sells": "I'm Selling",
-      "buys": "I'm Buying",
-      "agent": "I'm a Real Estate Agent"
+      "sells": "I Sell",
+      "buys": "I Buy",
+      "agent": "I am a Real Estate Agent"
     },
     "propertyStatuses": {
       "unoccupied": "Unoccupied",
       "rented": "Rented",
-      "inhabitates it": "Currently Inhabited"
+      "inhabitates it": "I currently live in it"
     },
     "sellingMotives": {
-      "house change": "Moving to a new house",
+      "house change": "House change",
       "settle a debt": "Settle a debt",
       "business opportunity": "Business opportunity",
       "browsing offers": "Browsing offers",
@@ -241,7 +247,7 @@
       "proximity to work and schools": "Proximity to work and schools",
       "investment opportunity": "Investment opportunity",
       "affordability and financing options": "Affordability and financing options",
-      "interest in newer home": "Interest in a newer home",
+      "interest in newer home": "Interest in newer home",
       "bigger house": "Bigger house",
       "desire for a move-in ready home": "Desire for a move-in ready home"
     }
