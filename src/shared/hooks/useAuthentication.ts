@@ -1,8 +1,5 @@
 import { useMemo, useState } from "react";
-
-export function getAuthToken(){
-  return localStorage.getItem('auth_token')
-}
+import { getAuthToken } from "../utils/getAuthToken";
 
 export function useAuthentication(){
   const [isAuthenticated, setIsAuthenticated] = useState(!!getAuthToken())
