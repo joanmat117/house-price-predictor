@@ -8,6 +8,18 @@
       "button": "Empezar"
     }
   },
+  "header":{
+    "title":"Propiedades Aburrá"
+  },
+  "signIn": {
+    "title":"Accediendo...",
+    "description":"Completando autenticación, por favor espera."
+  },
+  "register":{
+    "title":"Completa tu perfil",
+    "submit":"Registrarse",
+    "submitPending":"Registrando..."
+  },
   "languageSelector": {
     "title": "Idioma",
     "spanish": "Español",

@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { exchangeCodeForToken } from '@/shared/services/googleOAuth';
 import { UserForm } from '@/features/UserForm';
+import { Loader } from '@/shared/components/icons/Loader';
+import { useTranslations } from '@/shared/hooks/useTranslations';
 
 /**
  * Google OAuth Callback Page
@@ -13,6 +15,7 @@ import { UserForm } from '@/features/UserForm';
  */
 export default function GoogleCallback() {
   const navigate = useNavigate();
+  const t = useTranslations()
   const [isLogin,setIsLogin] = useState(false)
 
   useEffect(() => {
@@ -67,15 +70,12 @@ export default function GoogleCallback() {
 
     handleCallback();
   }, [navigate]);
-
   return <>
     {isLogin &&
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-        <h2 className="text-xl font-semibold mb-2">Signing you in...</h2>
-        <p className="text-muted-foreground">Please wait while we complete your authentication.</p>
-      </div>
+    <div className="min-h-screen flex flex-col justify-center items-center justify-center bg-background">
+        <Loader className='size-12 my-4'/>
+        <h2 className="text-2xl font-semibold mb-2">{t.signIn.title}</h2>
+        <p className="text-muted-foreground">{t.signIn.description}</p>
     </div>
     }
     {!isLogin &&

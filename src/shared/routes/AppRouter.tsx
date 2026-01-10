@@ -13,13 +13,13 @@ export function AppRouter(){
   <Suspense >
 
     <Routes>
-      <Route
-        path="/google/callback"
-        element={<GoogleCallback/>}
-      />
 
       <Route element={<Layout/>}>
 
+        <Route
+          path="/google/callback"
+          element={<GoogleCallback/>}
+        />
         <Route
         path="/results"
         element={<Results/>}

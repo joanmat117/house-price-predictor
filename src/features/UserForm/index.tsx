@@ -15,8 +15,9 @@ import {
 } from '@/shared/components/ui/form';
 import { Input } from '@/shared/components/ui/input';
 import { Checkbox } from '@/shared/components/ui/checkbox';
-import { Loader2 } from 'lucide-react';
 import { useRedirectAfterLogin } from '@/shared/hooks/useRedirectAfterLogin';
+import { useTranslations } from '@/shared/hooks/useTranslations';
+import { Loader } from '@/shared/components/icons/Loader';
 
 interface UserFormProps {
   onSuccess?: () => void;
@@ -24,6 +25,7 @@ interface UserFormProps {
 
 export function UserForm({}: UserFormProps) {
 
+  const t = useTranslations()
   const {redirect} = useRedirectAfterLogin()
 
   const form = useForm({
@@ -64,7 +66,10 @@ export function UserForm({}: UserFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 p-3 max-w-lg mx-auto">
+        <h1 className='text-2xl font-bold text-center'>
+        {t.register.title}
+        </h1>
         <FormField
           control={form.control}
           name="name"
@@ -89,7 +94,7 @@ export function UserForm({}: UserFormProps) {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Número de teléfono</FormLabel>
-              <FormControl>
+              <FormControl >
                 <Input 
                   placeholder="+1 (555) 123-4567" 
                   {...field} 
@@ -158,11 +163,11 @@ export function UserForm({}: UserFormProps) {
         >
           {mutation.isPending ? (
             <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Registrando...
+              <Loader className="mr-2 size-6" />
+              {t.register.submitPending}
             </>
           ) : (
-            'Registrarse'
+          t.register.submit
           )}
         </Button>
       </form>
