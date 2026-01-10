@@ -5,7 +5,7 @@ import { createPredictionSchema } from "../schemas/PredictionSchema";
 export type PredictionSchemaType = ReturnType<typeof createPredictionSchema>
 
 
-type PredictionData = z.infer<PredictionSchemaType>
-type SchemaKeys = keyof PredictionData
+export type PredictionData = z.infer<PredictionSchemaType>
+export type SchemaKeys = keyof PredictionData
 
 export type PredictionSchemaMask = Mask<SchemaKeys>

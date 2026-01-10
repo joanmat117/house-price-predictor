@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { exchangeCodeForToken } from '@/shared/services/googleOAuth';
+import { useRedirectAfterLogin } from '@/shared/hooks/useRedirectAfterLogin';
 
 /**
  * Google OAuth Callback Page
@@ -12,6 +13,7 @@ import { exchangeCodeForToken } from '@/shared/services/googleOAuth';
  */
 export default function GoogleCallback() {
   const navigate = useNavigate();
+  const {redirect} = useRedirectAfterLogin()
 
   useEffect(() => {
     const handleCallback = async () => {
@@ -52,9 +54,7 @@ export default function GoogleCallback() {
         newUrl.searchParams.delete('prompt');
         window.history.replaceState({}, document.title, newUrl.pathname);
 
-        // Redirect to home page
-        navigate('/', { replace: true });
-
+        redirect()
       } catch (err) {
         console.error('OAuth callback error:', err);
 

@@ -43,15 +43,12 @@ export function useFormPrediction(step:Steps){
   
   const stepSchema = usePredictionSchema(predictionFormSteps[step])
 
-  const formUtils = useForm({
+  const formUtils = useFormPersist(
+    useForm({
     mode:'onBlur',
     resolver:zodResolver(stepSchema as any)
   })
-  
-  useFormPersist(step,{
-    watch:formUtils.watch,
-    reset:formUtils.reset
-  })
+  )
   
   return formUtils
 }

@@ -1,6 +1,6 @@
 import { initiateGoogleLogin } from '@/shared/services/googleOAuth';
 import { Button } from '@/shared/components/ui/button';
-import { useEffect, useState } from 'react';
+import { useAuthentication } from '../hooks/useAuthentication';
 
 /**
  * Google Login Button Component
@@ -8,22 +8,15 @@ import { useEffect, useState } from 'react';
  * Initiates Google OAuth authentication flow when clicked
  */
 export function GoogleLoginButton() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    // Check if user is authenticated on mount
-    const token = localStorage.getItem('auth_token');
-    setIsAuthenticated(!!token);
-  }, []);
+  
+  const {isAuthenticated,logOut} = useAuthentication()
 
   const handleLogin = () => {
     initiateGoogleLogin();
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('auth_token');
-    localStorage.removeItem('is_registered');
-    setIsAuthenticated(false);
+    logOut()
   };
 
   return (

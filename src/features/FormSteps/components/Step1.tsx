@@ -48,7 +48,7 @@ export function Step1(){
     {/*Town*/}
     <InputWrapper
     labelHeading={t.form.town.label}
-    error={errors.latitude?.message}
+    error={errors.latitude?.message || errors.longitude?.message}
     >
       <ComboboxCordsControlled
       label={t.form.town.label}

@@ -2,11 +2,11 @@ import { createPredictionSchema } from "../schemas/PredictionSchema";
 import { useTranslations } from "./useTranslations";
 import {type PredictionSchemaMask } from "@/shared/types/PredictionSchema"
 
-export function usePredictionSchema(Properties:Partial<PredictionSchemaMask>){
+export function usePredictionSchema(Properties?:Partial<PredictionSchemaMask>){
   const t = useTranslations()
 
   const schema = createPredictionSchema(t)
-
-  return schema.pick(Properties) 
+  if(Properties) return schema.pick(Properties)
+  return schema
 
 }

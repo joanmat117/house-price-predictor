@@ -29,7 +29,8 @@
     "previous": "Anterior",
     "next": "Siguiente",
     "yes": "Sí",
-    "no": "No"
+    "no": "No",
+    "getPrediction":"Calcular"
   },
   "form": {
     "city": {

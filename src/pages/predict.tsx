@@ -7,13 +7,14 @@ import { Step4 } from "@/features/FormSteps/components/Step4";
 import { Step5 } from "@/features/FormSteps/components/Step5";
 import { StepperContent, StepperPanel } from "@/shared/components/ui/stepper";
 import { useStepperStore } from "@/shared/hooks/useStepperStore";
+import { genArrayRange } from "@/shared/utils/genArrayRange";
 
 
 export default function Predict(){
 
   const {maxStep,currentStep} = useStepperStore()
 
-  const steps = Array.from({length:maxStep},(_,i)=>i+1)
+  const steps = genArrayRange(1,maxStep) 
 
   return <section className=' px-5'>
   <FormStepper className="py-5" onValueChange={()=>{}} steps={steps} value={currentStep}>

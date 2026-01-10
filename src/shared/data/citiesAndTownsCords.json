@@ -2,201 +2,201 @@
   "medellin": {
     "aranjuez": {
       "latitude": 6.2828,
-      "longitude": -75.5622
+      "longitude": -75.2622
     },
     "belen": {
       "latitude": 6.2241,
-      "longitude": -75.5987
+      "longitude": -75.2987
     },
     "buenos aires": {
       "latitude": 6.2425,
-      "longitude": -75.5749
+      "longitude": -75.2749
     },
     "castilla": {
       "latitude": 6.2892,
-      "longitude": -75.5936
+      "longitude": -75.2936
     },
     "doce de octubre": {
       "latitude": 6.2906,
-      "longitude": -75.5883
+      "longitude": -75.2883
     },
     "el poblado": {
       "latitude": 6.2081,
-      "longitude": -75.5671
+      "longitude": -75.2671
     },
     "guayabal": {
       "latitude": 6.2236,
-      "longitude": -75.6075
+      "longitude": -75.3075
     },
     "la america": {
       "latitude": 6.2597,
-      "longitude": -75.605
+      "longitude": -75.305
     },
     "la candelaria": {
       "latitude": 6.2475,
-      "longitude": -75.5656
+      "longitude": -75.2656
     },
     "laureles - estadio": {
       "latitude": 6.2479,
-      "longitude": -75.5898
+      "longitude": -75.2898
     },
     "manrique": {
       "latitude": 6.2747,
-      "longitude": -75.5528
+      "longitude": -75.2528
     },
     "popular": {
       "latitude": 6.2919,
-      "longitude": -75.5575
+      "longitude": -75.2575
     },
     "robledo": {
       "latitude": 6.2746,
-      "longitude": -75.5932
+      "longitude": -75.2932
     },
     "san javier": {
       "latitude": 6.2356,
-      "longitude": -75.625
+      "longitude": -75.325
     },
     "santa cruz": {
       "latitude": 6.2814,
-      "longitude": -75.5728
+      "longitude": -75.2728
     },
     "villa hermosa": {
       "latitude": 6.2442,
-      "longitude": -75.5642
+      "longitude": -75.2642
     }
   },
   "bello": {
     "acevedo": {
       "latitude": 6.3186,
-      "longitude": -75.5453
+      "longitude": -75.2453
     },
     "andaluz": {
       "latitude": 6.3203,
-      "longitude": -75.57
+      "longitude": -75.27
     },
     "bellavista": {
       "latitude": 6.3451,
-      "longitude": -75.5623
+      "longitude": -75.2623
     },
     "cabañas": {
       "latitude": 6.3533,
-      "longitude": -75.5425
+      "longitude": -75.2425
     },
     "fontibon": {
       "latitude": 6.3269,
-      "longitude": -75.5358
+      "longitude": -75.2358
     },
     "la miel": {
       "latitude": 6.3667,
-      "longitude": -75.5569
+      "longitude": -75.2569
     },
     "miraflores": {
       "latitude": 6.3106,
-      "longitude": -75.5533
+      "longitude": -75.2533
     },
     "niquia": {
       "latitude": 6.3344,
-      "longitude": -75.5589
+      "longitude": -75.2589
     },
     "paris": {
       "latitude": 6.3317,
-      "longitude": -75.5432
+      "longitude": -75.2432
     },
     "quito": {
       "latitude": 6.3375,
-      "longitude": -75.5283
+      "longitude": -75.2283
     },
     "sucre": {
       "latitude": 6.3486,
-      "longitude": -75.5731
+      "longitude": -75.2731
     }
   },
   "itagui": {
     "la aldea": {
       "latitude": 6.1583,
-      "longitude": -75.6056
+      "longitude": -75.3056
     },
     "san javier": {
       "latitude": 6.1619,
-      "longitude": -75.6186
+      "longitude": -75.3186
     },
     "san pedro": {
       "latitude": 6.1778,
-      "longitude": -75.5989
+      "longitude": -75.2989
     },
     "santa maria": {
       "latitude": 6.1667,
-      "longitude": -75.6083
+      "longitude": -75.3083
     },
     "simon bolivar": {
       "latitude": 6.1725,
-      "longitude": -75.6142
+      "longitude": -75.3142
     }
   },
   "envigado": {
     "el dorado": {
       "latitude": 6.1694,
-      "longitude": -75.5806
+      "longitude": -75.2806
     },
     "las vegas": {
       "latitude": 6.1556,
-      "longitude": -75.5833
+      "longitude": -75.2833
     },
     "milan": {
       "latitude": 6.1833,
-      "longitude": -75.5694
+      "longitude": -75.2694
     },
     "san marcos": {
       "latitude": 6.1764,
-      "longitude": -75.575
+      "longitude": -75.275
     },
     "zuniga": {
       "latitude": 6.1625,
-      "longitude": -75.5917
+      "longitude": -75.2917
     }
   },
   "sabaneta": {
     "el castillo": {
       "latitude": 6.15,
-      "longitude": -75.6083
+      "longitude": -75.3083
     },
     "julio rincon": {
       "latitude": 6.1361,
-      "longitude": -75.6028
+      "longitude": -75.3028
     },
     "la florida": {
       "latitude": 6.1417,
-      "longitude": -75.6167
+      "longitude": -75.3167
     },
     "parque sabaneta": {
       "latitude": 6.1433,
-      "longitude": -75.61
+      "longitude": -75.31
     },
     "sabaneta centro": {
       "latitude": 6.1514,
-      "longitude": -75.6
+      "longitude": -75.3
     }
   },
   "la estrella": {
     "el pedregal": {
       "latitude": 6.1417,
-      "longitude": -75.65
+      "longitude": -75.35
     },
     "el socorro": {
       "latitude": 6.15,
-      "longitude": -75.6583
+      "longitude": -75.3583
     },
     "la esperanza": {
       "latitude": 6.175,
-      "longitude": -75.6417
+      "longitude": -75.3417
     },
     "la tablaza": {
       "latitude": 6.1583,
-      "longitude": -75.6417
+      "longitude": -75.3417
     },
     "san jose": {
       "latitude": 6.1667,
-      "longitude": -75.6333
+      "longitude": -75.3333
     }
   }
 }
