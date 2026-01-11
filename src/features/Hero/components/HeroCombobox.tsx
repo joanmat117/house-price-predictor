@@ -1,4 +1,4 @@
-import { CITIES, SESSION_STORAGE_CITY_KEY } from "@/config";
+import { CITIES } from "@/config";
 import { Combobox } from "@/shared/components/Combobox";
 import { useFormFieldsStore } from "@/shared/hooks/useFormFieldsStore";
 import { useTranslations } from "@/shared/hooks/useTranslations";
