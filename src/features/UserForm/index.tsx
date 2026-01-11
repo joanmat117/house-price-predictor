@@ -42,9 +42,9 @@ export function UserForm({}: UserFormProps) {
 
   const mutation = useMutation({
     mutationFn: userService.registerUser,
-    onSuccess: () => {
+    onSuccess: (data) => {
       form.reset();
-      
+        console.log('Register response: ',data) 
         redirect()
 
     },

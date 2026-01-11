@@ -20,6 +20,10 @@
     "submit":"Registrarse",
     "submitPending":"Registrando..."
   },
+  "oauth":{
+    "signIn":"Iniciar sesión",
+    "logOut":"Cerrar sesión"
+  },
   "languageSelector": {
     "title": "Idioma",
     "spanish": "Español",

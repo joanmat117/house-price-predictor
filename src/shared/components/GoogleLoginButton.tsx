@@ -1,6 +1,9 @@
 import { initiateGoogleLogin } from '@/shared/services/googleOAuth';
 import { Button } from '@/shared/components/ui/button';
 import { useAuthentication } from '../hooks/useAuthentication';
+import { Google } from './icons/Google';
+import { LogOut } from 'lucide-react';
+import { useTranslations } from '../hooks/useTranslations';
 
 /**
  * Google Login Button Component
@@ -10,6 +13,7 @@ import { useAuthentication } from '../hooks/useAuthentication';
 export function GoogleLoginButton() {
   
   const {isAuthenticated,logOut} = useAuthentication()
+  const t = useTranslations()
 
   const handleLogin = () => {
     initiateGoogleLogin();
@@ -25,7 +29,10 @@ export function GoogleLoginButton() {
       variant={isAuthenticated ? 'outline' : 'default'}
       size="sm"
     >
-      {isAuthenticated ? 'Logout' : 'Google Sign In'}
+      {isAuthenticated ? <LogOut/> : <Google/>}
+      <span>
+        {isAuthenticated ? t.oauth.logOut : t.oauth.signIn }
+      </span>
     </Button>
   );
 }
