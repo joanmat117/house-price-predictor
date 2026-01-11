@@ -1,8 +1,8 @@
 {
   "hero": {
-    "title": "Housing Price Estimator - Aburrá Valley",
+    "title": "Aburrá Valley House Price Estimator",
     "description": "Estimation based on actual real estate market data.",
-    "accuracy": " ±10% error on average.",
+    "accuracy": "Average error of ±10%.",
     "cost": "free",
     "cta": {
       "button": "Get Started"
@@ -32,12 +32,12 @@
     "system": "System"
   },
   "notfound": {
-    "title": "Oops, something's missing",
+    "title": "Oops, something got lost",
     "description": "Sorry, we can't find this page",
-    "button": "Return to Home"
+    "button": "Return Home"
   },
   "buttons": {
-    "out": "Log Out",
+    "out": "Sign Out",
     "previous": "Previous",
     "next": "Next",
     "yes": "Yes",
@@ -70,7 +70,7 @@
       "label": "Built area (m²)"
     },
     "rooms": {
-      "label": "Number of rooms"
+      "label": "Number of bedrooms"
     },
     "bathrooms": {
       "label": "Number of bathrooms"
@@ -95,7 +95,7 @@
       "label": "Is the property under construction?"
     },
     "relation_with_property": {
-      "label": "What is your relationship with the property?",
+      "label": "What is your relationship to the property?",
       "notFound": "Role not available"
     },
     "property_status": {
@@ -125,7 +125,7 @@
       "title": "Features"
     },
     "step4": {
-      "title": "Transaction Role"
+      "title": "Role in Transaction"
     },
     "step5": {
       "title": "Additional Information"
@@ -154,8 +154,8 @@
       "max": "Built area cannot exceed 5,000 m²"
     },
     "rooms": {
-      "gt": "Must have at least 1 room",
-      "lt": "Cannot have more than 9 rooms"
+      "gt": "Must have at least 1 bedroom",
+      "lt": "Cannot have more than 9 bedrooms"
     },
     "bathrooms": {
       "gt": "Must have at least 1 bathroom",
@@ -186,7 +186,7 @@
       "max": "Maximum longitude: -75.3"
     },
     "relationWithProperty": {
-      "invalid": "Invalid relationship with property"
+      "invalid": "Invalid relationship to property"
     },
     "propertyStatus": {
       "invalid": "Invalid property status",
@@ -224,17 +224,17 @@
       "house": "House"
     },
     "relationsWithProperty": {
-      "sells": "I Sell",
-      "buys": "I Buy",
-      "agent": "I am a Real Estate Agent"
+      "sells": "I'm Selling",
+      "buys": "I'm Buying",
+      "agent": "I'm a Real Estate Agent"
     },
     "propertyStatuses": {
       "unoccupied": "Unoccupied",
       "rented": "Rented",
-      "inhabitates it": "I currently live in it"
+      "inhabitates it": "Currently Inhabited"
     },
     "sellingMotives": {
-      "house change": "House change",
+      "house change": "Change of house",
       "settle a debt": "Settle a debt",
       "business opportunity": "Business opportunity",
       "browsing offers": "Browsing offers",
@@ -252,4 +252,4 @@
       "desire for a move-in ready home": "Desire for a move-in ready home"
     }
   }
-}
+  }
