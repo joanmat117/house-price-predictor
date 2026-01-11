@@ -9,7 +9,7 @@ export function usePrediction(fields:PredictionData){
   const [error,setError] = useState<string|null|undefined>(null)
   const [isLatest,setIsLatest] = useState(false)
 
-  const {authToken} = useAuthentication()
+  const {getAuthToken} = useAuthentication()
   
   const fetchPrediction = async()=>{
     try {
@@ -24,7 +24,7 @@ export function usePrediction(fields:PredictionData){
         console.log('Llego aqui')
         return
       }
-      const prediction = await generatePrediction(fields,authToken as string)
+      const prediction = await generatePrediction(fields,getAuthToken() as string)
       setData(prediction)
       localStorage.setItem('LATEST_PREDICTION',prediction)
     } catch(e){
