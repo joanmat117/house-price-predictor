@@ -5,6 +5,7 @@ import { StepWrapper } from "./StepWrapper"
 import { Input } from "@/shared/components/ui/input"
 import { BoxRadioInputControlled } from "./BoxRadioInputControlled"
 import { useWatch } from "react-hook-form"
+import { BUYING_MOTIVES, PROPERTY_STATUSES, SELLING_MOTIVES } from "@/config"
 
 export function Step5(){
 
@@ -26,7 +27,7 @@ export function Step5(){
             <BoxRadioInputControlled
             name="property_status"
             control={control}
-            options={["unoccupied", "rented", "inhabitates it"]}
+            options={PROPERTY_STATUSES}
             optionsTranslation={t.enums.propertyStatuses}
             />
           </InputWrapper>
@@ -38,16 +39,7 @@ export function Step5(){
             <BoxRadioInputControlled
             name="selling_motives"
             control={control}
-            options={[
-              "house change",
-              "settle a debt",
-              "business opportunity",
-              "browsing offers",
-              "investment for studies or travel",
-              "Change city or live in the countryside",
-              "I don't want to keep renting",
-              "property division"
-            ]}
+            options={SELLING_MOTIVES}
             optionsTranslation={t.enums.sellingMotives}
             />
           </InputWrapper>
@@ -62,14 +54,7 @@ export function Step5(){
           <BoxRadioInputControlled
           name="buying_motives"
           control={control}
-          options={[
-            "proximity to work and schools",
-            "investment opportunity",
-            "affordability and financing options",
-            "interest in newer home",
-            "bigger house",
-            "desire for a move-in ready home"
-          ]}
+          options={BUYING_MOTIVES}
           optionsTranslation={t.enums.buyingMotives}
           />
         </InputWrapper>
@@ -81,7 +66,7 @@ export function Step5(){
       >
         <Input
           type="number"
-          placeholder="e.g., 300000000"
+          placeholder="300000000"
           {...register('willing_price',{valueAsNumber:true})}
         />
       </InputWrapper>

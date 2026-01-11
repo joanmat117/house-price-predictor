@@ -3,6 +3,7 @@ import { useFormPrediction } from "../hooks/useFormPrediction"
 import { InputWrapper } from "./InputWrapper"
 import { StepWrapper } from "./StepWrapper"
 import { BoxRadioInputControlled } from "./BoxRadioInputControlled"
+import { RELATION_WITH_PROPERTY } from "@/config"
 
 export function Step4(){
 
@@ -20,7 +21,7 @@ export function Step4(){
         <BoxRadioInputControlled
         name="relation_with_property"
         control={control}
-        options={["sells", "buys", "agent"]}
+        options={RELATION_WITH_PROPERTY}
         optionsTranslation={t.enums.relationsWithProperty}
         />
       </InputWrapper>

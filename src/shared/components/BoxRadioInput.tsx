@@ -5,7 +5,7 @@ import { capitalize } from '../utils/capitalize'
 
 interface Props {
   items:string[],
-  optionsTranslation:Record<string,string>,
+  optionsTranslation?:Record<string,string>,
   containerClassName?:string,
   labelClassName?:string,
   value:string|null|undefined,

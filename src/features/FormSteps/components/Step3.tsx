@@ -2,14 +2,14 @@ import { useTranslations } from "@/shared/hooks/useTranslations"
 import { useFormPrediction } from "../hooks/useFormPrediction"
 import { InputWrapper } from "./InputWrapper"
 import { StepWrapper } from "./StepWrapper"
-import { Input } from "@/shared/components/ui/input"
 import { BoxRadioInputControlled } from "./BoxRadioInputControlled"
-import { ComboboxControlled } from "./ComboboxControlled"
+import { SliderWithIndicator } from "./SliderWithIndicator"
+import { ANTIQUITY, STRATA } from "@/config"
 
 export function Step3(){
   const t = useTranslations()
 
-  const {handleSubmit,control,register,formState:{errors}} = useFormPrediction('step3')
+  const {handleSubmit,control,formState:{errors}} = useFormPrediction('step3')
 
   return <>
   <StepWrapper handleContinue={handleSubmit}>
@@ -18,12 +18,11 @@ export function Step3(){
       labelHeading={t.form.strata.label}
       error={errors.strata?.message}
       >
-        <ComboboxControlled
-        name="strata"
+        <SliderWithIndicator
+        name='strata'
         control={control}
-        options={["1", "2", "3", "4", "5", "6"]}
-        label={t.form.strata.label}
-        notFound="Strata not found"
+        max={STRATA.max}
+        min={STRATA.min}
         />
       </InputWrapper>
 
@@ -31,12 +30,11 @@ export function Step3(){
       labelHeading={t.form.antiquity.label}
       error={errors.antiquity?.message}
       >
-        <Input
-          type="number"
-          min={1}
-          max={5}
-          placeholder="e.g., 2"
-          {...register('antiquity',{valueAsNumber:true})}
+        <SliderWithIndicator
+        name='antiquity'
+        control={control}
+        max={ANTIQUITY.max}
+        min={ANTIQUITY.min}
         />
       </InputWrapper>
 

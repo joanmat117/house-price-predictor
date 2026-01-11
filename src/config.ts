@@ -32,7 +32,7 @@ export const BUYING_MOTIVES = [
 
 export const STRATA = {
   min:1,
-  max:5
+  max:6
 }
 
 export const AREA = {
@@ -56,7 +56,7 @@ export const BATHROOMS = {
 }
 
 export const PARKING_SPOTS = {
-  min:1,
+  min:0,
   max:9
 }
 
@@ -64,3 +64,18 @@ export const ANTIQUITY = {
   min:1,
   max:5
 } 
+
+export const LATITUDE = {
+  min:6,
+  max:6.5
+}
+
+export const LONGITUDE = {
+  min:-75.6,
+  max:-75.3
+}
+
+export const WILLING_PRICE = {
+  min:50000000,
+  max:10000000000000
+}

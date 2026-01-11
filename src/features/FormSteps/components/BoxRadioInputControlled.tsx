@@ -4,7 +4,7 @@ import { useController } from "react-hook-form";
 interface Props {
   name:string,
   control:any,
-  optionsTranslation:Record<string,string>,
+  optionsTranslation?:Record<string,string>,
   options:string[],
   valueType?: 'string' | 'boolean'
 }
@@ -29,7 +29,7 @@ export function BoxRadioInputControlled({name,control,options,optionsTranslation
   value={value !== undefined ? String(value) : undefined}
   optionsTranslation={optionsTranslation}
   items={options}
-  labelClassName=""
+  labelClassName=" transition-all active:scale-95"
   containerClassName=""
   />
 }

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ANTIQUITY, AREA, BATHROOMS, BUILT_AREA, BUYING_MOTIVES, CITIES, PARKING_SPOTS, PROPERTY_STATUSES, PROPERTY_TYPES, RELATION_WITH_PROPERTY, ROOMS, SELLING_MOTIVES, STRATA } from '@/config';
+import { ANTIQUITY, AREA, BATHROOMS, BUILT_AREA, BUYING_MOTIVES, CITIES, LATITUDE, LONGITUDE, PARKING_SPOTS, PROPERTY_STATUSES, PROPERTY_TYPES, RELATION_WITH_PROPERTY, ROOMS, SELLING_MOTIVES, STRATA, WILLING_PRICE } from '@/config';
 
 export function createPredictionSchema(translations: any) {
   const t = translations
@@ -46,12 +46,12 @@ export function createPredictionSchema(translations: any) {
     .max(ANTIQUITY.max, { message: t.validations.antiquity.max }),
   
   latitude: z.coerce.number()
-    .min(6, { message: t.validations.latitude.min })//Min should be 6
-    .max(6.5, { message: t.validations.latitude.max }),//Max should be 6.5
+    .min(LATITUDE.min, { message: t.validations.latitude.min })//Min should be 6
+    .max(LATITUDE.max, { message: t.validations.latitude.max }),//Max should be 6.5
   
   longitude: z.coerce.number()
-    .min(-75.6, { message: t.validations.longitude.min })//Min should be -75.6
-    .max(-75.3, { message: t.validations.longitude.max }),//Max should be -75.3
+    .min(LONGITUDE.min, { message: t.validations.longitude.min })//Min should be -75.6
+    .max(LONGITUDE.max, { message: t.validations.longitude.max }),//Max should be -75.3
   
   // Campos de Data Analysis
   relation_with_property: z.enum(RELATION_WITH_PROPERTY, {message: t.validations.relationWithProperty.invalid}).default("agent"),
@@ -63,8 +63,8 @@ export function createPredictionSchema(translations: any) {
   buying_motives: z.enum(BUYING_MOTIVES, {message: t.validations.buyingMotives.invalid}).optional().nullable(),
   
   willing_price: z.coerce.number()
-    .min(50000000, { message: t.validations.willingPrice.min })
-    .max(10000000000000, { message: t.validations.willingPrice.max })
+    .min(WILLING_PRICE.min, { message: t.validations.willingPrice.min })
+    .max(WILLING_PRICE.max, { message: t.validations.willingPrice.max })
     .optional()
     .nullable(),
   
