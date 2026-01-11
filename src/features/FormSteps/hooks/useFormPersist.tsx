@@ -1,47 +1,75 @@
 import { useFormFieldsStore } from '@/shared/hooks/useFormFieldsStore';
 import { 
-  type UseFormReturn, 
+  useForm,
   type UseFormHandleSubmit,
   type FieldValues,
-  type SubmitHandler
+  type SubmitHandler,
+  type UseFormProps,
+  type DefaultValues
 } from 'react-hook-form';
-import { useEffect, useCallback, useRef } from 'react';
+import { useEffect, useCallback, useRef, useMemo } from 'react';
 
 interface UseFormPersistOptions {
-  autoSave?: boolean; // Save automatically when fields change
-  debounceTime?: number; // Debounce time for auto-save
-  restoreOnMount?: boolean; // Restore data automatically on mount
+  autoSave?: boolean; 
+  debounceTime?: number; 
+  restoreOnMount?: boolean; 
 }
 
+// El hook ahora acepta las props de useForm (generic T) y sus propias opciones
 export function useFormPersist<T extends FieldValues>(
-  useFormReturn: UseFormReturn<T, unknown, any>,
-  options: UseFormPersistOptions = {}
+  useFormOptions: UseFormProps<T> = {},
+  persistOptions: UseFormPersistOptions = {}
 ) {
-  const { 
-    handleSubmit: originalHandleSubmit, 
-    watch,
-    getValues,
-    setValue
-  } = useFormReturn;
-
   const {
     autoSave = true,
     debounceTime = 500,
     restoreOnMount = true
-  } = options;
+  } = persistOptions;
 
   const { addFields, fields, resetFields } = useFormFieldsStore();
   
-  // Ref para controlar si es una restauración inicial
-  const isInitialRestoration = useRef(false);
+  // 1. LÓGICA DE DEFAULT VALUES
+  // Calculamos los valores iniciales combinando los defaultValues del usuario
+  // con los datos guardados en el store.
+  const combinedDefaultValues = useMemo(() => {
+    // Si no debemos restaurar, usamos los defaults originales
+    if (!restoreOnMount) {
+      return useFormOptions.defaultValues;
+    }
+
+    const hasPersistedData = Object.keys(fields).length > 0;
+    
+    // Si hay datos persistidos, los priorizamos
+    if (hasPersistedData) {
+      // Hacemos merge: persistidos sobreescriben a los defaults originales
+      return {
+        ...(useFormOptions.defaultValues || {}),
+        ...fields,
+      } as DefaultValues<T>;
+    }
+
+    return useFormOptions.defaultValues;
+  }, [useFormOptions.defaultValues, fields, restoreOnMount]);
+
+  // 2. INICIALIZACIÓN DE USEFORM INTERNA
+  // Inicializamos useForm aquí mismo con los valores ya combinados
+  const methods = useForm<T>({
+    ...useFormOptions,
+    defaultValues: combinedDefaultValues,
+  });
+
+  const { 
+    handleSubmit: originalHandleSubmit, 
+    watch, 
+    getValues, 
+  } = methods;
+
   const isRestoring = useRef(false);
 
-  // Function to save current form data to the store
+  // Guardar datos en el store
   const saveCurrentFields = useCallback(async (data?: T) => {
     try {
-      // No guardar mientras estamos restaurando datos
       if (isRestoring.current) return;
-      
       const fieldsToSave = data || getValues();
       await addFields(fieldsToSave);
     } catch (error) {
@@ -49,36 +77,7 @@ export function useFormPersist<T extends FieldValues>(
     }
   }, [addFields, getValues]);
 
-  // Function to restore form data from the store
-  const restoreFields = useCallback(() => {
-    try {
-      // The fields object contains all form data
-      if (Object.keys(fields).length > 0 && !isInitialRestoration.current) {
-        isRestoring.current = true;
-        
-        // Restaurar los datos SIN usar reset para evitar disparar watch
-        const formData = fields as T;
-        Object.entries(formData).forEach(([key, value]) => {
-          setValue(key as any, value, {
-            shouldValidate: false,
-            shouldDirty: false,
-            shouldTouch: false
-          });
-        });
-        
-        isInitialRestoration.current = true;
-        isRestoring.current = false;
-        return true;
-      }
-      return false;
-    } catch (error) {
-      console.error('Error restoring fields from store:', error);
-      isRestoring.current = false;
-      return false;
-    }
-  }, [fields, setValue]);
-
-  // Custom handleSubmit that persists data before executing onValid
+  // Custom handleSubmit
   const customHandleSubmit: UseFormHandleSubmit<T> = (
     onValid: SubmitHandler<T>, 
     onInvalid?: (errors: any, event?: React.BaseSyntheticEvent) => any
@@ -86,14 +85,9 @@ export function useFormPersist<T extends FieldValues>(
     return originalHandleSubmit(
       async (data, event) => {
         try {
-          // 1. Persist data to store before submit
           await saveCurrentFields(data);
-          
-          // 2. Execute the original onValid function
           const result = await onValid(data, event);
-          
           return result;
-          
         } catch (error) {
           console.error('Error in custom submit:', error);
           throw error;
@@ -103,32 +97,20 @@ export function useFormPersist<T extends FieldValues>(
     );
   };
 
-  // Effect to restore data when component mounts (SÓLO UNA VEZ)
+  // 3. AUTO-SAVE
   useEffect(() => {
-    if (restoreOnMount && !isInitialRestoration.current) {
-      const timer = setTimeout(() => {
-        restoreFields();
-      }, 100);
-      
-      return () => clearTimeout(timer);
-    }
-  }, [restoreOnMount]);
+    if (!autoSave) return;
 
-  // Effect for auto-save when form fields change
-  useEffect(() => {
-    if (!autoSave || isRestoring.current) return;
-
-    // Use ReturnType<typeof setTimeout> for browser compatibility
     let timeoutId: ReturnType<typeof setTimeout>;
     
     const subscription = watch((data) => {
-      // No auto-save durante la restauración inicial
+      // Si estamos restaurando programáticamente, ignorar
       if (isRestoring.current) return;
       
-      // Use debounce to avoid saving on every keystroke
       clearTimeout(timeoutId);
       timeoutId = setTimeout(async () => {
         try {
+          // data puede ser parcial, así que aseguramos el tipado
           await saveCurrentFields(data as T);
         } catch (error) {
           console.error('Error in auto-save:', error);
@@ -142,20 +124,19 @@ export function useFormPersist<T extends FieldValues>(
     };
   }, [watch, autoSave, debounceTime, saveCurrentFields]);
 
-  // Function to clear persisted form data
+  // Limpiar datos persistidos
   const clearPersistedData = useCallback(async () => {
     try {
-      // resetFields clears all fields from the store
-      resetFields();
-      isInitialRestoration.current = false;
+      resetFields(); // Limpia el store
+      // Opcional: Resetear el formulario a sus valores por defecto originales (sin persistencia)
+      // reset(useFormOptions.defaultValues as DefaultValues<T>); 
       return true;
     } catch (error) {
       console.error('Error clearing persisted data:', error);
       return false;
     }
-  }, [resetFields]);
+  }, [resetFields]); //, reset, useFormOptions.defaultValues
 
-  // Function to force a manual save
   const manualSave = useCallback(async () => {
     try {
       const currentData = getValues();
@@ -167,17 +148,15 @@ export function useFormPersist<T extends FieldValues>(
     }
   }, [getValues, saveCurrentFields]);
 
+  // Devolvemos methods (...methods) para que funcione igual que useForm normal
+  // pero sobreescribimos handleSubmit y añadimos nuestras utilidades
   return {
-    ...useFormReturn,
+    ...methods,
     handleSubmit: customHandleSubmit,
-    // Additional functions for persistence management
-    restoreFields,
     clearPersistedData,
     manualSave,
-    // Information about persisted data
     hasPersistedData: Object.keys(fields).length > 0,
     persistedData: fields,
-    // Keep access to original handleSubmit if needed
-    originalHandleSubmit,
+    originalHandleSubmit, // Por si acaso se necesita el original
   };
 }

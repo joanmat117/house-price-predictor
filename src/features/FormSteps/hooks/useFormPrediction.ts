@@ -1,4 +1,3 @@
-import {useForm} from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { type PredictionSchemaMask } from "@/shared/types/PredictionSchema"
 import { usePredictionSchema } from "@/shared/hooks/usePredictionSchema"
@@ -43,12 +42,10 @@ export function useFormPrediction(step:Steps){
   
   const stepSchema = usePredictionSchema(predictionFormSteps[step])
 
-  const formUtils = useFormPersist(
-    useForm({
+  const formUtils = useFormPersist({
     mode:'onBlur',
     resolver:zodResolver(stepSchema as any)
   })
-  )
   
   return formUtils
 }
