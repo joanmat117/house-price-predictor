@@ -3,8 +3,9 @@ import { useFormPrediction } from "../hooks/useFormPrediction"
 import { InputWrapper } from "./InputWrapper"
 import { StepWrapper } from "./StepWrapper"
 import { Input } from "@/shared/components/ui/input"
-import { SliderWithIndicator } from "./SliderWithIndicator"
 import {BATHROOMS, PARKING_SPOTS, ROOMS } from "@/config"
+import { BoxRadioInputControlled } from "./BoxRadioInputControlled"
+import { genArrayRange } from "@/shared/utils/genArrayRange"
 
 
 export function Step2(){
@@ -41,11 +42,17 @@ export function Step2(){
       labelHeading={t.form.rooms.label}
       error={errors.rooms?.message}
       >
-        <SliderWithIndicator
+        {/*<SliderWithIndicator
         min={ROOMS.min}
         max={ROOMS.max}
         control={control}
         name='rooms'
+        />*/}
+        <BoxRadioInputControlled
+        name="rooms"
+        control={control}
+        containsText={false}
+        options={genArrayRange(ROOMS.min,ROOMS.max)}
         />
       </InputWrapper>
 
@@ -53,23 +60,36 @@ export function Step2(){
       labelHeading={t.form.bathrooms.label}
       error={errors.bathrooms?.message}
       >
-        <SliderWithIndicator
+        {/*<SliderWithIndicator
         min={BATHROOMS.min}
         max={BATHROOMS.max}
         control={control}
         name='bathrooms'
+        />*/}
+        <BoxRadioInputControlled
+        name="bathrooms"
+        control={control}
+        containsText={false}
+        options={genArrayRange(BATHROOMS.min,BATHROOMS.max)}
         />
+
       </InputWrapper>
 
       <InputWrapper
         labelHeading={t.form.parking_spots.label}
         error={errors.parking_spots?.message}
       >
-        <SliderWithIndicator
+        {/*<SliderWithIndicator
         min={PARKING_SPOTS.min}
         max={PARKING_SPOTS.max}
         control={control}
         name='parking_spots'
+        />*/}
+        <BoxRadioInputControlled
+        name="parking_spots"
+        control={control}
+        containsText={false}
+        options={genArrayRange(PARKING_SPOTS.min,PARKING_SPOTS.max)}
         />
       </InputWrapper>
 

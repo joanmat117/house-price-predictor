@@ -21,7 +21,7 @@ import { capitalize } from "../utils/capitalize"
 interface Props {
   label:string,
   notFound:string,
-  options:string[],
+  options:Array<string|number>,
   triggerClassName?:string,
   popoverClassName?:string,
   popoverItemClassName?:string,
@@ -57,14 +57,14 @@ export function Combobox({label,value,notFound,optionsTranslation,options,onValu
               {options.map((option) => (
                 <CommandItem
                   key={option}
-                  value={option}
+                  value={option.toString()}
                   className={`${popoverItemClassName}`}
                   onSelect={(currentValue) => {
                     if(onValueChange)onValueChange(currentValue) 
                     setOpen(false)
                   }}
                 > 
-                  {optionsTranslation && optionsTranslation[option] ? optionsTranslation[option] : capitalize(option)}
+                  {optionsTranslation && optionsTranslation[option.toString()] ? optionsTranslation[option] : capitalize(option.toString())}
                   <Check
                     className={cn(
                       "ml-auto",

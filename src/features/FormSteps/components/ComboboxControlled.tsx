@@ -5,7 +5,7 @@ interface Props {
   label:string,
   notFound:string,
   optionsTranslation?:Record<string,string>,
-  options:string[],
+  options:Array<string|number>,
   name:string,
   control:any
 }

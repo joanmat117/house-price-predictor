@@ -5,14 +5,12 @@ import { InputWrapper } from "./InputWrapper"
 import { CITIES, PROPERTY_TYPES } from "@/config"
 import { ComboboxControlled } from "./ComboboxControlled"
 import { BoxRadioInputControlled } from "./BoxRadioInputControlled"
-import { ComboboxCordsControlled } from "./ComboboxCordsControlled"
+import { InputLocation } from "./InputLocation"
 
 export function Step1(){
   const t = useTranslations()
 
-  const {handleSubmit,control,watch,setValue,formState:{errors}} = useFormPrediction('step1')
-
-  const city = watch('city')
+  const {handleSubmit,control,formState:{errors}} = useFormPrediction('step1')
 
   return <>
   <StepWrapper handleContinue={handleSubmit}>
@@ -50,13 +48,7 @@ export function Step1(){
     labelHeading={t.form.town.label}
     error={errors.latitude?.message || errors.longitude?.message}
     >
-      <ComboboxCordsControlled
-      label={t.form.town.label}
-      city={city}
-      notFound={t.form.town.notFound}
-      setValue={setValue}
-      watch={watch}
-      /> 
+      <InputLocation/> 
     </InputWrapper>
     
   </StepWrapper>

@@ -4,7 +4,7 @@ import { RadioGroup, RadioGroupItem } from '@/shared/components/ui/radio-group'
 import { capitalize } from '../utils/capitalize'
 
 interface Props {
-  items:string[],
+  items:Array<string|number>,
   optionsTranslation?:Record<string,string>,
   containerClassName?:string,
   labelClassName?:string,
@@ -20,15 +20,15 @@ export const BoxRadioInput = ({onValueChange,value,items,optionsTranslation,cont
         {items.map(item => (
           <label
             key={`${id}-${item}`}
-            className={`border-input flex-1 max-w-[300px] min-w-[120px] has-data-[state=checked]:border-primary/80 has-focus-visible:border-ring has-focus-visible:ring-ring/50 relative flex flex-col items-center justify-center gap-3 rounded-md border px-2 py-3 text-center cursor-pointer shadow-xs transition-[color,box-shadow] outline-none has-focus-visible:ring-[3px] has-data-disabled:cursor-not-allowed has-data-disabled:opacity-50 ${labelClassName}`}
+            className={`border-input  has-data-[state=checked]:border-primary/80 has-focus-visible:border-ring has-focus-visible:ring-ring/50 relative flex flex-col items-center justify-center gap-3 rounded-md border px-2 py-3 text-center cursor-pointer shadow-xs transition-[color,box-shadow] outline-none has-focus-visible:ring-[3px] has-data-disabled:cursor-not-allowed has-data-disabled:opacity-50 ${labelClassName}`}
           >
             <RadioGroupItem
               id={`${id}-${item}`}
-              value={item}
+              value={item.toString()}
               className='sr-only after:absolute after:inset-0'
               aria-label={`size-radio-${item}`}
             />
-            <p className='text-foreground text-sm leading-none font-medium'>{optionsTranslation? optionsTranslation[item] : capitalize(item)}</p>
+            <p className='text-foreground text-sm leading-none font-medium'>{optionsTranslation? optionsTranslation[item.toString()] : capitalize(item.toString())}</p>
           </label>
         ))}
       </RadioGroup>

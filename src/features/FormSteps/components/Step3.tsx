@@ -3,8 +3,9 @@ import { useFormPrediction } from "../hooks/useFormPrediction"
 import { InputWrapper } from "./InputWrapper"
 import { StepWrapper } from "./StepWrapper"
 import { BoxRadioInputControlled } from "./BoxRadioInputControlled"
-import { SliderWithIndicator } from "./SliderWithIndicator"
 import { ANTIQUITY, STRATA } from "@/config"
+import { ComboboxControlled } from "./ComboboxControlled"
+import { genArrayRange } from "@/shared/utils/genArrayRange"
 
 export function Step3(){
   const t = useTranslations()
@@ -18,11 +19,18 @@ export function Step3(){
       labelHeading={t.form.strata.label}
       error={errors.strata?.message}
       >
-        <SliderWithIndicator
+        {/*<SliderWithIndicator
         name='strata'
         control={control}
         max={STRATA.max}
         min={STRATA.min}
+        />*/}
+        <ComboboxControlled
+        options={genArrayRange(STRATA.min,STRATA.max)}
+        control={control}
+        name="strata"
+        label={t.form.strata.label}
+        notFound={''}
         />
       </InputWrapper>
 
@@ -30,11 +38,17 @@ export function Step3(){
       labelHeading={t.form.antiquity.label}
       error={errors.antiquity?.message}
       >
-        <SliderWithIndicator
+        {/*<SliderWithIndicator
         name='antiquity'
         control={control}
         max={ANTIQUITY.max}
         min={ANTIQUITY.min}
+        />*/}
+        <BoxRadioInputControlled
+        name="antiquity"
+        control={control}
+        options={genArrayRange(ANTIQUITY.min,ANTIQUITY.max)}
+        containsText={false}
         />
       </InputWrapper>
 
