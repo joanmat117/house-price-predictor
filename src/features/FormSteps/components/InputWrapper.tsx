@@ -10,7 +10,7 @@ interface Props extends HTMLProps<HTMLLabelElement> {
 export function InputWrapper({labelHeading,error,className,children,...headingProps}:Props){
   return <>
   <article className="flex flex-col gap-1 mt-2">
-  <label {...headingProps} className={`font-black ${className}`}>{labelHeading}</label>
+  <label {...headingProps} className={`font-bold ${className}`}>{labelHeading}</label>
   {children}
   <span className="text-destructive text-sm ml-2 min-h-5">{error|| ""}</span>
   </article>
