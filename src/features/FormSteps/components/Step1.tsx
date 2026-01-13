@@ -10,7 +10,7 @@ import { InputLocation } from "./InputLocation"
 export function Step1(){
   const t = useTranslations()
 
-  const {handleSubmit,control,formState:{errors}} = useFormPrediction('step1')
+  const {handleSubmit,setValue,control,formState:{errors}} = useFormPrediction('step1')
 
   return <>
   <StepWrapper handleContinue={handleSubmit}>
@@ -45,10 +45,12 @@ export function Step1(){
 
     {/*Town*/}
     <InputWrapper
-    labelHeading={t.form.town.label}
+    labelHeading={t.form.location.label}
     error={errors.latitude?.message || errors.longitude?.message}
     >
-      <InputLocation/> 
+      <InputLocation
+      setValue={setValue}
+      /> 
     </InputWrapper>
     
   </StepWrapper>

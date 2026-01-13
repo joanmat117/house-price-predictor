@@ -8,6 +8,10 @@
       "button": "Empezar"
     }
   },
+  "results":{
+    "title":"Resultados de la predicción",
+    "latest":"Predicción más reciente"
+  },
   "header":{
     "title":"Propiedades Aburrá"
   },
@@ -56,6 +60,10 @@
     "town": {
       "label": "Selecciona el barrio",
       "notFound": "Barrio no disponible"
+    },
+    "location": {
+      "label": "Escribe la dirección",
+      "notFound": "Dirección no encontrada"
     },
     "property_type": {
       "label": "Selecciona el tipo de propiedad",
@@ -182,10 +190,12 @@
       "max": "La antigüedad no puede exceder 5 años"
     },
     "latitude": {
+      "required":"La ubicación es requerida",
       "min": "Latitud mínima: 6.0",
       "max": "Latitud máxima: 6.5"
     },
     "longitude": {
+      "required":"La ubicación es requerida",
       "min": "Longitud mínima: -75.6",
       "max": "Longitud máxima: -75.3"
     },

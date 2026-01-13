@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { searchPlaceByQuery } from "../services/openCageService";
 import type { OpenCageQueryResponse} from "../types/OpenCageQueryResponse";
+import { useTranslations } from "./useTranslations";
 
 type LocationDataHook = {
   name: string;
@@ -8,6 +9,11 @@ type LocationDataHook = {
   longitude: number;
   boundingbox: [string, string, string, string];
 };
+
+
+const getLocationDataStored = ()=>{
+  return localStorage.getItem('LOCATION_DATA') !== null? JSON.parse(localStorage.getItem('LOCATION_DATA') as string): undefined
+}
 
 function extractFirstResult(apiResponse: OpenCageQueryResponse): LocationDataHook {
   const results = apiResponse.results;
@@ -38,8 +44,9 @@ function extractFirstResult(apiResponse: OpenCageQueryResponse): LocationDataHoo
 
 export function useSearchLocation() {
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState<LocationDataHook | undefined>(undefined);
+  const [data, setData] = useState<LocationDataHook | undefined>(getLocationDataStored());
   const [error, setError] = useState<string | undefined>(undefined);
+  const t = useTranslations()
 
   const fetchLocation = async (query: string) => {
     try {
@@ -50,7 +57,7 @@ export function useSearchLocation() {
       const response = await searchPlaceByQuery(query.trim());
       
       if (!response.results || response.results.length === 0) {
-        throw new Error('Location not found');
+        throw new Error(t.form.location.notFound);
       }
 
       const extractedData = extractFirstResult(response);

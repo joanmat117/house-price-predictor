@@ -15,7 +15,7 @@ export function StepperNavigation({onNextClick,onPrevClick}:Props){
   const {currentStep,maxStep} = useStepperStore()
 
   return <>
-    <div className="flex items-center justify-between gap-2.5">
+    <div className="flex items-center my-1 justify-between gap-2.5">
       <Button variant="outline" onClick={onPrevClick?()=>onPrevClick():undefined} disabled={currentStep === 1}>
           <ArrowBigLeft className="size-4"/>
         {t.buttons.previous}

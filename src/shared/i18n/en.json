@@ -1,12 +1,16 @@
 {
   "hero": {
-    "title": "Housing Price Estimator - Aburrá Valley",
-    "description": "Estimation based on real real estate market data.",
-    "accuracy": " Average error of ±10%.",
+    "title": "Home Price Estimator - Aburrá Valley",
+    "description": "Estimation based on real estate market data.",
+    "accuracy": " Average ±10% error.",
     "cost": "free",
     "cta": {
       "button": "Get Started"
     }
+  },
+  "results": {
+    "title": "Prediction Results",
+    "latest": "Latest prediction"
   },
   "header": {
     "title": "Aburrá Properties"
@@ -38,7 +42,7 @@
   "notfound": {
     "title": "Oops, something went missing",
     "description": "Sorry, we can't find this page",
-    "button": "Return to Home"
+    "button": "Back to Home"
   },
   "buttons": {
     "out": "Exit",
@@ -57,8 +61,12 @@
       "label": "Select the neighborhood",
       "notFound": "Neighborhood not available"
     },
+    "location": {
+      "label": "Enter the address",
+      "notFound": "Address not found"
+    },
     "property_type": {
-      "label": "Select property type",
+      "label": "Select the property type",
       "notFound": "Property type not available"
     },
     "latitude": {
@@ -90,16 +98,16 @@
       "label": "Property age (years)"
     },
     "has_sauna_jacuzzi_or_turkish_bath": {
-      "label": "Does it have sauna, jacuzzi or Turkish bath?"
+      "label": "Does it have a sauna, jacuzzi, or Turkish bath?"
     },
     "has_pool": {
-      "label": "Does it have a swimming pool?"
+      "label": "Does it have a pool?"
     },
     "is_in_construction": {
       "label": "Is the property under construction?"
     },
     "relation_with_property": {
-      "label": "What is your relationship with the property?",
+      "label": "What is your relation with the property?",
       "notFound": "Role not available"
     },
     "property_status": {
@@ -147,7 +155,7 @@
     },
     "strata": {
       "min": "Stratum must be at least 1",
-      "max": "Stratum cannot be greater than 6"
+      "max": "Stratum cannot exceed 6"
     },
     "area": {
       "min": "Area must be at least 30 m²",
@@ -182,15 +190,17 @@
       "max": "Age cannot exceed 5 years"
     },
     "latitude": {
+      "required": "Location is required",
       "min": "Minimum latitude: 6.0",
       "max": "Maximum latitude: 6.5"
     },
     "longitude": {
+      "required": "Location is required",
       "min": "Minimum longitude: -75.6",
       "max": "Maximum longitude: -75.3"
     },
     "relationWithProperty": {
-      "invalid": "Invalid relationship with property"
+      "invalid": "Invalid relation with property"
     },
     "propertyStatus": {
       "invalid": "Invalid property status",
@@ -230,12 +240,12 @@
     "relationsWithProperty": {
       "sells": "I Sell",
       "buys": "I Buy",
-      "agent": "I am a Real Estate Agent"
+      "agent": "I'm a Real Estate Agent"
     },
     "propertyStatuses": {
       "unoccupied": "Unoccupied",
       "rented": "Rented",
-      "inhabitates it": "Currently living in it"
+      "inhabitates it": "Currently Inhabited"
     },
     "sellingMotives": {
       "house change": "House change",

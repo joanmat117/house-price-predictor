@@ -2,12 +2,15 @@ import { ReturnToHomeButton } from "@/shared/components/ReturnToHomeButton"
 import { Button } from "@/shared/components/ui/button"
 import { useFormFieldsStore } from "@/shared/hooks/useFormFieldsStore"
 import { usePrediction } from "@/shared/hooks/usePrediction"
+import { useTranslations } from "@/shared/hooks/useTranslations"
 import type { PredictionData } from "@/shared/types/PredictionSchema"
 import { formatCOP } from "@/shared/utils/formatCOP"
 import { LoaderIcon } from "lucide-react"
 import { useEffect } from "react"
 
 export default function Results(){
+  
+  const t = useTranslations()
 
   const {fields,resetFields} = useFormFieldsStore()
 
@@ -29,14 +32,14 @@ export default function Results(){
   return <section className="flex-1 px-4">
     <ReturnToHomeButton/>
     <h1 className="text-center text-2xl font-bold my-3">
-      Resultados de la prediccion
+    {t.results.title}
     </h1>
 
     <div className={`${isLoading?'animate-pulse':''} mx-auto ${error? 'bg-red-500':'bg-green-500'} font-black text-white/90 flex flex-col items-center justify-center  rounded-xl p-4 `}>
     {data && !isLoading &&<>
       {isLatest &&
         <span>
-      {'Prediccion mas reciente'}
+      {t.results.latest}
     </span>}
     <p className="text-lg">
     {formatCOP(data)}

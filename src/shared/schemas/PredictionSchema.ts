@@ -45,11 +45,11 @@ export function createPredictionSchema(translations: any) {
     .min(ANTIQUITY.min, { message: t.validations.antiquity.min })
     .max(ANTIQUITY.max, { message: t.validations.antiquity.max }),
   
-  latitude: z.coerce.number()
+  latitude: z.coerce.number({error:t.validations.latitude.required})
     .min(LATITUDE.min, { message: t.validations.latitude.min })//Min should be 6
     .max(LATITUDE.max, { message: t.validations.latitude.max }),//Max should be 6.5
   
-  longitude: z.coerce.number()
+  longitude: z.coerce.number({error:t.validations.longitude.required})
     .min(LONGITUDE.min, { message: t.validations.longitude.min })//Min should be -75.6
     .max(LONGITUDE.max, { message: t.validations.longitude.max }),//Max should be -75.3
   
@@ -62,7 +62,7 @@ export function createPredictionSchema(translations: any) {
   
   buying_motives: z.enum(BUYING_MOTIVES, {message: t.validations.buyingMotives.invalid}).optional().nullable(),
   
-  willing_price: z.coerce.number()
+  willing_price: z.coerce.number({error:t.validations.willingPrice.required})
     .min(WILLING_PRICE.min, { message: t.validations.willingPrice.min })
     .max(WILLING_PRICE.max, { message: t.validations.willingPrice.max })
     .optional()
