@@ -17,7 +17,7 @@ export function BoxRadioInputExpansible({name,control,setValue,options,...restPr
   const [isOpen,setIsOpen] = useState(false)
 
   useEffect(()=>{
-    if(value > options[indexOfLastShowedOption]){
+    if(value >= options[indexOfLastShowedOption]){
       setIsOpen(true)
     } 
     },[value])
