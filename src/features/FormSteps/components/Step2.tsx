@@ -4,14 +4,14 @@ import { InputWrapper } from "./InputWrapper"
 import { StepWrapper } from "./StepWrapper"
 import { Input } from "@/shared/components/ui/input"
 import {BATHROOMS, PARKING_SPOTS, ROOMS } from "@/config"
-import { BoxRadioInputControlled } from "./BoxRadioInputControlled"
 import { genArrayRange } from "@/shared/utils/genArrayRange"
+import { BoxRadioInputExpansible } from "./BoxRadioInputExpansible"
 
 
 export function Step2(){
   const t = useTranslations()
 
-  const {handleSubmit,control,register,formState:{errors}} = useFormPrediction('step2')
+  const {handleSubmit,control,setValue,register,formState:{errors}} = useFormPrediction('step2')
 
 
     return <>
@@ -48,8 +48,9 @@ export function Step2(){
         control={control}
         name='rooms'
         />*/}
-        <BoxRadioInputControlled
+        <BoxRadioInputExpansible
         name="rooms"
+        setValue={setValue}
         control={control}
         containsText={false}
         options={genArrayRange(ROOMS.min,ROOMS.max)}
@@ -66,9 +67,10 @@ export function Step2(){
         control={control}
         name='bathrooms'
         />*/}
-        <BoxRadioInputControlled
+        <BoxRadioInputExpansible
         name="bathrooms"
         control={control}
+        setValue={setValue}
         containsText={false}
         options={genArrayRange(BATHROOMS.min,BATHROOMS.max)}
         />
@@ -85,8 +87,9 @@ export function Step2(){
         control={control}
         name='parking_spots'
         />*/}
-        <BoxRadioInputControlled
+        <BoxRadioInputExpansible
         name="parking_spots"
+        setValue={setValue}
         control={control}
         containsText={false}
         options={genArrayRange(PARKING_SPOTS.min,PARKING_SPOTS.max)}

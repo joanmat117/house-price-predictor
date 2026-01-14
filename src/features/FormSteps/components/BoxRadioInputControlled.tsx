@@ -1,16 +1,17 @@
 import { BoxRadioInput } from "@/shared/components/BoxRadioInput";
+import type { ComponentProps } from "react";
 import { useController } from "react-hook-form";
 
-interface Props {
+interface Props extends Omit<ComponentProps<typeof BoxRadioInput>,'items'|'value'|'onValueChange'> {
   name:string,
   control:any,
   optionsTranslation?:Record<string,string>,
   options:Array<string|number>,
-  valueType?: 'string' | 'boolean',
-  containsText?:boolean
+  valueType?: 'string' | 'boolean'|'number',
+  onValueChange?:(value:string)=>void
 }
 
-export function BoxRadioInputControlled({name,control,containsText = true,options,optionsTranslation,valueType = 'string'}:Props){
+export function BoxRadioInputControlled({name,onValueChange,control,options,optionsTranslation,valueType = 'string',...restProps}:Props){
 
   const {
     field:{value,onChange}
@@ -23,14 +24,17 @@ export function BoxRadioInputControlled({name,control,containsText = true,option
   onValueChange={(stringValue)=>{
     if (valueType === 'boolean') {
       onChange(stringValue === 'true')
+    } else if (valueType === 'number') {
+      onChange(+stringValue)
     } else {
-      onChange(stringValue)
+        onChange(stringValue)
     }
+    if(onValueChange)onValueChange(stringValue)
   }}
   value={value !== undefined ? String(value) : undefined}
   optionsTranslation={optionsTranslation}
   items={options}
-  labelClassName={`transition-all active:scale-95 ${containsText ? 'flex-1 max-w-[300px] min-w-[120px]' : ' min-w-10 rounded-full!'}`}
-  containerClassName=""
+  labelClassName={``}
+  {...restProps}
   />
 }
