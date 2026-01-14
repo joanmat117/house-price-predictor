@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type ComponentProps } from "react";
+import { useMemo, useState, type ComponentProps } from "react";
 import { BoxRadioInputControlled } from "./BoxRadioInputControlled";
 import { Input } from "@/shared/components/ui/input";
 import { capitalize } from "@/shared/utils/capitalize";
@@ -15,12 +15,6 @@ export function BoxRadioInputExpansible({name,control,setValue,options,...restPr
   const {field:{value,onChange}} = useController({name,control})
 
   const [isOpen,setIsOpen] = useState(false)
-
-  useEffect(()=>{
-    if(value >= options[indexOfLastShowedOption]){
-      setIsOpen(true)
-    } 
-    },[value])
 
   const {slicedOptions,translations} = useMemo(()=>{
     const slicedOptions = options.slice(0,indexOfLastShowedOption+1)
@@ -44,6 +38,13 @@ export function BoxRadioInputExpansible({name,control,setValue,options,...restPr
     options={slicedOptions}
     valueType="number"
     name={name}
+    onLabelClick={(option)=>{
+        if(option.toString() === options[indexOfLastShowedOption].toString()){
+          setIsOpen(true)
+        } else {
+          setIsOpen(false)
+        }
+    }}
     control={control}
     optionsTranslation={translations}
     {...restProps}

@@ -6,12 +6,11 @@ import { BoxRadioInputControlled } from "./BoxRadioInputControlled"
 import { ANTIQUITY, STRATA } from "@/config"
 import { ComboboxControlled } from "./ComboboxControlled"
 import { genArrayRange } from "@/shared/utils/genArrayRange"
-import { BoxRadioInputExpansible } from "./BoxRadioInputExpansible"
 
 export function Step3(){
   const t = useTranslations()
 
-  const {handleSubmit,control,setValue,formState:{errors}} = useFormPrediction('step3')
+  const {handleSubmit,control,formState:{errors}} = useFormPrediction('step3')
 
   return <>
   <StepWrapper handleContinue={handleSubmit}>
@@ -45,12 +44,12 @@ export function Step3(){
         max={ANTIQUITY.max}
         min={ANTIQUITY.min}
         />*/}
-        <BoxRadioInputExpansible
+        <BoxRadioInputControlled
         name="antiquity"
-        setValue={setValue}
+        optionsTranslation={t.enums.antiquity}
         control={control}
         options={genArrayRange(ANTIQUITY.min,ANTIQUITY.max)}
-        containsText={false}
+        containsText={true}
         />
       </InputWrapper>
 

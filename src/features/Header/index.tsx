@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { LanguageSelector } from "./components/LanguageSelector";
 import { ThemeSelector } from "./components/ThemeSelector";
-import { GoogleLoginButton } from "@/shared/components/GoogleLoginButton";
 import { useTranslations } from "@/shared/hooks/useTranslations";
 
 export function Header(){
@@ -13,7 +12,7 @@ export function Header(){
       </Link>
 
       <div className="flex items-center gap-3">
-        <GoogleLoginButton />
+        {/*<GoogleLoginButton />*/}
         <LanguageSelector/>
         <ThemeSelector/>
       </div>
