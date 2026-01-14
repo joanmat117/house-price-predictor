@@ -62,7 +62,7 @@
       "notFound": "Barrio no disponible"
     },
     "location": {
-      "label": "Escribe la dirección",
+      "label": "Escribe la dirección de la propiedad",
       "notFound": "Dirección no encontrada"
     },
     "property_type": {

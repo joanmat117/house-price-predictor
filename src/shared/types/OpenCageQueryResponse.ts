@@ -133,7 +133,7 @@ export interface OpenCageResult {
     suburb?: string;
     town?: string;
     village?: string;
-    city?: string;
+    city: string;
     city_district?: string;
     neighbourhood?: string;
     house_number?: string;

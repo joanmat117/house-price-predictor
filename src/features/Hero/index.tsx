@@ -1,9 +1,5 @@
-
-import { Button } from "@/shared/components/ui/button";
 import { useTranslations } from "@/shared/hooks/useTranslations";
-import { Calculator } from "lucide-react";
-import { Link } from "react-router-dom";
-import { HeroCombobox } from "./components/HeroCombobox";
+import { HeroInputCta } from "./components/HeroInputCta";
 
 export const Hero = () => {
   
@@ -35,14 +31,7 @@ export const Hero = () => {
               {t.hero.description}
             </p>
             <div className="flex flex-col items-center justify-center gap-3 pt-3 pb-12">
-              <article className="flex min-w-[300px] md:min-w-[500px] px-1 md:px-2 gap-1 md:gap-2 items-center border border-border bg-background rounded-md" >
-              <HeroCombobox/>
-              <Button size='lg' variant={'default'} className="my-1 md:my-2 text-lg" asChild>
-                <Link to={'/predict'}>
-                  {t.hero.cta.button} <Calculator className="size-4"/> 
-                </Link>
-              </Button>
-              </article>
+              <HeroInputCta/> 
               {t.hero.accuracy && (
                 <div className="text-xs text-muted-foreground">{t.hero.accuracy}</div>
               )}

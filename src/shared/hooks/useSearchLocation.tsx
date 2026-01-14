@@ -7,6 +7,7 @@ type LocationDataHook = {
   name: string;
   latitude: number;
   longitude: number;
+  city:string;
   boundingbox: [string, string, string, string];
 };
 
@@ -38,6 +39,7 @@ function extractFirstResult(apiResponse: OpenCageQueryResponse): LocationDataHoo
     name,
     latitude: firstResult.geometry.lat,
     longitude: firstResult.geometry.lng,
+    city:firstResult.components.city,
     boundingbox
   };
 }
@@ -55,7 +57,6 @@ export function useSearchLocation() {
       setData(undefined);
 
       const response = await searchPlaceByQuery(query.trim());
-      
       if (!response.results || response.results.length === 0) {
         throw new Error(t.form.location.notFound);
       }

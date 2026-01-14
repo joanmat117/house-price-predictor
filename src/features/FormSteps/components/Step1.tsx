@@ -2,8 +2,7 @@ import { useTranslations } from "@/shared/hooks/useTranslations"
 import { useFormPrediction } from "../hooks/useFormPrediction"
 import { StepWrapper } from "./StepWrapper"
 import { InputWrapper } from "./InputWrapper"
-import { CITIES, PROPERTY_TYPES } from "@/config"
-import { ComboboxControlled } from "./ComboboxControlled"
+import { PROPERTY_TYPES } from "@/config"
 import { BoxRadioInputControlled } from "./BoxRadioInputControlled"
 import { InputLocation } from "./InputLocation"
 
@@ -16,7 +15,7 @@ export function Step1(){
   <StepWrapper handleContinue={handleSubmit}>
 
     {/*City*/}
-    <InputWrapper
+      {/*<InputWrapper
     labelHeading={t.form.city.label}
     error={errors.city?.message}
     >
@@ -28,7 +27,18 @@ export function Step1(){
       notFound={t.form.city.notFound}
       label={t.form.city.label}
       />
-      </InputWrapper>
+      </InputWrapper>*/}
+
+    <InputWrapper
+    labelHeading={t.form.location.label}
+    error={''}
+    >
+      <InputLocation
+      setValue={setValue}
+      cityError={errors.city?.message || errors.latitude?.message || errors.longitude?.message}
+      /> 
+    </InputWrapper>
+
 
     {/*Property Type*/}
     <InputWrapper
@@ -43,16 +53,7 @@ export function Step1(){
       />
     </InputWrapper>
 
-    {/*Town*/}
-    <InputWrapper
-    labelHeading={t.form.location.label}
-    error={errors.latitude?.message || errors.longitude?.message}
-    >
-      <InputLocation
-      setValue={setValue}
-      /> 
-    </InputWrapper>
-    
+        
   </StepWrapper>
   </>
 }
