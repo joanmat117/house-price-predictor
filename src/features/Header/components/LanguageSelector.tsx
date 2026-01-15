@@ -22,9 +22,9 @@ export function LanguageSelector() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className='aspect-square'><Earth className="size-4"/></Button>
+        <Button variant="ghost" size='icon' className='aspect-square rounded-full'><Earth className="size-4"/></Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
+      <DropdownMenuContent className="w-35 m-2">
         <DropdownMenuLabel>{t.languageSelector.title}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup value={position} onValueChange={(l)=>{

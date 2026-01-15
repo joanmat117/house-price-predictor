@@ -44,9 +44,9 @@ ${error  && `bg-red-500/10`}
     value={query}
     placeholder="Carrera 52 Guayabal..."
     onChange={(e)=>{setQuery(e.currentTarget.value)}}
-    className="rounded-r-none bg-background py-5"
+    className="rounded-r-none bg-background "
     />
-    <Button disabled={isLoading} onClick={handleClick} className="rounded-l-none py-5 ">
+    <Button disabled={isLoading} onClick={handleClick} className="rounded-l-none ">
         {isLoading?
         <Loader className="size-6"/>:
         <Search className="size-6" />

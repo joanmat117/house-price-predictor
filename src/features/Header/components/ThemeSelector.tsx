@@ -21,17 +21,17 @@ export function ThemeSelector() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className='aspect-square'>
+        <Button variant="ghost" size='icon' className='aspect-square rounded-full'>
 
         {position === 'light' && <Sun className='size-4'/>}
         {position === 'dark' && <Moon className='size-4' />}
         {position === 'system' && <Monitor className='size-4'/>}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>{t.themeSelector.title}</DropdownMenuLabel>
-        <DropdownMenuSeparator/>
-        <DropdownMenuRadioGroup value={position} onValueChange={(newTheme)=>{
+      <DropdownMenuContent className="w-35 m-2">
+        <DropdownMenuLabel >{t.themeSelector.title}</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuRadioGroup  value={position} onValueChange={(newTheme)=>{
           setTheme(newTheme as Theme)
           setPosition(newTheme as Theme)
         }}>
