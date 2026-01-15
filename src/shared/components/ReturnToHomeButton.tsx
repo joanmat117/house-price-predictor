@@ -8,7 +8,7 @@ export function ReturnToHomeButton(){
   const t = useTranslations()
 
   return <Link to='/' >
-    <Button variant={'outline'} size='sm' >
+    <Button variant={'ghost'} size='sm' >
       <CornerLeftUp className='size-4'/>
       {t.buttons.out}
     </Button>

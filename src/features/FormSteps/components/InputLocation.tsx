@@ -35,7 +35,7 @@ export function InputLocation({setValue,country = 'Colombia',city}:Props){
     fetchLocation(`${query} ${city} ${country}`)
   }
 
-  return <article className={` rounded-xl 
+  return <article className={`rounded-lg  
 ${data && !isLoading && 'bg-green-500/10'}
 ${error  && `bg-red-500/10`}
 `}>

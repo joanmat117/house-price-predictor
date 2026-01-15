@@ -18,7 +18,7 @@ export const BoxRadioInput = ({onValueChange,onLabelClick,value,containsText = t
   const id = useId()
 
   return (
-      <RadioGroup  value={value} onValueChange={onValueChange} className={`flex flex-wrap gap-2 ${containerClassName}`} defaultValue='1'>
+      <RadioGroup  value={value} onValueChange={onValueChange} className={`flex flex-wrap gap-2 ${containerClassName}`}>
         {items.map(item => (
           <label
             onClick={()=>onLabelClick && onLabelClick(item)}

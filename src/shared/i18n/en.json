@@ -144,6 +144,9 @@
     }
   },
   "validations": {
+    "general": {
+      "obligatory": "This field is required"
+    },
     "city": {
       "invalid": "Invalid city"
     },

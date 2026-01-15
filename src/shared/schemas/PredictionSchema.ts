@@ -9,27 +9,27 @@ export function createPredictionSchema(translations: any) {
   
   property_type: z.enum(PROPERTY_TYPES,{error:t.validations.propertyType.invalid}),
   
-  strata: z.coerce.number()
+  strata: z.coerce.number({error:t.validations.general.obligatory})
     .min(STRATA.min, { message: t.validations.strata.min })
     .max(STRATA.max, { message: t.validations.strata.max }),
   
-  area: z.coerce.number()
+  area: z.coerce.number({error:t.validations.general.obligatory})
     .min(AREA.min, { message: t.validations.area.min })
     .max(AREA.max, { message: t.validations.area.max }),
   
-  built_area: z.coerce.number()
+  built_area: z.coerce.number({error:t.validations.general.obligatory})
     .min(BUILT_AREA.min, { message: t.validations.builtArea.min })
     .max(BUILT_AREA.max, { message: t.validations.builtArea.max }),
   
-  rooms: z.coerce.number()
+  rooms: z.coerce.number({error:t.validations.general.obligatory})
     .min(ROOMS.min, { message: t.validations.rooms.gt })
     .max(ROOMS.max, { message: t.validations.rooms.lt }),
   
-  bathrooms: z.coerce.number()
+  bathrooms: z.coerce.number({error:t.validations.general.obligatory})
     .min(BATHROOMS.min, { message: t.validations.bathrooms.gt })
     .max(BATHROOMS.max, { message: t.validations.bathrooms.lt }),
   
-  parking_spots: z.coerce.number()
+  parking_spots: z.coerce.number({error:t.validations.general.obligatory})
     .min(PARKING_SPOTS.min, { message: t.validations.parkingSpots.min })
     .max(PARKING_SPOTS.max, { message: t.validations.parkingSpots.lt }),
   
@@ -41,7 +41,7 @@ export function createPredictionSchema(translations: any) {
     error: t.validations.hasPool.required,
   }),
   
-  antiquity: z.coerce.number()
+  antiquity: z.coerce.number({error:t.validations.general.obligatory})
     .min(ANTIQUITY.min, { message: t.validations.antiquity.min })
     .max(ANTIQUITY.max, { message: t.validations.antiquity.max }),
   

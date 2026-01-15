@@ -21,7 +21,7 @@ export const Hero = () => {
                 <div className="size-full rounded-full border"></div>
               </div>
             </div>
-            <span className="mx-auto flex text-green-600 bg-green-400/20 dark:text-green-500 rounded-full px-3 py-1 items-center justify-center border font-semibold text-sm">
+            <span className="mx-auto shadow-lg shadow-green-400/15 flex text-green-600 bg-green-400/20 dark:text-green-500 rounded-full px-3 py-1 items-center justify-center border font-semibold text-sm">
               {t.hero.cost.toUpperCase()}
             </span>
             <h1 className="mx-auto max-w-5xl text-center text-4xl font-extrabold text-balance md:text-6xl">

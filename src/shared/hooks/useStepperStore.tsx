@@ -7,14 +7,11 @@ export function useStepperStore(){
 
   const goNextStepCustom = ()=>{
     if(currentStep === maxStep){
-      console.log('Manejando con result handler')
       handleResult()
     } else {
-      console.log('Llendo al siguiente step')
       goNextStep()
     }
   }
-  console.log(currentStep)
   return {
     maxStep,
     currentStep,
