@@ -15,14 +15,15 @@ export function StepperNavigation({onNextClick,onPrevClick}:Props){
   const {currentStep,maxStep} = useStepperStore()
 
   return <>
-    <div className="flex items-center my-1 justify-between gap-2.5">
-      <Button variant="outline" onClick={onPrevClick?()=>onPrevClick():undefined} disabled={currentStep === 1}>
+    <div className={`flex items-center my-1 ${currentStep > 1?'justify-between':'justify-center'} gap-2.5`}>
+      {currentStep > 1 && <Button variant="outline" onClick={onPrevClick?()=>onPrevClick():undefined} disabled={currentStep === 1}>
           <ArrowBigLeft className="size-4"/>
         {t.buttons.previous}
       </Button>
+      }
       {currentStep !== maxStep?
       <Button
-        variant="outline"
+        variant="default"
         onClick={onNextClick ? ()=>onNextClick() : undefined}
         disabled={currentStep === maxStep}
       >

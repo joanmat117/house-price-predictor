@@ -2,20 +2,24 @@ import { useTranslations } from "@/shared/hooks/useTranslations"
 import { useFormPrediction } from "../hooks/useFormPrediction"
 import { StepWrapper } from "./StepWrapper"
 import { InputWrapper } from "./InputWrapper"
-import { PROPERTY_TYPES } from "@/config"
+import { CITIES, PROPERTY_TYPES } from "@/config"
+import { ComboboxControlled } from "./ComboboxControlled"
 import { BoxRadioInputControlled } from "./BoxRadioInputControlled"
 import { InputLocation } from "./InputLocation"
 
 export function Step1(){
   const t = useTranslations()
 
-  const {handleSubmit,setValue,control,formState:{errors}} = useFormPrediction('step1')
+  const {handleSubmit,setValue,watch,control,formState:{errors}} = useFormPrediction('step1')
+
+  const city = watch('city')
 
   return <>
   <StepWrapper handleContinue={handleSubmit}>
 
+      <div className="flex flex-col sm:flex-row sm:gap-2">
     {/*City*/}
-      {/*<InputWrapper
+    <InputWrapper
     labelHeading={t.form.city.label}
     error={errors.city?.message}
     >
@@ -27,18 +31,19 @@ export function Step1(){
       notFound={t.form.city.notFound}
       label={t.form.city.label}
       />
-      </InputWrapper>*/}
+      </InputWrapper>
 
     <InputWrapper
     labelHeading={t.form.location.label}
-    error={''}
+    error={errors.latitude?.message || errors.longitude?.message}
     >
       <InputLocation
-      setValue={setValue}
-      cityError={errors.city?.message || errors.latitude?.message || errors.longitude?.message}
+      setValue={setValue} 
+      city={city}
       /> 
     </InputWrapper>
 
+    </div>
 
     {/*Property Type*/}
     <InputWrapper
