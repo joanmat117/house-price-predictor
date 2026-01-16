@@ -29,8 +29,6 @@ export function Step3(){
         options={genArrayRange(STRATA.min,STRATA.max)}
         control={control}
         name="strata"
-        label={t.form.strata.label}
-        notFound={''}
         />
       </InputWrapper>
 

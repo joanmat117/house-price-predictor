@@ -2,8 +2,8 @@ import { Combobox } from "@/shared/components/Combobox";
 import { useController } from "react-hook-form";
 
 interface Props {
-  label:string,
-  notFound:string,
+  label?:string,
+  notFound?:string,
   optionsTranslation?:Record<string,string>,
   options:Array<string|number>,
   name:string,

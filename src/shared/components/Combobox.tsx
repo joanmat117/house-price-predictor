@@ -19,8 +19,8 @@ import { useState } from "react"
 import { capitalize } from "../utils/capitalize"
 
 interface Props {
-  label:string,
-  notFound:string,
+  label?:string,
+  notFound?:string|undefined,
   options:Array<string|number>,
   triggerClassName?:string,
   popoverClassName?:string,
@@ -44,7 +44,10 @@ export function Combobox({label,value,notFound,optionsTranslation,options,onValu
         >
           {value
             ? (optionsTranslation? optionsTranslation[value] : capitalize(value))
-            : label}
+            : 
+            label ?
+            <span className='text-muted-foreground'>{label}</span> :
+            <div/>}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -52,13 +55,13 @@ export function Combobox({label,value,notFound,optionsTranslation,options,onValu
         <Command>
           <CommandInput placeholder={label} className="h-9" />
           <CommandList>
-            <CommandEmpty>{notFound}</CommandEmpty>
+            <CommandEmpty>{notFound || ''}</CommandEmpty>
             <CommandGroup>
               {options.map((option) => (
                 <CommandItem
                   key={option}
                   value={option.toString()}
-                  className={`${popoverItemClassName}`}
+                  className={`cursor-pointer ${popoverItemClassName}`}
                   onSelect={(currentValue) => {
                     if(onValueChange)onValueChange(currentValue) 
                     setOpen(false)

@@ -1,126 +1,167 @@
 import { useSearchLocation } from "@/shared/hooks/useSearchLocation";
 import { Input } from "@/shared/components/ui/input";
-import { useEffect, useState } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { Button } from "@/shared/components/ui/button";
 import { Loader } from "@/shared/components/icons/Loader";
-import { AlertCircle, MapPinCheckInside, Search } from "lucide-react";
-import type { UseFormSetValue } from "react-hook-form";
+import { AlertCircle,LucideX, MapPinCheckInside, Search } from "lucide-react";
+import type { Control, FieldErrors, UseFormSetValue } from "react-hook-form";
 import { InputWrapper } from "./InputWrapper";
 import { useTranslations } from "@/shared/hooks/useTranslations";
+import { Combobox } from "@/shared/components/Combobox";
+import { CITIES, TYPE_WAY } from "@/config";
+import { ComboboxControlled } from "./ComboboxControlled";
 
 interface Props {
   setValue: UseFormSetValue<any>;
   city?: string;
+  control:Control<any,any,any>,
+  errors:FieldErrors<any>
 }
 
-export function InputLocation({ setValue, city }: Props) {
-  const [address, setAddress] = useState('');
-  const [department, setDepartment] = useState('');
-  const [postalCode, setPostalCode] = useState('');
+type TypeWayEnumKeys = 'calle'|'carrera'|'avenida'|'diagonal'|'transversal'
 
-  const t = useTranslations()
-  
-  const { fetchLocationStructured, data, error, isLoading } = useSearchLocation();
+export function InputLocation({ setValue,errors,control, city }: Props) {
+  const t = useTranslations();
+  const { fetchLocationStructured,removeLocationDataStored, data, error, isLoading } = useSearchLocation();
+
+  const [typeWay, setTypeWay] = useState("");
+  const [street, setStreet] = useState("");
+  const [number1, setNumber1] = useState("");
+  const [block1, setBlock1] = useState("");
+  const [block2, setBlock2] = useState("");
 
   useEffect(() => {
-    if (data && !isLoading) {
-      setValue('longitude', data.longitude, { shouldValidate: true });
-      setValue('latitude', data.latitude, { shouldValidate: true });
-      localStorage.setItem('LOCATION_DATA', JSON.stringify(data));
-    }
-  }, [data, isLoading, setValue]);
+      setValue("longitude", data?.longitude, { shouldValidate: true });
+      setValue("latitude", data?.latitude, { shouldValidate: true });
+  }, [data, setValue]);
 
   const handleSearch = () => {
-    if (!city || address.trim().length < 3) return;
-    
+    if (!city || !typeWay || !street || !number1) return;
+
     fetchLocationStructured({
-      address: address.trim(),
+      typeWay,
+      street,
+      number1,
+      block1: block1.trim() || undefined,
+      block2: block2.trim() || undefined,
       city,
-      department: department.trim() || undefined,
-      postalCode: postalCode.trim() || undefined
     });
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && city && address.trim().length >= 3) {
-      handleSearch();
-    }
-  };
-
-  const canSearch = city && address.trim().length >= 3;
+  const canSearch = !!city && !!typeWay && street.trim() && number1.trim();
 
   return (
-    <div className="space-y-4 mb-3 animate-fade-in">
+    <section className="space-y-4 mb-3 animate-fade-in">
+      <div className="grid items-end grid-cols-2 gap-1">
+      {/*City*/}
       <InputWrapper
-      labelHeading={t.form.address.label}
+      labelHeading={t.form.city.label}
+      error={errors.city?.message}
       >
-        <Input
-          value={address}
-          placeholder="Carrera 45 # 20-34, Avenida Las Vegas con Calle 10"
-          onChange={(e) => setAddress(e.target.value)}
-          onKeyPress={handleKeyPress}
-          className="mt-1"
+        
+        <ComboboxControlled
+        name="city"
+        control={control}
+        options={CITIES}
+        notFound={t.form.city.notFound}
+        label={t.form.city.label}
         />
       </InputWrapper>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <InputWrapper
-        labelHeading={t.form.departament.label}
-        >
-          <Input
-            value={department}
-            placeholder="Antioquia..."
-            onChange={(e) => setDepartment(e.target.value)}
-            onKeyPress={handleKeyPress}
-            className="mt-1"
-          />
-        </InputWrapper>
-        <InputWrapper
-        labelHeading={t.form.postalCode.label}
-        >
-          <Input
-            value={postalCode}
-            placeholder="050001..."
-            onChange={(e) => setPostalCode(e.target.value)}
-            onKeyPress={handleKeyPress}
-            className="mt-1"
-          />
-        </InputWrapper>
+      {/* Tipo de vía */}
+      <InputWrapper labelHeading={t.form.typeWay.label}>
+        <Combobox
+          onValueChange={(value) => setTypeWay(value)}
+          label={t.form.typeWay.label}
+          value={typeWay}
+          options={TYPE_WAY}
+          optionsTranslation={t.enums.typeWay}
+        />
+      </InputWrapper>
       </div>
 
-      <Button
-        disabled={isLoading || !canSearch}
-        onClick={handleSearch}
-        className="w-full flex flex-wrap h-fit"
+      {/* Nombre de vía */}
+      {typeWay && <>
+        <InputWrapper 
+          labelHeading={t.form.street.label.replace(
+          '?',
+          t.enums.typeWay[typeWay as TypeWayEnumKeys].toLowerCase()
+        )}>
+        <Input
+          value={street}
+          onChange={(e) => setStreet(e.target.value)}
+          placeholder={t.form.street.placeholder}
+        />
+      </InputWrapper>
+
+      {/* Nº principal y secundarios */}
+      <div className="flex animate-fade-in items-center gap-2">
+          <Input
+            value={number1}
+            onChange={(e) => setNumber1(e.target.value)}
+            placeholder={t.form.number1.placeholder}
+            className="text-center"
+          />
+        <AddressSeparator>#</AddressSeparator>
+          <Input
+            value={block1}
+            onChange={(e) => setBlock1(e.target.value)}
+            placeholder={t.form.block1.placeholder}
+            className='text-center'
+          />
+        <AddressSeparator>-</AddressSeparator>
+          <Input
+            value={block2}
+            onChange={(e) => setBlock2(e.target.value)}
+            placeholder={t.form.block2.placeholder}
+            className="text-center"
+          />
+      </div>
+
+      <Button disabled={isLoading || !canSearch} onClick={handleSearch}
+      className="w-full flex items-center gap-2 flex-wrap h-fit"
       >
         {isLoading ? (
-          <Loader className="size-5 " />
+          <Loader className="size-5" />
         ) : (
           <>
-            <Search className="size-5 mr-2" />
-            {city? t.buttons.searchLocation : t.validations.city.notFoundOnSearch}
+            <Search className="size-5" />
+            {t.buttons.searchLocation}
           </>
         )}
       </Button>
 
+      </>}
+
       {/* Resultado */}
       {data && !isLoading && (
-        <div className="flex items-center gap-3 p-3 bg-green-50 dark:bg-green-950/30 rounded-md border">
-          <MapPinCheckInside className="size-5 text-green-600 dark:text-green-400 flex-shrink-0" />
-          <div className="min-w-0">
-            <p className="font-medium">{data.name}</p>
+        <div className="flex relative flex-col gap-3 p-3 bg-green-500/10 rounded-md border">
+          <div className="felx gap-1">
+            <MapPinCheckInside className="size-5 text-green-600" />
+            <Button variant='ghost' size={'icon-sm'} 
+              onClick={()=>removeLocationDataStored()}
+              className="absolute rounded-full bg-transparent! right-1 top-0 m-1"
+            >
+              <LucideX/>
+            </Button>
           </div>
+          <p className="font-medium text-green-600 flex-1">{data.name}</p>
         </div>
       )}
 
       {/* Error */}
       {error && !isLoading && (
-        <div className="flex items-center gap-3 p-3 bg-red-50 dark:bg-red-950/30 rounded-md border">
-          <AlertCircle className="size-5 text-red-600 dark:text-red-400 flex-shrink-0" />
+        <div className="flex items-center gap-3 p-3 bg-red-50 rounded-md border">
+          <AlertCircle className="size-5 text-red-600" />
           <p className="text-sm">{error}</p>
         </div>
       )}
-
-    </div>
+    </section>
   );
+}
+
+
+function AddressSeparator({children}:{children:ReactNode}){
+  return <span className="flex items-center font-bold justify-center"
+  >{children}</span>
 }

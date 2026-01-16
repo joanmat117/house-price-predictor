@@ -4,9 +4,19 @@ export const AVALIABLE_LANGUAGES = ['es','en']
 
 export const SESSION_STORAGE_CITY_KEY = "hero-city-value"
 
+export const DEFAULT_DEPARTAMENT = 'Antioquia'
+
 export const TOTAL_STEPS = 5
 
 export const CITIES = Object.keys(citiesAndTownsCords)
+
+export const TYPE_WAY = [
+  "calle",
+  "carrera",
+  "avenida",
+  "diagonal",
+  "transversal"
+]
 
 export const PROPERTY_TYPES = ["apartment", "house"]
 export const RELATION_WITH_PROPERTY = ["sells", "buys", "agent"]

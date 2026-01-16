@@ -1,8 +1,8 @@
 {
   "hero": {
     "title": "Aburrá Valley House Price Estimator",
-    "description": "Estimation based on real estate market data.",
-    "accuracy": "Average error of ±10%.",
+    "description": "Estimation based on real real estate market data.",
+    "accuracy": " ±10% error on average.",
     "cost": "free",
     "cta": {
       "button": "Get Started"
@@ -40,9 +40,9 @@
     "system": "System"
   },
   "notfound": {
-    "title": "Oops, something is lost",
-    "description": "Sorry, we cannot find this page",
-    "button": "Return Home"
+    "title": "Oops, something got lost",
+    "description": "Sorry, we can't find this page",
+    "button": "Back to Home"
   },
   "buttons": {
     "out": "Exit",
@@ -54,6 +54,26 @@
     "searchLocation": "Search Location"
   },
   "form": {
+    "typeWay": {
+      "label": "Street Type",
+      "placeholder": "Select the street type"
+    },
+    "street": {
+      "label": "Name of the ? and neighborhood",
+      "placeholder": "45, Guayabal"
+    },
+    "number1": {
+      "label": "Primary Number",
+      "placeholder": "127A"
+    },
+    "block1": {
+      "label": "Secondary Number",
+      "placeholder": "7B"
+    },
+    "block2": {
+      "label": "Final Number",
+      "placeholder": "42"
+    },
     "address": {
       "label": "Address"
     },
@@ -105,7 +125,7 @@
       "label": "Socioeconomic stratum"
     },
     "antiquity": {
-      "label": "Property age (years)"
+      "label": "Property age"
     },
     "has_sauna_jacuzzi_or_turkish_bath": {
       "label": "Does it have a sauna, jacuzzi, or Turkish bath?"
@@ -133,7 +153,7 @@
       "notFound": "Motive not available"
     },
     "willing_price": {
-      "label": "Asking price ($)"
+      "label": "Willing price ($)"
     }
   },
   "steps": {
@@ -147,7 +167,7 @@
       "title": "Features"
     },
     "step4": {
-      "title": "Role in Transaction"
+      "title": "Role in the Transaction"
     },
     "step5": {
       "title": "Additional Information"
@@ -156,6 +176,9 @@
   "validations": {
     "general": {
       "obligatory": "This field is required"
+    },
+    "location": {
+      "invalid": "Invalid address"
     },
     "city": {
       "invalid": "Invalid city",
@@ -239,12 +262,19 @@
     }
   },
   "enums": {
+    "typeWay": {
+      "calle": "Street",
+      "carrera": "Avenue",
+      "avenida": "Main Avenue",
+      "diagonal": "Diagonal",
+      "transversal": "Cross Street"
+    },
     "antiquity": {
-      "1": "0 - 1",
-      "2": "1 - 8",
-      "3": "9 - 15",
-      "4": "16 - 30",
-      "5": "+ 30"
+      "1": "0 - 1 years",
+      "2": "1 - 8 years",
+      "3": "9 - 15 years",
+      "4": "16 - 30 years",
+      "5": "+ 30 years"
     },
     "cities": {
       "medellin": "Medellín",
@@ -266,10 +296,10 @@
     "propertyStatuses": {
       "unoccupied": "Unoccupied",
       "rented": "Rented",
-      "inhabitates it": "Currently Inhabited"
+      "inhabitates it": "Currently Inhabited by Me"
     },
     "sellingMotives": {
-      "house change": "House Change",
+      "house change": "Change of House",
       "settle a debt": "Settle a Debt",
       "business opportunity": "Business Opportunity",
       "browsing offers": "Browsing Offers",
