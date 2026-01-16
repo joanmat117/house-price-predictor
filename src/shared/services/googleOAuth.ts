@@ -7,6 +7,7 @@
  */
 
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 export const getGoogleOAuthUrl = (): string => {
   const params = new URLSearchParams({
@@ -37,7 +38,7 @@ export const exchangeCodeForToken = async (urlParams: URLSearchParams): Promise<
   is_registered: boolean;
 }> => {
   const response = await fetch(
-    `/api/google/callback?${urlParams.toString()}`,
+    `${BACKEND_URL}/google/callback?${urlParams.toString()}`,
     {
       method: 'GET',
     }

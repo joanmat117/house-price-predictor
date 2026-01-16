@@ -13,7 +13,7 @@ export function usePrediction(fields:PredictionData){
   
   const fetchPrediction = async()=>{
     try {
-      console.log('Fieldsss: ',fields)
+      console.info('Fields sent for prediction: ',fields)
       setIsLoading(true)
       setData(null)
       setError(null)

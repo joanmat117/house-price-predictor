@@ -1,20 +1,31 @@
 import type { PredictionData } from "../types/PredictionSchema";
 
-export async function generatePrediction(fields:PredictionData,authToken:string){
-    const res = await fetch(`/api/predict?token=${authToken}`,{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-      },
-      body:JSON.stringify(fields)
-    })
+export async function generatePrediction(fields: PredictionData, authToken: string) {
+    console.info('Entro en el generatePrediction');
+    
+    try {
+        const res = await fetch(`/api/predict?token=${authToken}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(fields)
+        });
 
-    const data = await res.json()
+        const contentType = res.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+            const text = await res.text();
+            console.error('Expected JSON but got:', text.substring(0, 200));
+            throw new Error('Server did not return JSON');
+        }
 
-    console.log('Response prediction: ',data)
+        const data = await res.json();
+        console.log('Response prediction: ', data);
 
-    if(typeof data !== 'number') throw new Error('Unexpected response')
+        return data;
 
-    return data as any
-
+    } catch (error) {
+        console.error('Error in generatePrediction:', error);
+        throw error;
+    }
 }
