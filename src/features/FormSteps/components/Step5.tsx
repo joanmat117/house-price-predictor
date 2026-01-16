@@ -2,16 +2,16 @@ import { useTranslations } from "@/shared/hooks/useTranslations"
 import { useFormPrediction } from "../hooks/useFormPrediction"
 import { InputWrapper } from "./InputWrapper"
 import { StepWrapper } from "./StepWrapper"
-import { Input } from "@/shared/components/ui/input"
 import { BoxRadioInputControlled } from "./BoxRadioInputControlled"
 import { useWatch } from "react-hook-form"
 import { BUYING_MOTIVES, PROPERTY_STATUSES, SELLING_MOTIVES } from "@/config"
+import { NumberInputControlled } from "./NumberInputControlled"
 
 export function Step5(){
 
   const t = useTranslations()
 
-  const {handleSubmit,control,register,formState:{errors}} = useFormPrediction('step5')
+  const {handleSubmit,control,formState:{errors}} = useFormPrediction('step5')
 
   const relationWithProperty = useWatch({ control, name: 'relation_with_property' })
 
@@ -64,10 +64,14 @@ export function Step5(){
       labelHeading={t.form.willing_price.label}
       error={errors.willing_price?.message}
       >
-        <Input
-          type="number"
-          placeholder="300000000"
-          {...register('willing_price',{valueAsNumber:true})}
+        <NumberInputControlled
+          thousandSeparator={','}
+          prefix="$ "
+          suffix=" COP"
+          stepper={1000000}
+          placeholder="$ 300,000,000 COP"
+          name="willing_price"
+          control={control}
         />
       </InputWrapper>
 

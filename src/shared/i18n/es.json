@@ -30,8 +30,10 @@
   },
   "languageSelector": {
     "title": "Idioma",
-    "spanish": "Español",
-    "english": "Inglés"
+    "options": {
+      "es": "Español",
+      "en": "Inglés"
+    }
   },
   "themeSelector": {
     "title": "Tema",

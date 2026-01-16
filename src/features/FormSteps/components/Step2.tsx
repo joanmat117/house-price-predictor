@@ -2,16 +2,16 @@ import { useTranslations } from "@/shared/hooks/useTranslations"
 import { useFormPrediction } from "../hooks/useFormPrediction"
 import { InputWrapper } from "./InputWrapper"
 import { StepWrapper } from "./StepWrapper"
-import { Input } from "@/shared/components/ui/input"
 import {BATHROOMS, PARKING_SPOTS, ROOMS } from "@/config"
 import { genArrayRange } from "@/shared/utils/genArrayRange"
 import { BoxRadioInputExpansible } from "./BoxRadioInputExpansible"
+import { NumberInputControlled } from "./NumberInputControlled"
 
 
 export function Step2(){
   const t = useTranslations()
 
-  const {handleSubmit,control,setValue,register,formState:{errors}} = useFormPrediction('step2')
+  const {handleSubmit,control,setValue,formState:{errors}} = useFormPrediction('step2')
 
 
     return <>
@@ -20,10 +20,12 @@ export function Step2(){
         labelHeading={t.form.area.label}
         error={errors.area?.message}
       >
-        <Input
-          type="number"
-          placeholder="e.g., 100"
-          {...register('area',{valueAsNumber:true})}
+        <NumberInputControlled
+          placeholder="100"
+          name='area'
+          suffix=" m²"
+          control={control}
+          thousandSeparator=","
         />
       </InputWrapper>
 
@@ -31,10 +33,12 @@ export function Step2(){
         labelHeading={t.form.built_area.label}
         error={errors.built_area?.message}
       >
-        <Input
-          type="number"
-          placeholder="e.g., 90"
-          {...register('built_area',{valueAsNumber:true})}
+        <NumberInputControlled
+          placeholder="90"
+          name='built_area'
+          suffix=" m²"
+          control={control}
+          thousandSeparator=","
         />
       </InputWrapper>
 

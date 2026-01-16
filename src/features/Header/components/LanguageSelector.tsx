@@ -1,3 +1,4 @@
+import { AVALIABLE_LANGUAGES } from "@/config"
 import { Button } from "@/shared/components/ui/button"
 import {
   DropdownMenu,
@@ -22,7 +23,10 @@ export function LanguageSelector() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size='icon' className='aspect-square rounded-full'><Earth className="size-4"/></Button>
+        <Button variant="ghost"  className='rounded-full'>
+          {t.languageSelector.options[language as AvaliableLanguages]}
+          <Earth className="size-4"/>
+        </Button> 
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-35 m-2">
         <DropdownMenuLabel>{t.languageSelector.title}</DropdownMenuLabel>
@@ -31,8 +35,9 @@ export function LanguageSelector() {
           changeLanguage(l as AvaliableLanguages)
           setPosition(l as AvaliableLanguages)
         }}>
-          <DropdownMenuRadioItem value="en">{t.languageSelector.english}</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="es">{t.languageSelector.spanish}</DropdownMenuRadioItem>
+          {AVALIABLE_LANGUAGES.map((langKey)=>(
+            <DropdownMenuRadioItem value={langKey}>{t.languageSelector.options[langKey as AvaliableLanguages]}</DropdownMenuRadioItem>
+          ))}
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

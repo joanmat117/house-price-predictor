@@ -1,8 +1,8 @@
 import { useMemo, useState, type ComponentProps } from "react";
 import { BoxRadioInputControlled } from "./BoxRadioInputControlled";
-import { Input } from "@/shared/components/ui/input";
 import { capitalize } from "@/shared/utils/capitalize";
 import { useController } from "react-hook-form";
+import { NumberInput } from "@/shared/components/NumberInput";
 
 interface Props extends Omit<ComponentProps<typeof BoxRadioInputControlled>,'onValueChange'|'valueType'>{
   setValue:any
@@ -49,13 +49,11 @@ export function BoxRadioInputExpansible({name,control,setValue,options,...restPr
     optionsTranslation={translations}
     {...restProps}
     />
-    {isOpen && <Input
-    className="rounded-full animate-fade-in"
-    type="number"
+    {isOpen && <NumberInput
+    className="rounded-l-full animate-fade-in"
     value={value}
-    onChange={(e)=>{
-        const value = e.currentTarget.value
-        onChange(+value == 0 ? '':+value)
+    onValueChange={(value)=>{
+        onChange(value)
       }}
     />}
   </section>
