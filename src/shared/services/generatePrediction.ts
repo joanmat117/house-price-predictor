@@ -1,10 +1,12 @@
 import type { PredictionData } from "../types/PredictionSchema";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export async function generatePrediction(fields: PredictionData, authToken: string) {
     console.info('Entro en el generatePrediction');
     
     try {
-        const res = await fetch(`/api/predict?token=${authToken}`, {
+        const res = await fetch(`${BACKEND_URL}/predict?token=${authToken}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
