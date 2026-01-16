@@ -116,7 +116,7 @@ export const MapSelector: React.FC<MapSelectorProps> = ({
   initialBbox = null,
   initialPin = null,
   onPinChange = () => {},
-  mapStyle = { height: '500px', width: '100%', borderRadius: '10px' },
+  mapStyle = { height: '200px', width: '100%', borderRadius: '100px' },
   zoom = 2,
   center = [20, 0],
   className = '',

@@ -166,3 +166,12 @@
   font-size: 13px;
   line-height: 1.4;
 }
+
+div.leaflet-control-zoom.leaflet-bar.leaflet-control {
+  @apply rounded-md border-none overflow-hidden flex  flex-col gap-2;
+}
+
+a.leaflet-control-zoom-in, 
+a.leaflet-control-zoom-out {
+  @apply rounded-md bg-black! border-none! text-white!;
+}
