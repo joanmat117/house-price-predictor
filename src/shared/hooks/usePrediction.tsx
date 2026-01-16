@@ -21,12 +21,15 @@ export function usePrediction(fields:PredictionData){
         console.log(localStorage.getItem('LATEST_PREDICTION'))
         setData(localStorage.getItem('LATEST_PREDICTION'))
         setIsLatest(true)
-        console.log('Llego aqui')
         return
       }
       const prediction = await generatePrediction(fields,getAuthToken() as string)
-      setData(prediction)
-      localStorage.setItem('LATEST_PREDICTION',prediction)
+      if(prediction.detail){
+        setError(JSON.stringify(prediction.detail))
+      } else {
+        setData(prediction)
+        localStorage.setItem('LATEST_PREDICTION',prediction)
+      }
     } catch(e){
       console.log('Error generating prediction',e)
       setError('Error generating prediction')
