@@ -50,9 +50,19 @@
     "next": "Siguiente",
     "yes": "Sí",
     "no": "No",
-    "getPrediction":"Calcular"
+    "getPrediction":"Calcular",
+    "searchLocation":"Buscar ubicación"
   },
   "form": {
+    "address": {
+      "label": "Dirección"
+    },
+    "departament": {
+      "label": "Departamento"
+    },
+    "postalCode": {
+      "label":"Código postal"
+    },
     "city": {
       "label": "Selecciona tu ciudad",
       "notFound": "Ciudad no disponible"
@@ -148,7 +158,8 @@
       "obligatory": "Este campo es obligatorio"
     },
     "city": {
-      "invalid": "Ciudad no válida"
+      "invalid": "Ciudad no válida",
+      "notFoundOnSearch":"Selecciona una ciudad"
     },
     "town": {
       "invalid": "Barrio no válido"

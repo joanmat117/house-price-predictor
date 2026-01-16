@@ -1,8 +1,8 @@
 {
   "hero": {
-    "title": "Home Price Estimator - Aburrá Valley",
+    "title": "Aburrá Valley House Price Estimator",
     "description": "Estimation based on real estate market data.",
-    "accuracy": " Average ±10% error.",
+    "accuracy": "Average error of ±10%.",
     "cost": "free",
     "cta": {
       "button": "Get Started"
@@ -10,7 +10,7 @@
   },
   "results": {
     "title": "Prediction Results",
-    "latest": "Latest prediction"
+    "latest": "Latest Prediction"
   },
   "header": {
     "title": "Aburrá Properties"
@@ -40,9 +40,9 @@
     "system": "System"
   },
   "notfound": {
-    "title": "Oops, something went missing",
-    "description": "Sorry, we can't find this page",
-    "button": "Back to Home"
+    "title": "Oops, something is lost",
+    "description": "Sorry, we cannot find this page",
+    "button": "Return Home"
   },
   "buttons": {
     "out": "Exit",
@@ -50,9 +50,19 @@
     "next": "Next",
     "yes": "Yes",
     "no": "No",
-    "getPrediction": "Calculate"
+    "getPrediction": "Calculate",
+    "searchLocation": "Search Location"
   },
   "form": {
+    "address": {
+      "label": "Address"
+    },
+    "departament": {
+      "label": "Department"
+    },
+    "postalCode": {
+      "label": "Postal Code"
+    },
     "city": {
       "label": "Select your city",
       "notFound": "City not available"
@@ -62,7 +72,7 @@
       "notFound": "Neighborhood not available"
     },
     "location": {
-      "label": "Enter the address",
+      "label": "Enter the property address",
       "notFound": "Address not found"
     },
     "property_type": {
@@ -70,10 +80,10 @@
       "notFound": "Property type not available"
     },
     "latitude": {
-      "label": "Enter latitude"
+      "label": "Enter the latitude"
     },
     "longitude": {
-      "label": "Enter longitude"
+      "label": "Enter the longitude"
     },
     "area": {
       "label": "Total land area (m²)"
@@ -107,7 +117,7 @@
       "label": "Is the property under construction?"
     },
     "relation_with_property": {
-      "label": "What is your relation with the property?",
+      "label": "What is your relationship with the property?",
       "notFound": "Role not available"
     },
     "property_status": {
@@ -123,7 +133,7 @@
       "notFound": "Motive not available"
     },
     "willing_price": {
-      "label": "Willing price ($)"
+      "label": "Asking price ($)"
     }
   },
   "steps": {
@@ -148,7 +158,8 @@
       "obligatory": "This field is required"
     },
     "city": {
-      "invalid": "Invalid city"
+      "invalid": "Invalid city",
+      "notFoundOnSearch": "Select a city"
     },
     "town": {
       "invalid": "Invalid neighborhood"
@@ -158,7 +169,7 @@
     },
     "strata": {
       "min": "Stratum must be at least 1",
-      "max": "Stratum cannot exceed 6"
+      "max": "Stratum cannot be greater than 6"
     },
     "area": {
       "min": "Area must be at least 30 m²",
@@ -203,7 +214,7 @@
       "max": "Maximum longitude: -75.3"
     },
     "relationWithProperty": {
-      "invalid": "Invalid relation with property"
+      "invalid": "Invalid relationship with property"
     },
     "propertyStatus": {
       "invalid": "Invalid property status",
@@ -228,12 +239,12 @@
     }
   },
   "enums": {
-    "antiquity":{
-      "1":"0 - 1",
-      "2":"1 - 8",
-      "3":"9 - 15",
-      "4":"16- 30",
-      "5":"+ 30"
+    "antiquity": {
+      "1": "0 - 1",
+      "2": "1 - 8",
+      "3": "9 - 15",
+      "4": "16 - 30",
+      "5": "+ 30"
     },
     "cities": {
       "medellin": "Medellín",
@@ -250,7 +261,7 @@
     "relationsWithProperty": {
       "sells": "I Sell",
       "buys": "I Buy",
-      "agent": "I'm a Real Estate Agent"
+      "agent": "I am a Real Estate Agent"
     },
     "propertyStatuses": {
       "unoccupied": "Unoccupied",
@@ -258,22 +269,22 @@
       "inhabitates it": "Currently Inhabited"
     },
     "sellingMotives": {
-      "house change": "House change",
-      "settle a debt": "Settle a debt",
-      "business opportunity": "Business opportunity",
-      "browsing offers": "Browsing offers",
-      "investment for studies or travel": "Investment for studies or travel",
-      "Change city or live in the countryside": "Change city or live in the countryside",
-      "I don't want to keep renting": "I don't want to keep renting",
-      "property division": "Property division"
+      "house change": "House Change",
+      "settle a debt": "Settle a Debt",
+      "business opportunity": "Business Opportunity",
+      "browsing offers": "Browsing Offers",
+      "investment for studies or travel": "Investment for Studies or Travel",
+      "Change city or live in the countryside": "Change City or Live in the Countryside",
+      "I don't want to keep renting": "I Don't Want to Keep Renting",
+      "property division": "Property Division"
     },
     "buyingMotives": {
-      "proximity to work and schools": "Proximity to work and schools",
-      "investment opportunity": "Investment opportunity",
-      "affordability and financing options": "Affordability and financing options",
-      "interest in newer home": "Interest in newer home",
-      "bigger house": "Bigger house",
-      "desire for a move-in ready home": "Desire for a move-in ready home"
+      "proximity to work and schools": "Proximity to Work and Schools",
+      "investment opportunity": "Investment Opportunity",
+      "affordability and financing options": "Affordability and Financing Options",
+      "interest in newer home": "Interest in Newer Home",
+      "bigger house": "Bigger House",
+      "desire for a move-in ready home": "Desire for a Move-in Ready Home"
     }
   }
 }

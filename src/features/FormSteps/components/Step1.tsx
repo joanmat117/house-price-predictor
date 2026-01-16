@@ -17,7 +17,6 @@ export function Step1(){
   return <>
   <StepWrapper handleContinue={handleSubmit}>
 
-      <div className="flex flex-col sm:flex-row sm:gap-2">
     {/*City*/}
     <InputWrapper
     labelHeading={t.form.city.label}
@@ -33,8 +32,7 @@ export function Step1(){
       />
       </InputWrapper>
 
-    <InputWrapper
-    labelHeading={t.form.location.label}
+      {city && <InputWrapper
     error={errors.latitude?.message || errors.longitude?.message}
     >
       <InputLocation
@@ -42,8 +40,8 @@ export function Step1(){
       city={city}
       /> 
     </InputWrapper>
+      }
 
-    </div>
 
     {/*Property Type*/}
     <InputWrapper
