@@ -137,3 +137,32 @@
   opacity: 1;
 }
 }
+
+
+/* MapSelector Styles */
+
+.map-selector-container {
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+.map-selector {
+  @apply border-3 border-border hover:border-primary transition-all;
+}
+
+
+.bbox-rectangle {
+  stroke-dashoffset: 0;
+  animation: dash 20s linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 100;
+  }
+}
+
+.leaflet-popup-content {
+  font-size: 13px;
+  line-height: 1.4;
+}

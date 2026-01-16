@@ -5,13 +5,14 @@ import { InputWrapper } from "./InputWrapper"
 import { PROPERTY_TYPES } from "@/config"
 import { BoxRadioInputControlled } from "./BoxRadioInputControlled"
 import { InputLocation } from "./InputLocation"
+import { MapSelector } from "./MapSelector"
 
 export function Step1(){
   const t = useTranslations()
 
   const {handleSubmit,setValue,watch,control,formState:{errors}} = useFormPrediction('step1')
 
-  const city = watch('city')
+  const [city,latitude,longitude] = watch(['city','latitude','longitude'],'latitude')
 
   return <>
   <StepWrapper handleContinue={handleSubmit}>
@@ -27,6 +28,19 @@ export function Step1(){
       errors={errors}
       /> 
     </InputWrapper>
+
+    {latitude && longitude && 
+    <MapSelector
+    onPinChange={([lat,lon])=>{
+      setValue('latitude',lat)
+      setValue('longitude',lon)
+    }}
+    initialPin={[latitude,longitude]}
+    zoom={17}
+    center={[latitude,longitude]}
+
+    />
+    }
 
 
     {/*Property Type*/}
