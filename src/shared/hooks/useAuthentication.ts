@@ -1,22 +1,42 @@
-import { useEffect, useState } from "react";
-import { getAuthToken } from "../utils/getAuthToken";
+import Cookies from 'js-cookie'
+import { useState, useCallback } from 'react' 
 
-export function useAuthentication(){
-  const [isAuthenticated, setIsAuthenticated] = useState(false);    
+const AUTH_COOKIE_NAME = 'auth_token'
 
-  useEffect(()=>{
-    const tokenValue = getAuthToken()
+export function useAuthentication() {
+  const [authToken, setAuthTokenState] = useState<string | undefined>(() => {
+    return Cookies.get(AUTH_COOKIE_NAME)
+  })
 
-    setIsAuthenticated(Boolean(tokenValue))
-  },[])
+  const getAuthToken = useCallback(() => {
+    return authToken
+  }, [authToken])
 
-  const logOut = ()=>{
-    if(isAuthenticated){
-    localStorage.removeItem('auth_token');
-    localStorage.removeItem('is_registered');
-    setIsAuthenticated(false);
+  const setAuthToken = useCallback((token: string) => {
+    try {
+      Cookies.set(AUTH_COOKIE_NAME, token, {
+        path: '/',
+        secure: true,
+        sameSite: 'lax',
+        domain: window.location.hostname,
+        expires: 50 / (24 * 60)
+      })
+      setAuthTokenState(token) 
+    } catch(e) {
+      console.log('Error while setting AuthToken on cookies: ', e)
+      throw new Error('Error setting AuthToken')
     }
-  }
+  }, [])
 
-  return {isAuthenticated,getAuthToken,logOut}
+  const removeAuthToken = useCallback(() => {
+    Cookies.remove(AUTH_COOKIE_NAME, {
+      path: '/',
+      domain: window.location.hostname
+    })
+    setAuthTokenState(undefined) 
+  }, [])
+
+  const isAuthenticated = !!authToken
+
+  return { isAuthenticated, getAuthToken, removeAuthToken, setAuthToken, authToken }
 }

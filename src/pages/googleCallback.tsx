@@ -3,15 +3,17 @@ import { GoogleCallbackLoading } from '@/features/Auth/components/GoogleCallback
 import { useGoogleOAuthCallback } from '@/features/Auth/hooks/useGoogleOAuthCallback';
 
 export default function GoogleCallbackPage() {
-  const { isLoading, needsRegistration } = useGoogleOAuthCallback();
+  const { isLoading, needsRegistration, registerToken} = useGoogleOAuthCallback();
 
 
   if (isLoading) {
     return <GoogleCallbackLoading />;
   }
 
-  if (needsRegistration) {
-    return <UserForm />;
+  if (needsRegistration && registerToken) {
+    return <UserForm 
+    registerToken={registerToken}
+    />;
   }
 
   return null;

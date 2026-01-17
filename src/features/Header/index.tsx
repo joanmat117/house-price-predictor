@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { LanguageSelector } from "./components/LanguageSelector";
 import { ThemeSelector } from "./components/ThemeSelector";
 import { useTranslations } from "@/shared/hooks/useTranslations";
+import { LogOutBtn } from "./components/LogOutBtn";
 
 export function Header(){
   const t = useTranslations()
@@ -13,6 +14,7 @@ export function Header(){
 
       <div className="flex items-center gap-3">
         {/*<GoogleLoginButton />*/}
+        <LogOutBtn/>
         <LanguageSelector/>
         <ThemeSelector/>
       </div>

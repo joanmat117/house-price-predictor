@@ -2,12 +2,15 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { exchangeCodeForToken } from '@/shared/services/googleOAuth';
 import { useRedirectAfterLogin } from '@/shared/hooks/useRedirectAfterLogin';
+import { useAuthentication } from '@/shared/hooks/useAuthentication';
 
 type OAuthStatus = 'loading' | 'needs-registration' | 'error';
 
 export const useGoogleOAuthCallback = () => {
   const navigate = useNavigate();
   const { redirect } = useRedirectAfterLogin();
+  const [registerToken,setRegisterToken] = useState<string|null>(null)
+  const {setAuthToken} = useAuthentication()
 
   const [status, setStatus] = useState<OAuthStatus>('loading');
 
@@ -33,14 +36,14 @@ export const useGoogleOAuthCallback = () => {
           throw new Error('Invalid backend response');
         }
 
-        localStorage.setItem('auth_token', data.token);
-        localStorage.setItem('is_registered', String(data.is_registered));
 
         cleanOAuthParamsFromUrl();
 
         if (data.is_registered) {
+          setAuthToken(data.token)
           redirect();
         } else {
+          setRegisterToken(data.token)
           setStatus('needs-registration');
         }
       } catch (error) {
@@ -57,6 +60,7 @@ export const useGoogleOAuthCallback = () => {
     status,
     needsRegistration: status === 'needs-registration',
     isLoading: status === 'loading',
+    registerToken
   };
 };
 

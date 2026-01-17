@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
 import { UserSchema, type UserFormData } from '@/shared/schemas/UserSchema';
 import { userService } from '@/shared/services/userService';
 import { Button } from '@/shared/components/ui/button';
@@ -18,15 +17,20 @@ import { Checkbox } from '@/shared/components/ui/checkbox';
 import { useRedirectAfterLogin } from '@/shared/hooks/useRedirectAfterLogin';
 import { useTranslations } from '@/shared/hooks/useTranslations';
 import { Loader } from '@/shared/components/icons/Loader';
+import { useAuthentication } from '@/shared/hooks/useAuthentication';
+import { useState } from 'react';
 
 interface UserFormProps {
   onSuccess?: () => void;
+  registerToken:string
 }
 
-export function UserForm({}: UserFormProps) {
-
+export function UserForm({registerToken,onSuccess}: UserFormProps) {
+  
+  const {setAuthToken} = useAuthentication()
   const t = useTranslations()
   const {redirect} = useRedirectAfterLogin()
+  const [isLoading,setIsLoading] = useState(false)
 
   const form = useForm({
     resolver: zodResolver(UserSchema as any),
@@ -40,28 +44,28 @@ export function UserForm({}: UserFormProps) {
 
   const isAgent = form.watch('is_agent');
 
-  const mutation = useMutation({
-    mutationFn: userService.registerUser,
-    onSuccess: (data) => {
-      form.reset();
-        console.log('Register response: ',data) 
-        redirect()
-
-    },
-    onError: (error: Error) => {
-      console.log('Error registering: ',error)
-    alert('Error registering') 
-    },
-  });
-
-  function onSubmit(data: UserFormData) {
+  async function onSubmit(data: UserFormData) {
     const formattedData = {
       ...data,
       phone_number: data.phone_number || undefined,
       real_state_agency: data.real_state_agency || undefined,
     };
-
-    mutation.mutate(formattedData);
+    try {
+      setIsLoading(true)
+    const res = await userService.registerUser(formattedData,registerToken);
+      if(typeof res === 'string'){
+        setAuthToken(res)
+        form.reset()
+        onSuccess && onSuccess()
+        redirect()
+      } else {
+        alert('Error durign registering') 
+      }
+    } catch(e){
+      console.log('Error in registering response: ',e)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -80,7 +84,7 @@ export function UserForm({}: UserFormProps) {
                 <Input 
                   placeholder="Ingrese su nombre completo" 
                   {...field} 
-                  disabled={mutation.isPending}
+                  disabled={isLoading}
                 />
               </FormControl>
               <FormMessage />
@@ -99,7 +103,7 @@ export function UserForm({}: UserFormProps) {
                   placeholder="+1 (555) 123-4567" 
                   {...field} 
                   value={field.value || ''}
-                  disabled={mutation.isPending}
+                  disabled={isLoading}
                 />
               </FormControl>
               <FormDescription>
@@ -119,7 +123,7 @@ export function UserForm({}: UserFormProps) {
                 <Checkbox
                   checked={field.value}
                   onCheckedChange={field.onChange}
-                  disabled={mutation.isPending}
+                  disabled={isLoading}
                 />
               </FormControl>
               <div className="space-y-1 leading-none">
@@ -144,7 +148,7 @@ export function UserForm({}: UserFormProps) {
                     placeholder="Nombre de su agencia" 
                     {...field} 
                     value={field.value || ''}
-                    disabled={mutation.isPending}
+                    disabled={isLoading}
                   />
                 </FormControl>
                 <FormDescription>
@@ -159,9 +163,9 @@ export function UserForm({}: UserFormProps) {
         <Button 
           type="submit" 
           className="w-full" 
-          disabled={mutation.isPending}
+          disabled={isLoading}
         >
-          {mutation.isPending ? (
+          {isLoading ? (
             <>
               <Loader className="mr-2 size-6" />
               {t.register.submitPending}
