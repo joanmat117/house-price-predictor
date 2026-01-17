@@ -19,6 +19,7 @@ export const useGoogleOAuthCallback = () => {
       try {
         const urlParams = new URLSearchParams(window.location.search);
 
+        console.log('URL params received from google: ',urlParams)
         const code = urlParams.get('code');
         const error = urlParams.get('error');
 
@@ -27,7 +28,8 @@ export const useGoogleOAuthCallback = () => {
         }
 
         if (!code) {
-          throw new Error('No authorization code received');
+          console.log('Auth code: ',code)
+          throw new Error('No authorization code received from google');
         }
 
         const data = await exchangeCodeForToken(urlParams);
@@ -35,6 +37,8 @@ export const useGoogleOAuthCallback = () => {
         if (!data.token || typeof data.is_registered !== 'boolean') {
           throw new Error('Invalid backend response');
         }
+
+        console.log('Se recibio la data del exchangeCodeForToken: ',data)
 
 
         cleanOAuthParamsFromUrl();
