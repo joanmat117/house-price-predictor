@@ -60,10 +60,6 @@
       "label": "Tipo de vía",
       "placeholder": "Seleccione el tipo de vía"
     },
-    "street": {
-      "label": "Nombre de la ? y barrio",
-      "placeholder": "45, Guayabal"
-    },
     "number1": {
       "label": "Número principal",
       "placeholder": "127A"
@@ -90,8 +86,9 @@
       "notFound": "Ciudad no disponible"
     },
     "town": {
-      "label": "Selecciona el barrio",
-      "notFound": "Barrio no disponible"
+      "label": "Escribe el barrio",
+      "notFound": "Barrio no disponible",
+      "placeholder": "Guayabal"
     },
     "location": {
       "label": "Escribe la dirección de la propiedad",

@@ -22,25 +22,27 @@ type TypeWayEnumKeys = 'calle'|'carrera'|'avenida'|'diagonal'|'transversal'
 
 export function InputLocation({ setValue,errors,control, city }: Props) {
   const t = useTranslations();
-  const { fetchLocationStructured,removeLocationDataStored, data, error, isLoading } = useSearchLocation();
+  const { fetchLocationStructured,data, error, isLoading } = useSearchLocation();
 
   const [typeWay, setTypeWay] = useState("");
-  const [street, setStreet] = useState("");
+  const [town, setTown] = useState("");
   const [number1, setNumber1] = useState("");
   const [block1, setBlock1] = useState("");
   const [block2, setBlock2] = useState("");
 
   useEffect(() => {
+      if(data && !isLoading){
       setValue("longitude", data?.longitude, { shouldValidate: true });
       setValue("latitude", data?.latitude, { shouldValidate: true });
+      }
   }, [data, setValue]);
 
   const handleSearch = () => {
-    if (!city || !typeWay || !street || !number1) return;
+    if (!city || !typeWay || !town || !number1) return;
 
     fetchLocationStructured({
       typeWay,
-      street,
+      town,
       number1,
       block1: block1.trim() || undefined,
       block2: block2.trim() || undefined,
@@ -48,11 +50,11 @@ export function InputLocation({ setValue,errors,control, city }: Props) {
     });
   };
 
-  const canSearch = !!city && !!typeWay && street.trim() && number1.trim();
+  const canSearch = !!city && !!typeWay && town.trim() && number1.trim();
 
   return (
     <section className="space-y-4 mb-3 animate-fade-in">
-      <div className="grid items-end grid-cols-2 gap-1">
+      <div className="grid items-end grid-cols-2 gap-2">
       {/*City*/}
       <InputWrapper
       labelHeading={t.form.city.label}
@@ -83,14 +85,14 @@ export function InputLocation({ setValue,errors,control, city }: Props) {
       {/* Nombre de vía */}
       {typeWay && <>
         <InputWrapper 
-          labelHeading={t.form.street.label.replace(
+          labelHeading={t.form.town.label.replace(
           '?',
           t.enums.typeWay[typeWay as TypeWayEnumKeys].toLowerCase()
         )}>
         <Input
-          value={street}
-          onChange={(e) => setStreet(e.target.value)}
-          placeholder={t.form.street.placeholder}
+          value={town}
+          onChange={(e) => setTown(e.target.value)}
+          placeholder={t.form.town.placeholder}
         />
       </InputWrapper>
 
@@ -139,8 +141,7 @@ export function InputLocation({ setValue,errors,control, city }: Props) {
           <div className="felx gap-1">
             <MapPinCheckInside className="size-5 text-green-600" />
             <Button variant='ghost' size={'icon-sm'} 
-              onClick={()=>removeLocationDataStored()}
-              className="absolute rounded-full bg-transparent! right-1 top-0 m-1"
+              className="hidden absolute rounded-full bg-transparent! right-1 top-0 m-1"
             >
               <LucideX/>
             </Button>

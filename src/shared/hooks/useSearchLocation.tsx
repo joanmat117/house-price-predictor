@@ -15,7 +15,7 @@ type LocationDataHook = {
 interface StructuredAddressParams {
   city: string;
   typeWay: string;
-  street: string;
+  town: string;
   number1: string;
   block1?: string;
   block2?: string;
@@ -23,7 +23,7 @@ interface StructuredAddressParams {
 
 function buildOcQueryStructured({
   typeWay,
-  street,
+  town,
   number1,
   block1,
   block2,
@@ -32,8 +32,8 @@ function buildOcQueryStructured({
   const parts: string[] = [];
 
   parts.push(typeWay);
-  parts.push(street);
   parts.push(number1);
+  parts.push(town);
 
   if (block1) parts.push(`# ${block1}`);
   if (block2) parts.push(`- ${block2}`);
@@ -43,17 +43,6 @@ function buildOcQueryStructured({
 
   return parts.filter(Boolean).join(", ");
 }
-
-const getLocationDataStored = (): LocationDataHook | undefined => {
-  const stored = localStorage.getItem("LOCATION_DATA");
-  return stored ? JSON.parse(stored) : undefined;
-};
-
-const setLocationDataStored = (data:LocationDataHook)=>{
-  localStorage.setItem('LOCATION_DATA',JSON.stringify(data))
-}
-
-
 
 function extractFirstResult(apiResponse: OpenCageQueryResponse): LocationDataHook {
   const results = apiResponse.results;
@@ -88,21 +77,12 @@ function extractFirstResult(apiResponse: OpenCageQueryResponse): LocationDataHoo
 
 export function useSearchLocation() {
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState<LocationDataHook | undefined>(
-    getLocationDataStored()
-  );
+  const [data, setData] = useState<Partial<LocationDataHook> | undefined>(undefined);
   const [error, setError] = useState<string | undefined>(undefined);
   const t = useTranslations();
 
-
-  const removeLocationDataStored = ()=>{
-  localStorage.removeItem('LOCATION_DATA')
-    setData(undefined)
-}
-
   const fetchLocationStructured = async (params: StructuredAddressParams) => {
     try {
-      removeLocationDataStored()
       setIsLoading(true);
       setError(undefined);
       setData(undefined);
@@ -115,10 +95,7 @@ export function useSearchLocation() {
       }
 
       const extractedData = extractFirstResult(response);
-      setData(()=>{
-        setLocationDataStored(extractedData)
-        return extractedData
-      });
+      setData(extractedData);
     } catch (e: any) {
       console.error("Error during fetching location: ", e);
       setError(e.message);
@@ -132,7 +109,6 @@ export function useSearchLocation() {
     isLoading,
     error,
     fetchLocationStructured,
-    removeLocationDataStored
   };
 }
 

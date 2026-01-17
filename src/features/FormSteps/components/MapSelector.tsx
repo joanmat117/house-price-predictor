@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { MapContainer, TileLayer, Rectangle, Marker, useMapEvents, useMap, Popup } from 'react-leaflet';
-import L, { type LatLngBoundsExpression } from 'leaflet';
+import { MapContainer, TileLayer, Rectangle, Marker, useMapEvents, Popup } from 'react-leaflet';
+import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 // Solucionar iconos rotos en React Leaflet
@@ -9,27 +9,6 @@ L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
   iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-});
-
-
-const customIcon = L.divIcon({
-  html: `
-    <svg 
-      width="32" 
-      height="32" 
-      viewBox="0 0 1200 1200"
-      style="filter: drop-shadow(0px 2px 3px rgba(255,255,255,0.6));"
-    >
-      <path 
-        fill="#3388ff" 
-        d="M600 0C350.178 0 147.656 202.521 147.656 452.344c0 83.547 16.353 169.837 63.281 232.031L600 1200l389.062-515.625c42.625-56.49 63.281-156.356 63.281-232.031C1052.344 202.521 849.822 0 600 0m0 261.987c105.116 0 190.356 85.241 190.356 190.356C790.356 557.46 705.116 642.7 600 642.7s-190.356-85.24-190.356-190.356S494.884 261.987 600 261.987"
-      />
-    </svg>
-  `,
-  className: 'simple-svg-marker',
-  iconSize: [32, 32],
-  iconAnchor: [36, 32],
-  popupAnchor: [0, -32]
 });
 // =========== TIPOS ===========
 export type Position = [number, number]; // [lat, lng]
@@ -40,7 +19,7 @@ export interface MapSelectorProps {
   initialBbox?: BoundingBox | null;
   
   /** Posición inicial del PIN */
-  initialPin?: Position | null;
+  initialPin: Position ;
   
   /** Callback cuando el PIN cambia de posición */
   onPinChange?: (position: Position) => void;
@@ -72,10 +51,6 @@ interface MapClickHandlerProps {
   enabled: boolean;
 }
 
-interface BoundsSetterProps {
-  bounds: LatLngBoundsExpression;
-}
-
 // =========== COMPONENTES INTERNOS ===========
 
 /**
@@ -92,21 +67,6 @@ const MapClickHandler: React.FC<MapClickHandlerProps> = ({ onPinPlaced, enabled 
   return null;
 };
 
-/**
- * Ajusta la vista del mapa al bounding box proporcionado
- */
-const BoundsSetter: React.FC<BoundsSetterProps> = ({ bounds }) => {
-  const map = useMap();
-  
-  useEffect(() => {
-    if (bounds) {
-      map.fitBounds(bounds);
-    }
-  }, [bounds, map]);
-  
-  return null;
-};
-
 // =========== COMPONENTE PRINCIPAL ===========
 
 /**
@@ -114,7 +74,7 @@ const BoundsSetter: React.FC<BoundsSetterProps> = ({ bounds }) => {
  */
 export const MapSelector: React.FC<MapSelectorProps> = ({
   initialBbox = null,
-  initialPin = null,
+  initialPin,
   onPinChange = () => {},
   mapStyle = { height: '200px', width: '100%', borderRadius: '100px' },
   zoom = 2,
@@ -123,18 +83,8 @@ export const MapSelector: React.FC<MapSelectorProps> = ({
   draggable = true,
   clickToPlace = true,
 }) => {
-  // Estados internos
-  const [pinPosition, setPinPosition] = useState<Position>(
-    initialPin || [40.7128, -74.0060] // NYC por defecto
-  );
   const [bbox, setBbox] = useState<BoundingBox | null>(initialBbox);
 
-  // Sincronizar con props iniciales
-  useEffect(() => {
-    if (initialPin) {
-      setPinPosition(initialPin);
-    }
-  }, [initialPin]);
 
   useEffect(() => {
     setBbox(initialBbox);
@@ -144,7 +94,6 @@ export const MapSelector: React.FC<MapSelectorProps> = ({
    * Maneja la colocación de un nuevo PIN
    */
   const handlePinPlaced = useCallback((position: Position) => {
-    setPinPosition(position);
     onPinChange(position);
   }, [onPinChange]);
 
@@ -156,7 +105,6 @@ export const MapSelector: React.FC<MapSelectorProps> = ({
     const position = marker.getLatLng();
     const newPosition: Position = [position.lat, position.lng];
     
-    setPinPosition(newPosition);
     onPinChange(newPosition);
   }, [onPinChange]);
 
@@ -211,25 +159,23 @@ export const MapSelector: React.FC<MapSelectorProps> = ({
         
         {/* Marcador arrastrable */}
         <Marker
-          position={pinPosition}
+          position={initialPin as Position}
           draggable={draggable}
-          icon={customIcon}
           eventHandlers={{
             dragend: handleMarkerDragEnd,
           }}
         >
           <Popup>
             <div className="flex flex-col gap-1">
-              <div className="rounded-full font-bold py-1 px-2 bg-black text-white">Lat: <code>{pinPosition[0].toFixed(6)}</code></div>
-              <div  className="rounded-full font-bold py-1 px-2 bg-black text-white">Lng: <code>{pinPosition[1].toFixed(6)}</code></div>
+              <div className="rounded-full font-bold py-1 px-2 bg-black text-white">Lat: <code>{initialPin[0].toFixed(6)}</code></div>
+              <div  className="rounded-full font-bold py-1 px-2 bg-black text-white">Lng: <code>{initialPin[1].toFixed(6)}</code></div>
             </div>
           </Popup>
         </Marker>
         
         {/* Componentes auxiliares */}
         <MapClickHandler onPinPlaced={handlePinPlaced} enabled={clickToPlace} />
-        {bbox && <BoundsSetter bounds={bbox} />}
-      </MapContainer>
+        </MapContainer>
       
           </div>
   );
