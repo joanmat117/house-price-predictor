@@ -1,7 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { UserSchema, type UserFormData } from '@/shared/schemas/UserSchema';
-import { userService } from '@/shared/services/userService';
 import { Button } from '@/shared/components/ui/button';
 import {
   Form,
@@ -14,25 +13,18 @@ import {
 } from '@/shared/components/ui/form';
 import { Input } from '@/shared/components/ui/input';
 import { Checkbox } from '@/shared/components/ui/checkbox';
-import { useRedirectAfterLogin } from '@/shared/hooks/useRedirectAfterLogin';
 import { useTranslations } from '@/shared/hooks/useTranslations';
 import { Loader } from '@/shared/components/icons/Loader';
-import { useAuthentication } from '@/shared/hooks/useAuthentication';
-import { useState } from 'react';
 
 interface UserFormProps {
-  onSuccess?: () => void;
-  registerToken:string
+  onSubmit: (data: UserFormData) => Promise<void>;
+  isSubmitting: boolean;
 }
 
-export function UserForm({registerToken,onSuccess}: UserFormProps) {
-  
-  const {setAuthToken} = useAuthentication()
-  const t = useTranslations()
-  const {redirect} = useRedirectAfterLogin()
-  const [isLoading,setIsLoading] = useState(false)
+export function UserForm({ onSubmit, isSubmitting }: UserFormProps) {
+  const t = useTranslations();
 
-  const form = useForm({
+  const form = useForm<UserFormData>({
     resolver: zodResolver(UserSchema as any),
     defaultValues: {
       name: '',
@@ -44,36 +36,23 @@ export function UserForm({registerToken,onSuccess}: UserFormProps) {
 
   const isAgent = form.watch('is_agent');
 
-  async function onSubmit(data: UserFormData) {
+  // Format data before sending it up to the parent
+  const handleFormSubmit = (data: UserFormData) => {
     const formattedData = {
       ...data,
       phone_number: data.phone_number || undefined,
-      real_state_agency: data.real_state_agency || undefined,
+      real_state_agency: data.is_agent ? data.real_state_agency : undefined,
     };
-    try {
-      setIsLoading(true)
-    const res = await userService.registerUser(formattedData,registerToken);
-      if(typeof res === 'string'){
-        setAuthToken(res)
-        form.reset()
-        onSuccess && onSuccess()
-        redirect()
-      } else {
-        alert('Error durign registering') 
-      }
-    } catch(e){
-      console.log('Error in registering response: ',e)
-    } finally {
-      setIsLoading(false)
-    }
-  }
+    return onSubmit(formattedData);
+  };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 p-3 max-w-lg mx-auto">
+      <form onSubmit={form.handleSubmit(handleFormSubmit)} className="space-y-6 p-3 max-w-lg mx-auto">
         <h1 className='text-2xl font-bold text-center'>
-        {t.register.title}
+          {t.register.title}
         </h1>
+
         <FormField
           control={form.control}
           name="name"
@@ -84,7 +63,7 @@ export function UserForm({registerToken,onSuccess}: UserFormProps) {
                 <Input 
                   placeholder="Ingrese su nombre completo" 
                   {...field} 
-                  disabled={isLoading}
+                  disabled={isSubmitting}
                 />
               </FormControl>
               <FormMessage />
@@ -98,12 +77,12 @@ export function UserForm({registerToken,onSuccess}: UserFormProps) {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Número de teléfono</FormLabel>
-              <FormControl >
+              <FormControl>
                 <Input 
                   placeholder="+1 (555) 123-4567" 
                   {...field} 
                   value={field.value || ''}
-                  disabled={isLoading}
+                  disabled={isSubmitting}
                 />
               </FormControl>
               <FormDescription>
@@ -123,7 +102,7 @@ export function UserForm({registerToken,onSuccess}: UserFormProps) {
                 <Checkbox
                   checked={field.value}
                   onCheckedChange={field.onChange}
-                  disabled={isLoading}
+                  disabled={isSubmitting}
                 />
               </FormControl>
               <div className="space-y-1 leading-none">
@@ -148,7 +127,7 @@ export function UserForm({registerToken,onSuccess}: UserFormProps) {
                     placeholder="Nombre de su agencia" 
                     {...field} 
                     value={field.value || ''}
-                    disabled={isLoading}
+                    disabled={isSubmitting}
                   />
                 </FormControl>
                 <FormDescription>
@@ -163,15 +142,15 @@ export function UserForm({registerToken,onSuccess}: UserFormProps) {
         <Button 
           type="submit" 
           className="w-full" 
-          disabled={isLoading}
+          disabled={isSubmitting}
         >
-          {isLoading ? (
+          {isSubmitting ? (
             <>
-              <Loader className="mr-2 size-6" />
+              <Loader className="mr-2 size-6 animate-spin" />
               {t.register.submitPending}
             </>
           ) : (
-          t.register.submit
+            t.register.submit
           )}
         </Button>
       </form>
