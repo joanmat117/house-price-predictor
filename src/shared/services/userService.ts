@@ -3,7 +3,7 @@ import {type UserFormData } from '@/shared/schemas/UserSchema';
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const userService = {
-  async registerUser(data: UserFormData,authToken:string): Promise<string|{detail:Record<string,any>[]}> {
+  async registerUser(data: UserFormData,authToken:string): Promise<{detail?:Record<string,any>[]|string,token?:string}> {
     try {
     const response = await fetch(`${BACKEND_URL}/register?token=${authToken}`, {
       method: 'POST',

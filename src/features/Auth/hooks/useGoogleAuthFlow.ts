@@ -67,8 +67,8 @@ export const useGoogleAuthFlow = () => {
   }, [navigate, redirect, setAuthToken]);
 
   /**
-   * Handles user registration using the stored token.
-   * This is a closure, so it has access to 'registerToken' without passing it as a prop.
+   * Handles user registration.
+   * Handles both new registration and "already registered" cases.
    */
   const registerUser = async (formData: UserFormData) => {
     if (!registerToken) return;
@@ -77,21 +77,45 @@ export const useGoogleAuthFlow = () => {
       setIsSubmitting(true);
       const res = await userService.registerUser(formData, registerToken);
       
-      if (typeof res === 'string') {
-        setAuthToken(res);
+      // Case 1: Standard Success (User Created)
+      if (res && res.token) {
+        setAuthToken(res.token);
+        setStatus('success');
+        redirect();
+        return;
+      }
+
+      // Case 2: Handled Exception (User already exists)
+      if (res && res.detail === "User is already registered.") {
+        // If the API sends the token even in this case, use it. 
+        // Otherwise, you might need to handle a re-login flow.
+        if (res.token) setAuthToken(res.token);
+        
         setStatus('success');
         redirect();
       } else {
-        throw new Error('Registration failed');
+        throw new Error('Registration failed: Unexpected response');
       }
-    } catch (error) {
-      console.error('Registration error:', error);
-      // Optional: Add logic here to trigger a toast notification
+
+    } catch (error: any) {
+      // Case 3: Error response from Axios/Fetch (e.g., 400 Bad Request)
+      const errorDetail = error.response?.data?.detail;
+      
+      if (errorDetail === "User is already registered.") {
+        // Log them in if the error response includes the token
+        const recoveredToken = error.response?.data?.token;
+        if (recoveredToken) setAuthToken(recoveredToken);
+        
+        setStatus('success');
+        redirect();
+      } else {
+        console.error('Registration error:', error);
+        // Could add a setFormError here to show the message in the UI
+      }
     } finally {
       setIsSubmitting(false);
     }
   };
-
   return {
     status,
     isLoading: status === 'loading',
