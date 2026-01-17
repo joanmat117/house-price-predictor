@@ -10,7 +10,20 @@
   },
   "results":{
     "title":"Resultados de la predicción",
-    "latest":"Predicción más reciente"
+    "latest":"Predicción más reciente",
+    "onLoading":"Predicción en proceso",
+    "errors": {
+      "quotaExceed": {
+        "title":"Ha alcanzado el límite de predicciones.",
+        "contact":"Contactar con soporte"
+      },
+      "invalidCredentials": {
+        "title":"Hay un error en sus credenciales, vuelva a inicar sesión."
+      },
+      "unknown": {
+        "title":"Ha ocurrido un error, reinténtelo más tarde."
+      }
+    }
   },
   "header":{
     "title":"Propiedades Aburrá"

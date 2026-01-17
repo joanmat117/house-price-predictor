@@ -20,11 +20,11 @@ export async function generatePrediction(fields: PredictionData, authToken: stri
             console.error('Expected JSON but got:', text.substring(0, 200));
             throw new Error('Server did not return JSON');
         }
-
+        const statusCode = res.status
         const data = await res.json();
-        console.log('Response prediction: ', data);
+        console.log('Response prediction: ', data,statusCode);
 
-        return data;
+        return {data,statusCode};
 
     } catch (error) {
         console.error('Error in generatePrediction:', error);
