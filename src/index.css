@@ -134,6 +134,10 @@
   body {
     @apply bg-background text-foreground;
   }
+  img:not([src]),
+  img[src=""] {
+    display: none !important;
+  }
 
   .animate-fade-in {
     animation: fade-in 0.3s both;

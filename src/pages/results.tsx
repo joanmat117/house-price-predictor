@@ -8,6 +8,9 @@ import { useTranslations } from "@/shared/hooks/useTranslations"
 import type { PredictionData } from "@/shared/types/PredictionSchema"
 import { formatCOP } from "@/shared/utils/formatCOP"
 import { useEffect } from "react"
+import quotaExceedSvg from "@/assets/illustrations/season_change.svg"
+import invalidCredentialsSvg from "@/assets/illustrations/void.svg"
+import predictionSuccessSvg from "@/assets/illustrations/analytics.svg"
 
 export default function Results(){
   
@@ -20,8 +23,8 @@ export default function Results(){
   /*
   const isLoading = false
   const data = null
-  const error = 'Error desconocido'
-  const statusCode:number|null = null 
+  const error = 'error'
+  const statusCode:number|null = 401
   const isLatest = true
   */
 
@@ -42,18 +45,18 @@ export default function Results(){
     {/* When Data */}
     {data && !isLoading && !error &&
       <article className="flex flex-col items-center gap-1">
+        <p className="text-4xl text-green-600 dark:text-green-500  text-shadow-lg text-shadow-green-400/20 font-bold">
+          {formatCOP(+data)}
+        </p>
         {isLatest &&
-          <span className="text-muted-foreground text-sm font-semibold">
+          <span className="border px-2 py-2/3 border-border rounded-full text-xs font-medium">
             {t.results.latest}
           </span>
         }
-        <p className="text-4xl text-green-600 dark:text-green-500  text-shadow-lg text-shadow-green-400/20 pb-5 pt-3 font-bold">
-          {formatCOP(+data)}
-        </p>
       <img
-      src='/analytics.svg'
+      src={predictionSuccessSvg}
       alt="house for sale image"
-      className="w-full object-contain opacity-80 h-[200px] max-w-xl"
+      className="w-full object-contain opacity-80 mt-5 h-[200px] max-w-xl"
       />
       </article>
     }
@@ -73,6 +76,16 @@ export default function Results(){
     {error && 
       <>
         <article className="flex flex-col items-center justify-center gap-2">
+          <img
+            src={
+              (()=>{
+                if(statusCode === 429) return quotaExceedSvg
+                if(statusCode === 401) return invalidCredentialsSvg
+              })()
+            }
+            alt="decorative image"
+            className="w-full object-contain opacity-80 h-[200px] max-w-xl"
+          />
           <h2 className="text-center text-xl font-semibold py-2">
             {
               (()=>{
