@@ -19,8 +19,8 @@ export default function Results(){
   
   /*
   const isLoading = false
-  const data = 650002001
-  const error = null
+  const data = null
+  const error = 'Error desconocido'
   const statusCode:number|null = null 
   const isLatest = true
   */
@@ -73,7 +73,7 @@ export default function Results(){
     {error && 
       <>
         <article className="flex flex-col items-center justify-center gap-2">
-          <h2 className="text-center text-2xl font-bold py-2">
+          <h2 className="text-center text-xl font-semibold py-2">
             {
               (()=>{
                 if(statusCode === 429) return t.results.errors.quotaExceed.title
@@ -95,7 +95,7 @@ export default function Results(){
           {statusCode !== 429 && statusCode !== 401 &&
             <Button
             size='sm'
-            className='bg-transparent rounded-full'
+            className='rounded-full'
             onClick={()=>fetchPrediction()}
           >
             Reintentar
