@@ -12,7 +12,7 @@ import { useTranslations } from '../hooks/useTranslations';
  */
 export function GoogleLoginButton() {
   
-  const {isAuthenticated,logOut} = useAuthentication()
+  const {isAuthenticated,removeAuthToken} = useAuthentication()
   const t = useTranslations()
 
   const handleLogin = () => {
@@ -20,7 +20,7 @@ export function GoogleLoginButton() {
   };
 
   const handleLogout = () => {
-    logOut()
+    removeAuthToken()
   };
 
   return (
