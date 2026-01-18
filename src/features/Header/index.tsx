@@ -5,11 +5,19 @@ import { useTranslations } from "@/shared/hooks/useTranslations";
 import { LogOutBtn } from "./components/LogOutBtn";
 
 export function Header(){
+  
   const t = useTranslations()
+
   return (
     <header className="fixed top-0 left-0 w-screen rounded-b-md p-2 flex items-center justify-between gap-3 z-20 bg-background/70 backdrop-blur-[30px]">
-      <Link to="/" className="text-lg line-clamp-1 md:text-xl font-extrabold ">
+      <Link to="/" className="text-lg flex gap-1 pl-1 items-center line-clamp-1 md:text-lg font-extrabold ">
+        <img src='/favicon/favicon.ico' alt='logo' 
+
+        className="size-5"
+        /> 
+        <p className="line-clamp-1 flex-1">
         {t.header.title}
+        </p>
       </Link>
 
       <div className="flex items-center gap-3">
