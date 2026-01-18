@@ -84,7 +84,10 @@
     "yes": "Yes",
     "no": "No",
     "getPrediction": "Calculate",
-    "searchLocation": "Search location"
+    "searchLocation": "Search location",
+    "adjustPin": "Adjust location on map",
+    "searchAgain": "Search again",
+    "tryAgain": "Try again"
   },
   "form": {
     "typeWay": {
@@ -110,7 +113,12 @@
       "label": "State/Department"
     },
     "postalCode": {
-      "label": "Postal code"
+      "label": "Postal code",
+      "placeholder": "050021"
+    },
+    "landmark": {
+      "label": "Nearby reference",
+      "placeholder": "Near..."
     },
     "city": {
       "label": "Select your city",
@@ -121,13 +129,25 @@
       "notFound": "Neighborhood not available",
       "placeholder": "Guayabal"
     },
+    "notableLocation": {
+      "label": "Search for a place near your property",
+      "placeholder": "E.g: El Tesoro Mall, Lleras Park, Stadium..."
+    },
     "location": {
       "label": "Type the property address",
-      "notFound": "Address not found",
+      "notFound": "Location not found. Try another nearby place.",
       "highConfidence": "Verified location",
+      "mediumConfidence": "Location found",
       "lowConfidence": "We found something, but we aren't sure",
+      "locationFound": "Location found - verify on map",
       "showMap": "Show on map",
-      "hideMap": "Hide map"
+      "hideMap": "Hide map",
+      "alternativeResults": "Other locations found:",
+      "oneAlternative": "We found another option:",
+      "multipleAlternatives": "We found {count} more options:",
+      "confidence": "Confidence",
+      "dragPin": "Adjust exact location",
+      "dragPinDescription": "Drag the marker on the map to your property's exact location"
     },
     "property_type": {
       "label": "Select property type",

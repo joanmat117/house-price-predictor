@@ -1,18 +1,18 @@
 import { useSearchLocation } from "@/shared/hooks/useSearchLocation";
 import { Input } from "@/shared/components/ui/input";
-import { useState, useEffect, type ReactNode } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/shared/components/ui/button";
 import { Loader } from "@/shared/components/icons/Loader";
-import { AlertCircle, MapPinCheckInside, Search } from "lucide-react";
-import type { Control, FieldErrors, UseFormSetValue } from "react-hook-form";
+import { AlertCircle, MapPinCheckInside, Search, Move } from "lucide-react";
+import type { Control, FieldErrors, UseFormSetValue, UseFormWatch } from "react-hook-form";
 import { InputWrapper } from "./InputWrapper";
 import { useTranslations } from "@/shared/hooks/useTranslations";
-import { Combobox } from "@/shared/components/Combobox";
-import { CITIES, TYPE_WAY } from "@/config";
+import { CITIES } from "@/config";
 import { ComboboxControlled } from "./ComboboxControlled";
 
 interface Props {
   setValue: UseFormSetValue<any>;
+  watch: UseFormWatch<any>;
   city?: string;
   control:Control<any,any,any>,
   errors:FieldErrors<any>
@@ -20,155 +20,192 @@ interface Props {
   showMap:boolean
 }
 
-type TypeWayEnumKeys = 'calle'|'carrera'|'avenida'|'diagonal'|'transversal'
-
-export function InputLocation({ setValue,errors,setShowMap,showMap,control, city }: Props) {
+export function InputLocation({ setValue, watch, errors, setShowMap, showMap, control, city }: Props) {
   const t = useTranslations();
-  const { fetchLocationStructured,data, error, isLoading } = useSearchLocation();
+  const { 
+    searchNotableLocation, 
+    data, 
+    alternativeResults,
+    selectAlternativeResult,
+    clearSearch,
+    error, 
+    isLoading 
+  } = useSearchLocation();
 
-  const [typeWay, setTypeWay] = useState("");
-  const [town, setTown] = useState("");
-  const [number1, setNumber1] = useState("");
-  const [block1, setBlock1] = useState("");
-  const [block2, setBlock2] = useState("");
+  const [notableLocation, setNotableLocation] = useState("");
+  const [isManualAdjustment, setIsManualAdjustment] = useState(false);
+
+  const latitude = watch?.('latitude');
+  const longitude = watch?.('longitude');
 
   useEffect(() => {
-    if(data && !isLoading){
-      // Solo actualizar latitude y longitude si existen en data
+    if(data && !isLoading && !isManualAdjustment){
       if (data.latitude !== undefined && data.longitude !== undefined) {
         setValue("longitude", data.longitude, { shouldValidate: true });
         setValue("latitude", data.latitude, { shouldValidate: true });
+        setShowMap(true);
       }
     }
-  }, [data, setValue, isLoading]);
+  }, [data, setValue, isLoading, isManualAdjustment, setShowMap]);
 
   const handleSearch = () => {
-    if (!city || !typeWay || !town || !number1) return;
-
-    fetchLocationStructured({
-      typeWay,
-      town,
-      number1,
-      city,
-    });
+    if (!city || !notableLocation.trim()) return;
+    setIsManualAdjustment(false);
+    searchNotableLocation(city, notableLocation);
   };
 
-  const canSearch = !!city && !!typeWay && town.trim() && number1.trim();
+  const canSearch = !!city && notableLocation.trim().length > 2;
 
   return (
     <section className="space-y-4 mb-3 animate-fade-in">
-      <div className="grid items-end grid-cols-2 gap-2">
       <InputWrapper
-      labelHeading={t.form.city.label}
-      error={errors.city?.message}
+        labelHeading={t.form.city.label}
+        error={errors.city?.message}
       >
-        
         <ComboboxControlled
-        name="city"
-        control={control}
-        options={CITIES}
-        notFound={t.form.city.notFound}
-        label={t.form.city.label}
+          name="city"
+          control={control}
+          options={CITIES}
+          notFound={t.form.city.notFound}
+          label={t.form.city.label}
         />
       </InputWrapper>
 
-      <InputWrapper labelHeading={t.form.typeWay.label}>
-        <Combobox
-          onValueChange={(value) => setTypeWay(value)}
-          label={t.form.typeWay.label}
-          value={typeWay}
-          options={TYPE_WAY}
-          optionsTranslation={t.enums.typeWay}
-        />
-      </InputWrapper>
-      </div>
+      {city && (
+        <>
+          <InputWrapper labelHeading={t.form.notableLocation.label}>
+            <Input
+              value={notableLocation}
+              onChange={(e) => setNotableLocation(e.target.value)}
+              placeholder={t.form.notableLocation.placeholder}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && canSearch) {
+                  e.preventDefault();
+                  handleSearch();
+                }
+              }}
+            />
+          </InputWrapper>
 
-      {typeWay && <>
-        <InputWrapper 
-          labelHeading={t.form.town.label.replace(
-          '?',
-          t.enums.typeWay[typeWay as TypeWayEnumKeys].toLowerCase()
-        )}>
-        <Input
-          value={town}
-          onChange={(e) => setTown(e.target.value)}
-          placeholder={t.form.town.placeholder}
-        />
-      </InputWrapper>
-
-      <div className="flex animate-fade-in items-center gap-2">
-          <Input
-            value={number1}
-            onChange={(e) => setNumber1(e.target.value)}
-            placeholder={t.form.number1.placeholder}
-            className="text-center"
-          />
-        <AddressSeparator>#</AddressSeparator>
-          <Input
-            value={block1}
-            onChange={(e) => setBlock1(e.target.value)}
-            placeholder={t.form.block1.placeholder}
-            className='text-center'
-          />
-        <AddressSeparator>-</AddressSeparator>
-          <Input
-            value={block2}
-            onChange={(e) => setBlock2(e.target.value)}
-            placeholder={t.form.block2.placeholder}
-            className="text-center"
-          />
-      </div>
-
-      <Button disabled={isLoading || !canSearch} onClick={handleSearch}
-      className="w-full flex items-center gap-2 flex-wrap h-fit"
-      >
-        {isLoading ? (
-          <Loader className="size-5" />
-        ) : (
-          <>
-            <Search className="size-5" />
-            {t.buttons.searchLocation}
-          </>
-        )}
-      </Button>
-
-      </>}
+          <Button 
+            disabled={isLoading || !canSearch} 
+            onClick={handleSearch}
+            className="w-full flex items-center gap-2"
+          >
+            {isLoading ? (
+              <Loader className="size-5" />
+            ) : (
+              <>
+                <Search className="size-5" />
+                {t.buttons.searchLocation}
+              </>
+            )}
+          </Button>
+        </>
+      )}
 
       {data && !isLoading && (
-        <div className="flex relative gap-3 p-3 bg-green-500/10 rounded-md border">
-        <MapPinCheckInside className="size-5 text-green-600" />
-          <div className="flex flex-col flex-1 items-start gap-1">
-          <p className="font-medium  text-green-600">{
-            data.confidence ?
-              data.confidence > 7 ? 
-                t.form.location.highConfidence :
-                t.form.location.lowConfidence
-            :
-              data.name
-          }</p>
-          
-            <Button variant='ghost' size={'sm'} 
-              onClick={()=>setShowMap(!showMap)}
-              className="rounded-full text-end! text-sm text-muted-foreground self-end p-0! h-fit m-0! bg-transparent! "
+        <div className="space-y-2">
+          <div className="flex relative gap-3 p-3 bg-green-500/10 rounded-md border">
+            <MapPinCheckInside className="size-5 text-green-600 flex-shrink-0" />
+            <div className="flex flex-col flex-1 items-start gap-1">
+              <p className="font-medium text-green-600 text-sm">
+                {t.form.location.locationFound}
+              </p>
+              <p className="text-xs text-muted-foreground line-clamp-2">{data.name}</p>
+            </div>
+          </div>
+
+          <div className="flex gap-2">
+            {!showMap && (
+              <Button 
+                variant='outline' 
+                size={'sm'} 
+                onClick={() => setShowMap(true)}
+                className="flex-1 flex items-center gap-2"
+              >
+                <Move className="size-4" />
+                {t.buttons.adjustPin}
+              </Button>
+            )}
+            <Button 
+              variant='ghost' 
+              size={'sm'} 
+              onClick={() => {
+                clearSearch();
+                setNotableLocation('');
+                setShowMap(false);
+              }}
+              className="flex items-center gap-2"
             >
-            {showMap ? t.form.location.hideMap : t.form.location.showMap}
+              <Search className="size-4" />
+              {t.buttons.searchAgain || 'Search again'}
             </Button>
-          
           </div>
         </div>
       )}
 
+      {alternativeResults.length > 0 && data && !isLoading && (
+        <div className="space-y-2">
+          <p className="text-sm font-medium text-muted-foreground">
+            {alternativeResults.length === 1 
+              ? (t.form.location.oneAlternative || 'We found another option:')
+              : (t.form.location.multipleAlternatives || 'We found {count} more options:').replace('{count}', alternativeResults.length.toString())}
+          </p>
+          <div className="max-h-64 overflow-y-auto space-y-2">
+            {alternativeResults.map((result, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  selectAlternativeResult(index);
+                  setIsManualAdjustment(false);
+                }}
+                className="w-full flex items-start gap-3 p-2 bg-blue-500/5 hover:bg-blue-500/10 rounded-md border border-blue-200 text-left transition-colors"
+              >
+                <MapPinCheckInside className="size-4 mt-0.5 text-blue-600 flex-shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-medium text-blue-700 line-clamp-2">{result.name}</p>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {latitude && longitude && showMap && (
+        <div className="p-3 bg-blue-500/10 rounded-md border border-blue-200">
+          <div className="flex items-center gap-2 mb-2">
+            <Move className="size-4 text-blue-600" />
+            <p className="text-sm font-medium text-blue-700">{t.form.location.dragPin}</p>
+          </div>
+          <p className="text-xs text-muted-foreground">
+            {t.form.location.dragPinDescription}
+          </p>
+        </div>
+      )}
+
       {error && !isLoading && (
-        <div className="flex items-center gap-3 p-3 bg-red-500/10 text-red-500 rounded-md border">
-          <AlertCircle className="size-5 text-red-500" />
-          <p className="text-sm">{error}</p>
+        <div className="space-y-2">
+          <div className="flex items-center gap-3 p-3 bg-red-500/10 text-red-500 rounded-md border">
+            <AlertCircle className="size-5 text-red-500 flex-shrink-0" />
+            <div className="flex-1">
+              <p className="text-sm">{error}</p>
+            </div>
+          </div>
+          <Button 
+            variant='outline' 
+            size={'sm'} 
+            onClick={() => {
+              clearSearch();
+              setNotableLocation('');
+            }}
+            className="w-full flex items-center gap-2"
+          >
+            <Search className="size-4" />
+            {t.buttons.tryAgain || 'Try again'}
+          </Button>
         </div>
       )}
     </section>
   );
-}
-
-function AddressSeparator({children}:{children:ReactNode}){
-  return <span className="flex items-center font-bold justify-center"
-  >{children}</span>
 }

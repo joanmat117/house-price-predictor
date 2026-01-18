@@ -24,7 +24,8 @@ export function Step1(){
     error={errors.latitude?.message || errors.longitude?.message}
     >
       <InputLocation
-      setValue={setValue} 
+      setValue={setValue}
+      watch={watch}
       city={city}
       control={control}
       errors={errors}

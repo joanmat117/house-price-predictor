@@ -84,7 +84,10 @@
     "yes": "Sí",
     "no": "No",
     "getPrediction":"Calcular",
-    "searchLocation":"Buscar ubicación"
+    "searchLocation":"Buscar ubicación",
+    "adjustPin":"Ajustar ubicación en el mapa",
+    "searchAgain":"Buscar de nuevo",
+    "tryAgain":"Intentar de nuevo"
   },
   "form": {
     "typeWay": {
@@ -110,7 +113,12 @@
       "label": "Departamento"
     },
     "postalCode": {
-      "label":"Código postal"
+      "label":"Código postal",
+      "placeholder":"050021"
+    },
+    "landmark": {
+      "label": "Referencia cercana",
+      "placeholder": "Cerca de..."
     },
     "city": {
       "label": "Selecciona tu ciudad",
@@ -121,13 +129,25 @@
       "notFound": "Barrio no disponible",
       "placeholder": "Guayabal"
     },
+    "notableLocation": {
+      "label": "Busca un lugar cercano a tu propiedad",
+      "placeholder": "Ej: Centro Comercial El Tesoro, Parque Lleras, Estadio..."
+    },
     "location": {
       "label": "Escribe la dirección de la propiedad",
-      "notFound": "Dirección no encontrada",
+      "notFound": "Ubicación no encontrada. Intenta con otro lugar cercano.",
       "highConfidence":"Ubicación verificada",
+      "mediumConfidence":"Ubicación encontrada",
       "lowConfidence": "Hemos encontrado algo, pero no estamos seguros",
+      "locationFound": "Ubicación encontrada - verifica en el mapa",
       "showMap":"Ubicar en el mapa",
-      "hideMap":"Ocultar mapa"
+      "hideMap":"Ocultar mapa",
+      "alternativeResults": "Otras ubicaciones encontradas:",
+      "oneAlternative": "Encontramos otra opción:",
+      "multipleAlternatives": "Encontramos {count} opciones más:",
+      "confidence": "Confianza",
+      "dragPin": "Ajusta la ubicación exacta",
+      "dragPinDescription": "Arrastra el marcador en el mapa a la ubicación exacta de tu propiedad"
     },
     "property_type": {
       "label": "Selecciona el tipo de propiedad",

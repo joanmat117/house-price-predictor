@@ -1,88 +1,20 @@
 import { useState, useEffect } from "react";
-import { searchPlaceByQuery } from "../services/openCageService";
-import type { OpenCageQueryResponse } from "../types/OpenCageQueryResponse";
+import { getGeocodingService } from "../services/geocoding";
+import type { GeocodingResult } from "../services/geocoding/types";
 import { useTranslations } from "./useTranslations";
+import { useLanguage } from "./useLanguage";
 import { DEFAULT_DEPARTAMENT } from "@/config";
 import { usePersistedLocation } from "./usePersistedLocation";
 
-type LocationDataHook = {
-  name: string;
-  latitude: number;
-  longitude: number;
-  city: string;
-  confidence: number;
-  boundingbox: [string, string, string, string];
-};
-
-interface StructuredAddressParams {
-  city: string;
-  typeWay: string;
-  town: string;
-  number1: string;
-  block1?: string;
-  block2?: string;
-}
-
-function buildOcQueryStructured({
-  typeWay,
-  town,
-  number1,
-  block1,
-  block2,
-  city,
-}: StructuredAddressParams): string {
-  const parts: string[] = [];
-
-  parts.push(`${typeWay}`);
-  parts.push(` ${number1}`);
-  if (block1) parts.push(` # ${block1}`);
-  if (block2) parts.push(`-${block2}`);
-  parts.push(` ${town}`);
-  parts.push(` ${city}`);
-  parts.push(` ${DEFAULT_DEPARTAMENT}`);
-
-  return parts.filter(Boolean).join("");
-}
-
-function extractFirstResult(apiResponse: OpenCageQueryResponse): LocationDataHook {
-  const results = apiResponse.results;
-  if (!results || results.length === 0) {
-    throw new Error("No hay resultados disponibles");
-  }
-  const firstResult = results[0];
-  const name = firstResult.formatted;
-
-  const boundingbox: [string, string, string, string] = [
-    firstResult.bounds?.southwest.lat.toString() || firstResult.geometry.lat.toString(),
-    firstResult.bounds?.northeast.lat.toString() || firstResult.geometry.lat.toString(),
-    firstResult.bounds?.southwest.lng.toString() || firstResult.geometry.lng.toString(),
-    firstResult.bounds?.northeast.lng.toString() || firstResult.geometry.lng.toString(),
-  ];
-
-  const city =
-    firstResult.components.city ||
-    firstResult.components.town ||
-    firstResult.components.village ||
-    firstResult.components.county ||
-    "";
-
-  const confidence = firstResult.confidence;
-
-  return {
-    name,
-    latitude: firstResult.geometry.lat,
-    longitude: firstResult.geometry.lng,
-    city,
-    boundingbox,
-    confidence,
-  };
-}
+type LocationDataHook = GeocodingResult;
 
 export function useSearchLocation() {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<Partial<LocationDataHook> | undefined>(undefined);
+  const [alternativeResults, setAlternativeResults] = useState<LocationDataHook[]>([]);
   const [error, setError] = useState<string | undefined>(undefined);
   const t = useTranslations();
+  const { language } = useLanguage();
   
   const { persistLocation, deleteLocation, persistedLocation } = usePersistedLocation();
 
@@ -91,36 +23,66 @@ export function useSearchLocation() {
       setData(prev => ({
         ...prev,
         name: persistedLocation.name,
-        confidence: persistedLocation.confidence
       }));
     }
   }, [persistedLocation, data?.name]);
 
-  const fetchLocationStructured = async (params: StructuredAddressParams) => {
+  const searchNotableLocation = async (city: string, notableLocation: string) => {
     try {
       setIsLoading(true);
       setError(undefined);
       setData(undefined);
+      setAlternativeResults([]);
 
-      const formattedQuery = buildOcQueryStructured(params);
-
-      const response = await searchPlaceByQuery(formattedQuery);
+      const geocodingService = getGeocodingService();
+      
+      const response = await geocodingService.searchLocation({
+        city,
+        query: notableLocation,
+        state: DEFAULT_DEPARTAMENT,
+        language,
+      });
+      
       if (!response.results || response.results.length === 0) {
         throw new Error(t.form.location.notFound);
       }
 
-      const extractedData = extractFirstResult(response);
-      setData(extractedData);
+      // Set the first result as primary
+      setData(response.results[0]);
       
-      if (extractedData.name) {
-        persistLocation(extractedData.name, extractedData.confidence);
+      // Set all other results as alternatives
+      if (response.results.length > 1) {
+        setAlternativeResults(response.results.slice(1, 15)); // Up to 14 alternatives
+      }
+      
+      if (response.results[0].name) {
+        persistLocation(response.results[0].name, 10); // Default confidence for persistence
       }
       
     } catch (e: any) {
-      console.error("Error during fetching location: ", e);
+      console.error("Error during fetching notable location: ", e);
       setError(e.message);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const selectAlternativeResult = (index: number) => {
+    if (alternativeResults[index]) {
+      const selected = alternativeResults[index];
+      setData(selected);
+      
+      // Remove selected from alternatives and add current data to alternatives
+      const newAlternatives = [...alternativeResults];
+      newAlternatives.splice(index, 1);
+      if (data?.name) {
+        newAlternatives.push(data as LocationDataHook);
+      }
+      setAlternativeResults(newAlternatives);
+      
+      if (selected.name) {
+        persistLocation(selected.name, 10);
+      }
     }
   };
 
@@ -128,12 +90,21 @@ export function useSearchLocation() {
     deleteLocation();
   };
 
+  const clearSearch = () => {
+    setData(undefined);
+    setAlternativeResults([]);
+    setError(undefined);
+  };
+
   return {
     data,
+    alternativeResults,
     isLoading,
     error,
-    fetchLocationStructured,
+    searchNotableLocation,
+    selectAlternativeResult,
     persistedLocation,
     deletePersistedLocation,
+    clearSearch,
   };
 }
