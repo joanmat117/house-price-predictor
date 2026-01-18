@@ -3,12 +3,13 @@ import { Input } from "@/shared/components/ui/input";
 import { useState, useEffect } from "react";
 import { Button } from "@/shared/components/ui/button";
 import { Loader } from "@/shared/components/icons/Loader";
-import { AlertCircle, MapPinCheckInside, Search, Move } from "lucide-react";
+import { AlertCircle, MapPinCheckInside, Search, Move, MapPinPlus } from "lucide-react";
 import type { Control, FieldErrors, UseFormSetValue, UseFormWatch } from "react-hook-form";
 import { InputWrapper } from "./InputWrapper";
 import { useTranslations } from "@/shared/hooks/useTranslations";
 import { CITIES } from "@/config";
 import { ComboboxControlled } from "./ComboboxControlled";
+import { sliceRedundantLocationName } from "@/shared/utils/sliceRedundantLocationName";
 
 interface Props {
   setValue: UseFormSetValue<any>;
@@ -27,7 +28,6 @@ export function InputLocation({ setValue, watch, errors, setShowMap, showMap, co
     data, 
     alternativeResults,
     selectAlternativeResult,
-    clearSearch,
     error, 
     isLoading 
   } = useSearchLocation();
@@ -35,8 +35,8 @@ export function InputLocation({ setValue, watch, errors, setShowMap, showMap, co
   const [notableLocation, setNotableLocation] = useState("");
   const [isManualAdjustment, setIsManualAdjustment] = useState(false);
 
-  const latitude = watch?.('latitude');
-  const longitude = watch?.('longitude');
+  const latitude = watch('latitude');
+  const longitude = watch('longitude');
 
   useEffect(() => {
     if(data && !isLoading && !isManualAdjustment){
@@ -128,19 +128,6 @@ export function InputLocation({ setValue, watch, errors, setShowMap, showMap, co
                 {t.buttons.adjustPin}
               </Button>
             )}
-            <Button 
-              variant='ghost' 
-              size={'sm'} 
-              onClick={() => {
-                clearSearch();
-                setNotableLocation('');
-                setShowMap(false);
-              }}
-              className="flex items-center gap-2"
-            >
-              <Search className="size-4" />
-              {t.buttons.searchAgain || 'Search again'}
-            </Button>
           </div>
         </div>
       )}
@@ -152,7 +139,7 @@ export function InputLocation({ setValue, watch, errors, setShowMap, showMap, co
               ? (t.form.location.oneAlternative || 'We found another option:')
               : (t.form.location.multipleAlternatives || 'We found {count} more options:').replace('{count}', alternativeResults.length.toString())}
           </p>
-          <div className="max-h-64 overflow-y-auto space-y-2">
+          <div className="max-h-64 flex gap-2 flex-wrap overflow-y-auto">
             {alternativeResults.map((result, index) => (
               <button
                 key={index}
@@ -164,11 +151,11 @@ export function InputLocation({ setValue, watch, errors, setShowMap, showMap, co
                     setShowMap(true);
                   }
                 }}
-                className="w-full flex items-start gap-3 p-2 bg-blue-500/5 hover:bg-blue-500/10 rounded-md border border-blue-200 text-left transition-colors"
+                className="w-fit flex items-center text-blue-600 dark:text-blue-500 gap-1 p-2 bg-blue-500/5 hover:bg-blue-500/10 rounded-full cursor-pointer min-w-[200px] border border-border transition-colors"
               >
-                <MapPinCheckInside className="size-4 mt-0.5 text-blue-600 flex-shrink-0" />
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs font-medium text-blue-700 line-clamp-2">{result.name}</p>
+                <MapPinPlus className="size-4 " />
+                <div className="flex-1 text-start">
+                  <p className="text-xs font-medium">{sliceRedundantLocationName(result.name) + '...'}</p>
                 </div>
               </button>
             ))}
@@ -177,12 +164,9 @@ export function InputLocation({ setValue, watch, errors, setShowMap, showMap, co
       )}
 
       {latitude && longitude && showMap && (
-        <div className="p-3 bg-blue-500/10 rounded-md border border-blue-200">
-          <div className="flex items-center gap-2 mb-2">
-            <Move className="size-4 text-blue-600" />
-            <p className="text-sm font-medium text-blue-700">{t.form.location.dragPin}</p>
-          </div>
-          <p className="text-xs text-muted-foreground">
+        <div className="justify-end text-muted-foreground pr-2 flex gap-2 items-center rounded-md ">
+            <Move className="size-4" />
+          <p className="text-xs ">
             {t.form.location.dragPinDescription}
           </p>
         </div>
@@ -196,18 +180,6 @@ export function InputLocation({ setValue, watch, errors, setShowMap, showMap, co
               <p className="text-sm">{error}</p>
             </div>
           </div>
-          <Button 
-            variant='outline' 
-            size={'sm'} 
-            onClick={() => {
-              clearSearch();
-              setNotableLocation('');
-            }}
-            className="w-full flex items-center gap-2"
-          >
-            <Search className="size-4" />
-            {t.buttons.tryAgain || 'Try again'}
-          </Button>
         </div>
       )}
     </section>

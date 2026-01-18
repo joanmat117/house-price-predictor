@@ -147,7 +147,7 @@
       "multipleAlternatives": "Encontramos {count} opciones más:",
       "confidence": "Confianza",
       "dragPin": "Ajusta la ubicación exacta",
-      "dragPinDescription": "Arrastra el marcador en el mapa a la ubicación exacta de tu propiedad"
+      "dragPinDescription": "Arrastra el marcador hasta tu propiedad"
     },
     "property_type": {
       "label": "Selecciona el tipo de propiedad",

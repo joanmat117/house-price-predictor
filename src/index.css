@@ -132,7 +132,10 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground ;
+  }
+  html {
+    @apply overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none];
   }
   img:not([src]),
   img[src=""] {
@@ -141,6 +144,15 @@
 
   .animate-fade-in {
     animation: fade-in 0.3s both;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+    /* Para IE, Edge y Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE y Edge */
+    scrollbar-width: none;  /* Firefox */
   }
 }
 
