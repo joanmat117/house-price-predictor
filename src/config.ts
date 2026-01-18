@@ -15,7 +15,8 @@ export const TYPE_WAY = [
   "carrera",
   "avenida",
   "diagonal",
-  "transversal"
+  "transversal",
+  "circular"
 ]
 
 export const PROPERTY_TYPES = ["apartment", "house"]
