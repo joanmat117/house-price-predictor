@@ -146,14 +146,14 @@ export function InputLocation({ setValue,errors,setShowMap,showMap,control, city
             :
               data.name
           }</p>
-          {data.confidence && data.confidence <= 7 && 
+          
             <Button variant='ghost' size={'sm'} 
               onClick={()=>setShowMap(!showMap)}
               className="rounded-full text-end! text-sm text-muted-foreground self-end p-0! h-fit m-0! bg-transparent! "
             >
             {showMap ? t.form.location.hideMap : t.form.location.showMap}
             </Button>
-          }
+          
           </div>
         </div>
       )}
