@@ -301,7 +301,8 @@
       "carrera": "Carrera",
       "avenida": "Avenida",
       "diagonal": "Diagonal",
-      "transversal": "Transversal"
+      "transversal": "Transversal",
+      "circular":"Circular"
     },
     "antiquity":{
       "1":"0 - 1 años",
