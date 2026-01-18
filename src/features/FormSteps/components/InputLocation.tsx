@@ -159,6 +159,10 @@ export function InputLocation({ setValue, watch, errors, setShowMap, showMap, co
                 onClick={() => {
                   selectAlternativeResult(index);
                   setIsManualAdjustment(false);
+                  // Show map and center it on the selected location
+                  if (!showMap) {
+                    setShowMap(true);
+                  }
                 }}
                 className="w-full flex items-start gap-3 p-2 bg-blue-500/5 hover:bg-blue-500/10 rounded-md border border-blue-200 text-left transition-colors"
               >

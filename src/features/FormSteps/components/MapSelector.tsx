@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { MapContainer, TileLayer, Rectangle, Marker, useMapEvents, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Rectangle, Marker, useMapEvents, useMap, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -67,6 +67,22 @@ const MapClickHandler: React.FC<MapClickHandlerProps> = ({ onPinPlaced, enabled 
   return null;
 };
 
+/**
+ * Component to recenter map when pin position changes
+ */
+const MapRecenter: React.FC<{ center: Position }> = ({ center }) => {
+  const map = useMap();
+  
+  useEffect(() => {
+    map.setView(center, map.getZoom(), {
+      animate: true,
+      duration: 0.8
+    });
+  }, [center[0], center[1], map]);
+  
+  return null;
+};
+
 // =========== COMPONENTE PRINCIPAL ===========
 
 /**
@@ -131,12 +147,19 @@ export const MapSelector: React.FC<MapSelectorProps> = ({
         style={mapStyle}
         scrollWheelZoom={true}
         className="map-selector"
-        worldCopyJump={true} // Permite scroll horizontal infinito
+        maxBounds={bbox || undefined}
+        maxBoundsViscosity={1.0}
+        minZoom={11}
       >
         {/* Capa base del mapa */}
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          maxZoom={19}
+          noWrap={true}
         />
+        
+        {/* Recenter map when position changes */}
+        <MapRecenter center={initialPin} />
         
         {/* Bounding box si existe */}
         {bbox && (

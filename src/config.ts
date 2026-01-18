@@ -77,13 +77,13 @@ export const ANTIQUITY = {
 } 
 
 export const LATITUDE = {
-  min:6,
-  max:6.5
+  min: 6.115763,
+  max: 6.342470
 }
 
 export const LONGITUDE = {
-  min:-75.6,
-  max:-75.3
+  min: -75.685063,
+  max: -75.4885
 }
 
 export const WILLING_PRICE = {

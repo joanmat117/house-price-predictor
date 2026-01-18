@@ -34,6 +34,120 @@ export class OpenCageGeocodingService implements GeocodingService {
     return true;
   }
 
+  /**
+   * Strip common location prefixes that might cause search issues
+   * Based on OpenStreetMap naming conventions and common Colombian landmarks
+   * Includes both Spanish and English prefixes
+   */
+  private stripCommonPrefixes(query: string): string {
+    const prefixes = [
+      // Commercial (Spanish)
+      'centro comercial ',
+      'centro ',
+      'edificio ',
+      'torre ',
+      'plaza ',
+      // Commercial (English)
+      'shopping center ',
+      'shopping centre ',
+      'mall ',
+      'center ',
+      'centre ',
+      'building ',
+      'tower ',
+      
+      // Roads/Streets (Spanish)
+      'calle ',
+      'carrera ',
+      'avenida ',
+      'diagonal ',
+      'transversal ',
+      'circular ',
+      'autopista ',
+      'vía ',
+      'via ',
+      // Roads/Streets (English)
+      'street ',
+      'avenue ',
+      'road ',
+      'highway ',
+      
+      // Transportation (Spanish)
+      'estación ',
+      'estacion ',
+      'metro ',
+      'metrocable ',
+      'tranvía ',
+      'tranvia ',
+      'terminal ',
+      'parada ',
+      'aeropuerto ',
+      // Transportation (English)
+      'station ',
+      'tram ',
+      'tramway ',
+      'stop ',
+      'airport ',
+      
+      // Recreation/Sports (Spanish)
+      'parque ',
+      'estadio ',
+      'polideportivo ',
+      // Recreation/Sports (English)
+      'park ',
+      'stadium ',
+      'sports center ',
+      'sports centre ',
+      
+      // Education (Spanish)
+      'universidad ',
+      'colegio ',
+      'escuela ',
+      // Education (English)
+      'university ',
+      'college ',
+      'school ',
+      
+      // Healthcare (Spanish)
+      'hospital ',
+      'clínica ',
+      'clinica ',
+      // Healthcare (English)
+      'clinic ',
+      
+      // Religious/Cultural (Spanish)
+      'iglesia ',
+      'catedral ',
+      'museo ',
+      'biblioteca ',
+      'teatro ',
+      // Religious/Cultural (English)
+      'church ',
+      'cathedral ',
+      'museum ',
+      'library ',
+      'theater ',
+      'theatre ',
+      
+      // Hospitality (Spanish)
+      'hotel ',
+      'restaurante ',
+      // Hospitality (English)
+      'restaurant ',
+    ];
+    
+    const lowerQuery = query.toLowerCase();
+    for (const prefix of prefixes) {
+      if (lowerQuery.startsWith(prefix)) {
+        const stripped = query.substring(prefix.length);
+        console.log(`Stripped prefix "${prefix.trim()}" from query`);
+        return stripped;
+      }
+    }
+    
+    return query;
+  }
+
   async searchLocation(params: {
     city: string;
     query: string;
@@ -41,46 +155,58 @@ export class OpenCageGeocodingService implements GeocodingService {
     language?: string;
   }): Promise<GeocodingResponse> {
     const { city, query, state = 'Antioquia', language = 'es' } = params;
+    
+    const simplifiedQuery = this.stripCommonPrefixes(query);
+    const hasPrefix = simplifiedQuery !== query;
 
-    // Strategy 1: Try exact query with all details
+    // Strategy 1: Try exact query with all details (always try original first)
     let response = await this.tryQuery(
       `${query}, ${city}, ${state}, Colombia`,
       language,
       city
     );
 
-    if (response.results.length > 0) {
+    let allResults = [...response.results];
+
+    // Strategy 2: If has prefix, ALSO try simplified version and combine results
+    if (hasPrefix) {
+      console.log(`Also trying simplified "${simplifiedQuery}" for additional results`);
+      const simplifiedResponse = await this.tryQuery(
+        `${simplifiedQuery}, ${city}, ${state}, Colombia`,
+        language,
+        city
+      );
+
+      // Add simplified results that aren't duplicates
+      const existingNames = new Set(allResults.map(r => r.name));
+      const newResults = simplifiedResponse.results.filter(r => !existingNames.has(r.name));
+      allResults = [...allResults, ...newResults];
+      
+      if (allResults.length > 0) {
+        console.log(`Combined results: ${response.results.length} original + ${newResults.length} simplified`);
+        return { results: allResults, provider: 'opencage' };
+      }
+    } else if (allResults.length > 0) {
       console.log('Strategy 1 (full query) succeeded');
       return response;
     }
 
-    // Strategy 2: Try without state
+    // Strategy 3: Try without state
+    const queryToUse = hasPrefix ? simplifiedQuery : query;
     response = await this.tryQuery(
-      `${query}, ${city}, Colombia`,
+      `${queryToUse}, ${city}, Colombia`,
       language,
       city
     );
 
     if (response.results.length > 0) {
-      console.log('Strategy 2 (without state) succeeded');
+      console.log('Strategy 3 (without state) succeeded');
       return response;
     }
 
-    // Strategy 3: Try just query and country (but still filter by city)
+    // Strategy 4: Last resort - try city first order
     response = await this.tryQuery(
-      `${query}, Colombia`,
-      language,
-      city
-    );
-
-    if (response.results.length > 0) {
-      console.log('Strategy 3 (query + country) succeeded');
-      return response;
-    }
-
-    // Strategy 4: Try query with city in a different order
-    response = await this.tryQuery(
-      `${city} ${query}`,
+      `${city} ${queryToUse}`,
       language,
       city
     );

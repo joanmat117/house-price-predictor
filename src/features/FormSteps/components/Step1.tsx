@@ -2,7 +2,7 @@ import { useTranslations } from "@/shared/hooks/useTranslations"
 import { useFormPrediction } from "../hooks/useFormPrediction"
 import { StepWrapper } from "./StepWrapper"
 import { InputWrapper } from "./InputWrapper"
-import { LATITUDE, LONGITUDE, PROPERTY_TYPES } from "@/config"
+import { PROPERTY_TYPES } from "@/config"
 import { BoxRadioInputControlled } from "./BoxRadioInputControlled"
 import { InputLocation } from "./InputLocation"
 import { MapSelector } from "./MapSelector"
@@ -37,12 +37,17 @@ export function Step1(){
     {showMap && latitude && longitude && 
     <MapSelector
     onPinChange={([lat,lon])=>{
-      setValue('latitude',lat)
-      setValue('longitude',lon)
+      // Validate coordinates are within bounds
+      if (lat >= 6.115763 && lat <= 6.342470 && lon >= -75.685063 && lon <= -75.4885) {
+        setValue('latitude',lat)
+        setValue('longitude',lon)
+      } else {
+        console.warn('Coordinates outside allowed bounds:', {lat, lon});
+      }
     }}
     initialBbox={[
-    [LATITUDE.min, LONGITUDE.min], // Esquina suroeste
-    [LATITUDE.max, LONGITUDE.max]  // Esquina noreste
+    [6.115763, -75.685063], // Southwest corner
+    [6.342470, -75.4885]    // Northeast corner (extended 500m east)
   ]}
     initialPin={[latitude,longitude]}
     zoom={17}
