@@ -36,24 +36,21 @@ export function UserForm({ onSubmit, isSubmitting }: UserFormProps) {
 
   const isAgent = form.watch('is_agent');
 
-  // Función para manejar cambios en el input de teléfono
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>, field: any) => {
-    // Permitir solo números y espacios
-    const value = e.target.value.replace(/[^\d\s]/g, '');
-    field.onChange(value);
+    const rawValue = e.target.value.replace(/\D/g, ''); 
+    const limitedValue = rawValue.slice(0, 10); 
+    field.onChange(limitedValue);
   };
 
-  // Format data before sending it up to the parent
   const handleFormSubmit = (data: UserFormData) => {
     const formattedData = {
       ...data,
-      // Agregar prefijo +57 solo si hay algún número
-      phone_number: data.phone_number && data.phone_number.trim() !== '' 
-        ? `+57${data.phone_number.replace(/\D/g, '')}` 
+      phone_number: data.phone_number && data.phone_number.length === 10 
+        ? `+57${data.phone_number}` 
         : undefined,
       real_state_agency: data.is_agent ? data.real_state_agency : undefined,
     };
-    return onSubmit(formattedData);
+    return onSubmit(formattedData as UserFormData);
   };
 
   return (
@@ -63,6 +60,7 @@ export function UserForm({ onSubmit, isSubmitting }: UserFormProps) {
           {t.register.title}
         </h1>
 
+        {/* Campo: Nombre Completo */}
         <FormField
           control={form.control}
           name="name"
@@ -81,6 +79,7 @@ export function UserForm({ onSubmit, isSubmitting }: UserFormProps) {
           )}
         />
 
+        {/* Campo: Teléfono (Validación Colombia) */}
         <FormField
           control={form.control}
           name="phone_number"
@@ -89,17 +88,19 @@ export function UserForm({ onSubmit, isSubmitting }: UserFormProps) {
               <FormLabel>{t.register.phoneNumber.label}</FormLabel>
               <FormControl>
                 <div className="relative">
-                  <div className="absolute left-3 top-1/2 transform -translate-y-1/2 flex items-center gap-2 text-gray-500 pointer-events-none">
-                    <span className="text-sm font-medium">🇨🇴</span>
+                  {/* Prefijo visual de Colombia */}
+                  <div className="absolute left-3 top-1/2 transform -translate-y-1/2 flex items-center gap-2 text-gray-500 pointer-events-none border-r pr-2">
+                    <span className="text-sm">🇨🇴</span>
                     <span className="text-sm font-medium">+57</span>
                   </div>
                   <Input 
+                    type="tel"
                     placeholder={t.register.phoneNumber.placeholder} 
                     {...field}
                     value={field.value || ''}
                     onChange={(e) => handlePhoneChange(e, field)}
                     disabled={isSubmitting}
-                    className="pl-20"
+                    className="pl-20" // Espacio para el prefijo +57
                   />
                 </div>
               </FormControl>
@@ -111,6 +112,7 @@ export function UserForm({ onSubmit, isSubmitting }: UserFormProps) {
           )}
         />
 
+        {/* Campo: ¿Es agente? */}
         <FormField
           control={form.control}
           name="is_agent"
@@ -133,6 +135,7 @@ export function UserForm({ onSubmit, isSubmitting }: UserFormProps) {
           )}
         />
 
+        {/* Campo Condicional: Agencia Inmobiliaria */}
         {isAgent && (
           <FormField
             control={form.control}
@@ -157,6 +160,7 @@ export function UserForm({ onSubmit, isSubmitting }: UserFormProps) {
           />
         )}
 
+        {/* Botón de envío */}
         <Button 
           type="submit" 
           className="w-full" 
