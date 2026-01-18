@@ -301,7 +301,8 @@
       "carrera": "Avenue (Carrera)",
       "avenida": "Avenue (Avenida)",
       "diagonal": "Diagonal",
-      "transversal": "Transversal"
+      "transversal": "Transversal",
+      "circular":"Roundabout"
     },
     "antiquity": {
       "1": "0 - 1 years",
