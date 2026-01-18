@@ -5,6 +5,7 @@ import { Button } from "@/shared/components/ui/button"
 import { useFormFieldsStore } from "@/shared/hooks/useFormFieldsStore"
 import { usePrediction } from "@/shared/hooks/usePrediction"
 import { useTranslations } from "@/shared/hooks/useTranslations"
+import { useLanguage } from "@/shared/hooks/useLanguage"
 import type { PredictionData } from "@/shared/types/PredictionSchema"
 import { formatCOP } from "@/shared/utils/formatCOP"
 import { useEffect } from "react"
@@ -15,6 +16,7 @@ import predictionSuccessSvg from "@/assets/illustrations/analytics.svg"
 export default function Results(){
   
   const t = useTranslations()
+  const {language} = useLanguage()
 
   const {fields,resetFields} = useFormFieldsStore()
 
@@ -96,7 +98,7 @@ export default function Results(){
             }
           </h2>
           {statusCode === 429 && 
-          <a href='#'>
+          <a href={`https://wa.me/573126561205?text=${language === 'en' ? 'Hello%2C%20I%20ran%20out%20of%20predictions%2C%20I%27m%20going%20to%20share%20my%20email%20and%20phone%20number%20so%20you%20can%20locate%20my%20account%20and%20increase%20my%20limit%2C%20thank%20you%21' : 'Hola%2C%20me%20qued%C3%A9%20sin%20predicciones%2C%20te%20voy%20a%20pasar%20mi%20email%20y%20tel%C3%A9fono%20para%20que%20ubiques%20mi%20cuenta%20y%20aumentes%20mi%20l%C3%ADmite%2C%20gracias%21'}`} target='_blank' rel='noopener noreferrer'>
             <Button
           className="rounded-full flex gap-2 items-center justify-center"
           >
