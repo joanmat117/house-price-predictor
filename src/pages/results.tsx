@@ -12,6 +12,7 @@ import { useEffect } from "react"
 import quotaExceedSvg from "@/assets/illustrations/season_change.svg"
 import invalidCredentialsSvg from "@/assets/illustrations/void.svg"
 import predictionSuccessSvg from "@/assets/illustrations/analytics.svg"
+import { usePersistedLocation } from "@/shared/hooks/usePersistedLocation"
 
 export default function Results(){
   
@@ -21,6 +22,7 @@ export default function Results(){
   const {fields,resetFields} = useFormFieldsStore()
 
   const {isLoading,statusCode,isLatest,data,error,fetchPrediction} = usePrediction(fields as PredictionData)
+  const {deleteLocation} = usePersistedLocation()
   
   /*
   const isLoading = false
@@ -34,6 +36,7 @@ export default function Results(){
   if(!isLoading && data && !error){
       console.log('Se reseteo los fields')
       resetFields()
+      deleteLocation()
     }
   },[data])
 
