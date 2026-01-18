@@ -6,6 +6,7 @@ import { LATITUDE, LONGITUDE, PROPERTY_TYPES } from "@/config"
 import { BoxRadioInputControlled } from "./BoxRadioInputControlled"
 import { InputLocation } from "./InputLocation"
 import { MapSelector } from "./MapSelector"
+import { useState } from "react"
 
 export function Step1(){
   const t = useTranslations()
@@ -13,6 +14,7 @@ export function Step1(){
   const {handleSubmit,setValue,watch,control,formState:{errors}} = useFormPrediction('step1')
 
   const [city,latitude,longitude] = watch(['city','latitude','longitude'],'latitude')
+  const [showMap,setShowMap] = useState(false)
 
   return <>
   <StepWrapper handleContinue={handleSubmit}>
@@ -26,10 +28,12 @@ export function Step1(){
       city={city}
       control={control}
       errors={errors}
+      showMap={showMap}
+      setShowMap={setShowMap}
       /> 
     </InputWrapper>
 
-    {latitude && longitude && 
+    {showMap && latitude && longitude && 
     <MapSelector
     onPinChange={([lat,lon])=>{
       setValue('latitude',lat)

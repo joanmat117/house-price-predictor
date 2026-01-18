@@ -42,11 +42,13 @@ export function Combobox({label,value,notFound,optionsTranslation,options,onValu
           aria-expanded={open}
           className={`justify-between cursor-pointer ${triggerClassName}`}
         >
-        <span className='text-muted-foreground flex-1 text-start line-clamp-1'>
+        <span className='flex-1 text-start line-clamp-1'>
           {value
             ? (optionsTranslation? optionsTranslation[value] : capitalize(value))
-            : 
-            label || <div/>
+            :
+              label ?
+              <span className="text-muted-foreground">{label}</span>:
+              <div/>
             }   
           </span>
           <ChevronsUpDown className="opacity-50" />

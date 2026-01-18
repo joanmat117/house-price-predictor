@@ -36,11 +36,21 @@ export function UserForm({ onSubmit, isSubmitting }: UserFormProps) {
 
   const isAgent = form.watch('is_agent');
 
+  // Función para manejar cambios en el input de teléfono
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>, field: any) => {
+    // Permitir solo números y espacios
+    const value = e.target.value.replace(/[^\d\s]/g, '');
+    field.onChange(value);
+  };
+
   // Format data before sending it up to the parent
   const handleFormSubmit = (data: UserFormData) => {
     const formattedData = {
       ...data,
-      phone_number: data.phone_number || undefined,
+      // Agregar prefijo +57 solo si hay algún número
+      phone_number: data.phone_number && data.phone_number.trim() !== '' 
+        ? `+57${data.phone_number.replace(/\D/g, '')}` 
+        : undefined,
       real_state_agency: data.is_agent ? data.real_state_agency : undefined,
     };
     return onSubmit(formattedData);
@@ -58,10 +68,10 @@ export function UserForm({ onSubmit, isSubmitting }: UserFormProps) {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nombre completo *</FormLabel>
+              <FormLabel>{t.register.fullName.label}</FormLabel>
               <FormControl>
                 <Input 
-                  placeholder="Ingrese su nombre completo" 
+                  placeholder={t.register.fullName.placeholder} 
                   {...field} 
                   disabled={isSubmitting}
                 />
@@ -76,17 +86,25 @@ export function UserForm({ onSubmit, isSubmitting }: UserFormProps) {
           name="phone_number"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Número de teléfono</FormLabel>
+              <FormLabel>{t.register.phoneNumber.label}</FormLabel>
               <FormControl>
-                <Input 
-                  placeholder="+1 (555) 123-4567" 
-                  {...field} 
-                  value={field.value || ''}
-                  disabled={isSubmitting}
-                />
+                <div className="relative">
+                  <div className="absolute left-3 top-1/2 transform -translate-y-1/2 flex items-center gap-2 text-gray-500 pointer-events-none">
+                    <span className="text-sm font-medium">🇨🇴</span>
+                    <span className="text-sm font-medium">+57</span>
+                  </div>
+                  <Input 
+                    placeholder={t.register.phoneNumber.placeholder} 
+                    {...field}
+                    value={field.value || ''}
+                    onChange={(e) => handlePhoneChange(e, field)}
+                    disabled={isSubmitting}
+                    className="pl-20"
+                  />
+                </div>
               </FormControl>
               <FormDescription>
-                Opcional - Puede dejarlo en blanco si no desea proporcionarlo
+                {t.register.phoneNumber.description}
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -106,9 +124,9 @@ export function UserForm({ onSubmit, isSubmitting }: UserFormProps) {
                 />
               </FormControl>
               <div className="space-y-1 leading-none">
-                <FormLabel>¿Es agente inmobiliario?</FormLabel>
+                <FormLabel>{t.register.isAgent.label}</FormLabel>
                 <FormDescription>
-                  Marque esta opción si es un agente inmobiliario
+                  {t.register.isAgent.description}
                 </FormDescription>
               </div>
             </FormItem>
@@ -121,17 +139,17 @@ export function UserForm({ onSubmit, isSubmitting }: UserFormProps) {
             name="real_state_agency"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Agencia inmobiliaria</FormLabel>
+                <FormLabel>{t.register.realStateAgency.label}</FormLabel>
                 <FormControl>
                   <Input 
-                    placeholder="Nombre de su agencia" 
+                    placeholder={t.register.realStateAgency.placeholder} 
                     {...field} 
                     value={field.value || ''}
                     disabled={isSubmitting}
                   />
                 </FormControl>
                 <FormDescription>
-                  Opcional - Solo para agentes inmobiliarios
+                  {t.register.realStateAgency.description}
                 </FormDescription>
                 <FormMessage />
               </FormItem>

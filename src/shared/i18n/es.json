@@ -35,7 +35,25 @@
   "register":{
     "title":"Completa tu perfil",
     "submit":"Registrarse",
-    "submitPending":"Registrando..."
+    "submitPending":"Registrando...",
+    "fullName": {
+      "label": "Nombre completo *",
+      "placeholder": "Ingrese su nombre completo"
+    },
+    "phoneNumber": {
+      "label": "Número de teléfono",
+      "placeholder": "300 123 4567",
+      "description": "Opcional"
+    },
+    "isAgent": {
+      "label": "¿Es agente inmobiliario?",
+      "description": "Marque esta opción si es un agente inmobiliario"
+    },
+    "realStateAgency": {
+      "label": "Agencia inmobiliaria",
+      "placeholder": "Nombre de su agencia",
+      "description": "Opcional - Solo para agentes inmobiliarios"
+    }
   },
   "oauth":{
     "signIn":"Iniciar sesión",
@@ -105,7 +123,11 @@
     },
     "location": {
       "label": "Escribe la dirección de la propiedad",
-      "notFound": "Dirección no encontrada"
+      "notFound": "Dirección no encontrada",
+      "highConfidence":"Ubicación verificada",
+      "lowConfidence": "Hemos encontrado algo, pero no estamos seguros",
+      "showMap":"Ubicar en el mapa",
+      "hideMap":"Ocultar mapa"
     },
     "property_type": {
       "label": "Selecciona el tipo de propiedad",

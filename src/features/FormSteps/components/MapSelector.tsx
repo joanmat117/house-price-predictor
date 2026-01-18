@@ -145,7 +145,7 @@ export const MapSelector: React.FC<MapSelectorProps> = ({
             pathOptions={{
               color: getBboxColor(),
               weight: 3,
-              fillOpacity: 0.15,
+              fillOpacity: 0,
               dashArray: '5, 5',
               className: 'bbox-rectangle'
             }}

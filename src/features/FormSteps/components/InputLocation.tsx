@@ -3,7 +3,7 @@ import { Input } from "@/shared/components/ui/input";
 import { useState, useEffect, type ReactNode } from "react";
 import { Button } from "@/shared/components/ui/button";
 import { Loader } from "@/shared/components/icons/Loader";
-import { AlertCircle,LucideX, MapPinCheckInside, Search } from "lucide-react";
+import { AlertCircle, MapPinCheckInside, Search } from "lucide-react";
 import type { Control, FieldErrors, UseFormSetValue } from "react-hook-form";
 import { InputWrapper } from "./InputWrapper";
 import { useTranslations } from "@/shared/hooks/useTranslations";
@@ -16,11 +16,13 @@ interface Props {
   city?: string;
   control:Control<any,any,any>,
   errors:FieldErrors<any>
+  setShowMap:(value:boolean)=>void,
+  showMap:boolean
 }
 
 type TypeWayEnumKeys = 'calle'|'carrera'|'avenida'|'diagonal'|'transversal'
 
-export function InputLocation({ setValue,errors,control, city }: Props) {
+export function InputLocation({ setValue,errors,setShowMap,showMap,control, city }: Props) {
   const t = useTranslations();
   const { fetchLocationStructured,data, error, isLoading } = useSearchLocation();
 
@@ -31,11 +33,14 @@ export function InputLocation({ setValue,errors,control, city }: Props) {
   const [block2, setBlock2] = useState("");
 
   useEffect(() => {
-      if(data && !isLoading){
-      setValue("longitude", data?.longitude, { shouldValidate: true });
-      setValue("latitude", data?.latitude, { shouldValidate: true });
+    if(data && !isLoading){
+      // Solo actualizar latitude y longitude si existen en data
+      if (data.latitude !== undefined && data.longitude !== undefined) {
+        setValue("longitude", data.longitude, { shouldValidate: true });
+        setValue("latitude", data.latitude, { shouldValidate: true });
       }
-  }, [data, setValue]);
+    }
+  }, [data, setValue, isLoading]);
 
   const handleSearch = () => {
     if (!city || !typeWay || !town || !number1) return;
@@ -44,8 +49,6 @@ export function InputLocation({ setValue,errors,control, city }: Props) {
       typeWay,
       town,
       number1,
-      block1: block1.trim() || undefined,
-      block2: block2.trim() || undefined,
       city,
     });
   };
@@ -55,7 +58,6 @@ export function InputLocation({ setValue,errors,control, city }: Props) {
   return (
     <section className="space-y-4 mb-3 animate-fade-in">
       <div className="grid items-end grid-cols-2 gap-2">
-      {/*City*/}
       <InputWrapper
       labelHeading={t.form.city.label}
       error={errors.city?.message}
@@ -70,7 +72,6 @@ export function InputLocation({ setValue,errors,control, city }: Props) {
         />
       </InputWrapper>
 
-      {/* Tipo de vía */}
       <InputWrapper labelHeading={t.form.typeWay.label}>
         <Combobox
           onValueChange={(value) => setTypeWay(value)}
@@ -82,7 +83,6 @@ export function InputLocation({ setValue,errors,control, city }: Props) {
       </InputWrapper>
       </div>
 
-      {/* Nombre de vía */}
       {typeWay && <>
         <InputWrapper 
           labelHeading={t.form.town.label.replace(
@@ -96,7 +96,6 @@ export function InputLocation({ setValue,errors,control, city }: Props) {
         />
       </InputWrapper>
 
-      {/* Nº principal y secundarios */}
       <div className="flex animate-fade-in items-center gap-2">
           <Input
             value={number1}
@@ -135,32 +134,39 @@ export function InputLocation({ setValue,errors,control, city }: Props) {
 
       </>}
 
-      {/* Resultado */}
       {data && !isLoading && (
-        <div className="flex relative flex-col gap-3 p-3 bg-green-500/10 rounded-md border">
-          <div className="felx gap-1">
-            <MapPinCheckInside className="size-5 text-green-600" />
-            <Button variant='ghost' size={'icon-sm'} 
-              className="hidden absolute rounded-full bg-transparent! right-1 top-0 m-1"
+        <div className="flex relative gap-3 p-3 bg-green-500/10 rounded-md border">
+        <MapPinCheckInside className="size-5 text-green-600" />
+          <div className="flex flex-col flex-1 items-start gap-1">
+          <p className="font-medium  text-green-600">{
+            data.confidence ?
+              data.confidence > 7 ? 
+                t.form.location.highConfidence :
+                t.form.location.lowConfidence
+            :
+              data.name
+          }</p>
+          {data.confidence && data.confidence <= 7 && 
+            <Button variant='ghost' size={'sm'} 
+              onClick={()=>setShowMap(!showMap)}
+              className="rounded-full text-end! text-sm text-muted-foreground self-end p-0! h-fit m-0! bg-transparent! "
             >
-              <LucideX/>
+            {showMap ? t.form.location.hideMap : t.form.location.showMap}
             </Button>
+          }
           </div>
-          <p className="font-medium text-green-600 flex-1">{data.name}</p>
         </div>
       )}
 
-      {/* Error */}
       {error && !isLoading && (
-        <div className="flex items-center gap-3 p-3 bg-red-50 rounded-md border">
-          <AlertCircle className="size-5 text-red-600" />
+        <div className="flex items-center gap-3 p-3 bg-red-500/10 text-red-500 rounded-md border">
+          <AlertCircle className="size-5 text-red-500" />
           <p className="text-sm">{error}</p>
         </div>
       )}
     </section>
   );
 }
-
 
 function AddressSeparator({children}:{children:ReactNode}){
   return <span className="flex items-center font-bold justify-center"

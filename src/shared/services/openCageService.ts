@@ -3,6 +3,8 @@ import type { OpenCageQueryResponse } from "../types/OpenCageQueryResponse";
 
 export async function searchPlaceByQuery(query: string): Promise<OpenCageQueryResponse> {
   const API_KEY = import.meta.env.VITE_OPENCAGE_API_KEY;
+
+  //Redundant
   const cleanedQuery = query.trim().replace(/,?\s*Colombia$/i, '');
   
   const params = new URLSearchParams({
@@ -10,7 +12,7 @@ export async function searchPlaceByQuery(query: string): Promise<OpenCageQueryRe
     key: API_KEY,
     language: 'es',           
     countrycode: 'CO',        
-    limit: '2',               
+    limit: '1',               
     no_annotations: '1',
     bounds: `${LONGITUDE.min},${LATITUDE.min},${LONGITUDE.max},${LATITUDE.max}`
   });

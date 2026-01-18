@@ -1,1 +1,354 @@
-{"hero":{"title":"Housing Price Estimator - Aburrá Valley","description":"Estimation based on actual real estate market data.","accuracy":"Average error of ±10%.","cost":"free","cta":{"button":"Get Started"}},"results":{"title":"Prediction Results","latest":"Latest Prediction"},"header":{"title":"Aburrá Properties"},"signIn":{"title":"Signing In...","description":"Completing authentication, please wait."},"register":{"title":"Complete Your Profile","submit":"Register","submitPending":"Registering..."},"oauth":{"signIn":"Sign In","logOut":"Log Out"},"languageSelector":{"title":"Language","options":{"es":"Spanish","en":"English"}},"themeSelector":{"title":"Theme","dark":"Dark","light":"Light","system":"System"},"notfound":{"title":"Oops, Something Went Missing","description":"Sorry, we cannot find this page","button":"Back to Home"},"buttons":{"out":"Exit","previous":"Previous","next":"Next","yes":"Yes","no":"No","getPrediction":"Calculate","searchLocation":"Search Location"},"form":{"typeWay":{"label":"Road Type","placeholder":"Select the road type"},"number1":{"label":"Primary Number","placeholder":"127A"},"block1":{"label":"Secondary Number","placeholder":"7B"},"block2":{"label":"Final Number","placeholder":"42"},"address":{"label":"Address"},"departament":{"label":"Department"},"postalCode":{"label":"Postal Code"},"city":{"label":"Select Your City","notFound":"City not available"},"town":{"label":"Enter the Neighborhood","notFound":"Neighborhood not available","placeholder":"Guayabal"},"location":{"label":"Enter the Property Address","notFound":"Address not found"},"property_type":{"label":"Select Property Type","notFound":"Property type not available"},"latitude":{"label":"Enter Latitude"},"longitude":{"label":"Enter Longitude"},"area":{"label":"Total Land Area (m²)"},"built_area":{"label":"Built Area (m²)"},"rooms":{"label":"Number of Rooms"},"bathrooms":{"label":"Number of Bathrooms"},"parking_spots":{"label":"Number of Parking Spots"},"exact_number_label":"Specify the Exact Number (5 or more)","strata":{"label":"Socioeconomic Stratum"},"antiquity":{"label":"Property Age"},"has_sauna_jacuzzi_or_turkish_bath":{"label":"Does it have a sauna, jacuzzi, or Turkish bath?"},"has_pool":{"label":"Does it have a pool?"},"is_in_construction":{"label":"Is the property under construction?"},"relation_with_property":{"label":"What is Your Relationship to the Property?","notFound":"Role not available"},"property_status":{"label":"Current Property Status","notFound":"Status not available"},"selling_motives":{"label":"Why Do You Want to Sell?","notFound":"Motive not available"},"buying_motives":{"label":"Why Do You Want to Buy?","notFound":"Motive not available"},"willing_price":{"label":"Willing Price ($)"}},"steps":{"step1":{"title":"Location and Type"},"step2":{"title":"Dimensions"},"step3":{"title":"Features"},"step4":{"title":"Transaction Role"},"step5":{"title":"Additional Information"}},"validations":{"general":{"obligatory":"This field is required"},"location":{"invalid":"Invalid address"},"city":{"invalid":"Invalid city","notFoundOnSearch":"Select a city"},"town":{"invalid":"Invalid neighborhood"},"propertyType":{"invalid":"Invalid property type"},"strata":{"min":"Stratum must be at least 1","max":"Stratum cannot be greater than 6"},"area":{"min":"Area must be at least 30 m²","max":"Area cannot exceed 10,000 m²"},"builtArea":{"min":"Built area must be at least 30 m²","max":"Built area cannot exceed 5,000 m²"},"rooms":{"gt":"Must have at least 1 room","lt":"Cannot have more than 9 rooms"},"bathrooms":{"gt":"Must have at least 1 bathroom","lt":"Cannot have more than 9 bathrooms"},"parkingSpots":{"min":"Number of parking spots cannot be negative","lt":"Cannot have more than 9 parking spots"},"hasSauna":{"required":"This field is required","invalid_type":"Must be true or false"},"hasPool":{"required":"This field is required","invalid_type":"Must be true or false"},"antiquity":{"min":"Age must be at least 1 year","max":"Age cannot exceed 5 years"},"latitude":{"required":"Location is required","min":"Minimum latitude: 6.0","max":"Maximum latitude: 6.5"},"longitude":{"required":"Location is required","min":"Minimum longitude: -75.6","max":"Maximum longitude: -75.3"},"relationWithProperty":{"invalid":"Invalid relationship to property"},"propertyStatus":{"invalid":"Invalid property status","required":"Property status is required for sellers"},"sellingMotives":{"invalid":"Invalid selling motive","required":"Selling motive is required for sellers"},"buyingMotives":{"invalid":"Invalid buying motive","required":"Buying motive is required for buyers"},"willingPrice":{"min":"Price must be at least $50,000,000","max":"Price cannot exceed $10,000,000,000,000","required":"Price is required"},"isInConstruction":{"required":"This field is required","invalid_type":"Must be true or false"}},"enums":{"typeWay":{"calle":"Street","carrera":"Carrera","avenida":"Avenue","diagonal":"Diagonal","transversal":"Transversal"},"antiquity":{"1":"0 - 1 years","2":"1 - 8 years","3":"9 - 15 years","4":"16 - 30 years","5":"+ 30 years"},"cities":{"medellin":"Medellín","bello":"Bello","itagui":"Itagüí","envigado":"Envigado","sabaneta":"Sabaneta","la_estrella":"La Estrella"},"propertyTypes":{"apartment":"Apartment","house":"House"},"relationsWithProperty":{"sells":"I Sell","buys":"I Buy","agent":"I am a Real Estate Agent"},"propertyStatuses":{"unoccupied":"Unoccupied","rented":"Rented","inhabitates it":"Currently Inhabited"},"sellingMotives":{"house change":"Change of House","settle a debt":"Settle a Debt","business opportunity":"Business Opportunity","browsing offers":"Browsing Offers","investment for studies or travel":"Investment for Studies or Travel","Change city or live in the countryside":"Change City or Live in the Countryside","I don't want to keep renting":"I Don't Want to Keep Renting","property division":"Property Division"},"buyingMotives":{"proximity to work and schools":"Proximity to Work and Schools","investment opportunity":"Investment Opportunity","affordability and financing options":"Affordability and Financing Options","interest in newer home":"Interest in Newer Home","bigger house":"Bigger House","desire for a move-in ready home":"Desire for a Move-in Ready Home"}}}
+{
+  "hero": {
+    "title": "Home Price Estimator - Valle de Aburrá",
+    "description": "Estimation based on real estate market data.",
+    "accuracy": "Average error of ±10%.",
+    "cost": "free",
+    "cta": {
+      "button": "Get Started"
+    }
+  },
+  "results": {
+    "title": "Prediction Results",
+    "latest": "Most recent prediction",
+    "onLoading": "Prediction in progress",
+    "errors": {
+      "quotaExceed": {
+        "title": "You have reached the prediction limit.",
+        "contact": "Contact support"
+      },
+      "invalidCredentials": {
+        "title": "There is an error with your credentials, please log in again."
+      },
+      "unknown": {
+        "title": "An error has occurred, please try again later."
+      }
+    }
+  },
+  "header": {
+    "title": "Aburrá Properties"
+  },
+  "signIn": {
+    "title": "Signing in...",
+    "description": "Completing authentication, please wait."
+  },
+  "register": {
+    "title": "Complete your profile",
+    "submit": "Register",
+    "submitPending": "Registering...",
+    "fullName": {
+      "label": "Full name *",
+      "placeholder": "Enter your full name"
+    },
+    "phoneNumber": {
+      "label": "Phone number",
+      "placeholder": "300 123 4567",
+      "description": "Optional"
+    },
+    "isAgent": {
+      "label": "Are you a real estate agent?",
+      "description": "Check this box if you are a real estate agent"
+    },
+    "realStateAgency": {
+      "label": "Real estate agency",
+      "placeholder": "Your agency's name",
+      "description": "Optional - Only for real estate agents"
+    }
+  },
+  "oauth": {
+    "signIn": "Log In",
+    "logOut": "Log Out"
+  },
+  "languageSelector": {
+    "title": "Language",
+    "options": {
+      "es": "Spanish",
+      "en": "English"
+    }
+  },
+  "themeSelector": {
+    "title": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System"
+  },
+  "notfound": {
+    "title": "Oops, something went missing",
+    "description": "Sorry, we can't find this page",
+    "button": "Back to home"
+  },
+  "buttons": {
+    "out": "Exit",
+    "previous": "Previous",
+    "next": "Next",
+    "yes": "Yes",
+    "no": "No",
+    "getPrediction": "Calculate",
+    "searchLocation": "Search location"
+  },
+  "form": {
+    "typeWay": {
+      "label": "Road type",
+      "placeholder": "Select road type"
+    },
+    "number1": {
+      "label": "Main number",
+      "placeholder": "127A"
+    },
+    "block1": {
+      "label": "Secondary number",
+      "placeholder": "7B"
+    },
+    "block2": {
+      "label": "Final number",
+      "placeholder": "42"
+    },
+    "address": {
+      "label": "Address"
+    },
+    "departament": {
+      "label": "State/Department"
+    },
+    "postalCode": {
+      "label": "Postal code"
+    },
+    "city": {
+      "label": "Select your city",
+      "notFound": "City not available"
+    },
+    "town": {
+      "label": "Type the neighborhood",
+      "notFound": "Neighborhood not available",
+      "placeholder": "Guayabal"
+    },
+    "location": {
+      "label": "Type the property address",
+      "notFound": "Address not found",
+      "highConfidence": "Verified location",
+      "lowConfidence": "We found something, but we aren't sure",
+      "showMap": "Show on map",
+      "hideMap": "Hide map"
+    },
+    "property_type": {
+      "label": "Select property type",
+      "notFound": "Property type not available"
+    },
+    "latitude": {
+      "label": "Enter latitude"
+    },
+    "longitude": {
+      "label": "Enter longitude"
+    },
+    "area": {
+      "label": "Total lot area (m²)"
+    },
+    "built_area": {
+      "label": "Built area (m²)"
+    },
+    "rooms": {
+      "label": "Number of bedrooms"
+    },
+    "bathrooms": {
+      "label": "Number of bathrooms"
+    },
+    "parking_spots": {
+      "label": "Number of parking spots"
+    },
+    "exact_number_label": "Specify exact number (5 or more)",
+    "strata": {
+      "label": "Socioeconomic stratum"
+    },
+    "antiquity": {
+      "label": "Property age"
+    },
+    "has_sauna_jacuzzi_or_turkish_bath": {
+      "label": "Does it have a sauna, jacuzzi, or Turkish bath?"
+    },
+    "has_pool": {
+      "label": "Does it have a pool?"
+    },
+    "is_in_construction": {
+      "label": "Is the property under construction?"
+    },
+    "relation_with_property": {
+      "label": "What is your relationship with the property?",
+      "notFound": "Role not available"
+    },
+    "property_status": {
+      "label": "Current property status",
+      "notFound": "Status not available"
+    },
+    "selling_motives": {
+      "label": "Why do you want to sell?",
+      "notFound": "Reason not available"
+    },
+    "buying_motives": {
+      "label": "Why do you want to buy?",
+      "notFound": "Reason not available"
+    },
+    "willing_price": {
+      "label": "Desired price ($)"
+    }
+  },
+  "steps": {
+    "step1": {
+      "title": "Location and Type"
+    },
+    "step2": {
+      "title": "Dimensions"
+    },
+    "step3": {
+      "title": "Features"
+    },
+    "step4": {
+      "title": "Role in Transaction"
+    },
+    "step5": {
+      "title": "Additional Information"
+    }
+  },
+  "validations": {
+    "general": {
+      "obligatory": "This field is required"
+    },
+    "location": {
+      "invalid": "Invalid address"
+    },
+    "city": {
+      "invalid": "Invalid city",
+      "notFoundOnSearch": "Please select a city"
+    },
+    "town": {
+      "invalid": "Invalid neighborhood"
+    },
+    "propertyType": {
+      "invalid": "Invalid property type"
+    },
+    "strata": {
+      "min": "Stratum must be at least 1",
+      "max": "Stratum cannot be greater than 6"
+    },
+    "area": {
+      "min": "Area must be at least 30 m²",
+      "max": "Area cannot exceed 10,000 m²"
+    },
+    "builtArea": {
+      "min": "Built area must be at least 30 m²",
+      "max": "Built area cannot exceed 5,000 m²"
+    },
+    "rooms": {
+      "gt": "Must have at least 1 bedroom",
+      "lt": "Cannot have more than 9 bedrooms"
+    },
+    "bathrooms": {
+      "gt": "Must have at least 1 bathroom",
+      "lt": "Cannot have more than 9 bathrooms"
+    },
+    "parkingSpots": {
+      "min": "Number of parking spots cannot be negative",
+      "lt": "Cannot have more than 9 parking spots"
+    },
+    "hasSauna": {
+      "required": "This field is required",
+      "invalid_type": "Must be true or false"
+    },
+    "hasPool": {
+      "required": "This field is required",
+      "invalid_type": "Must be true or false"
+    },
+    "antiquity": {
+      "min": "Age must be at least 1 year",
+      "max": "Age cannot exceed 5 years"
+    },
+    "latitude": {
+      "required": "Location is required",
+      "min": "Minimum latitude: 6.0",
+      "max": "Maximum latitude: 6.5"
+    },
+    "longitude": {
+      "required": "Location is required",
+      "min": "Minimum longitude: -75.6",
+      "max": "Maximum longitude: -75.3"
+    },
+    "relationWithProperty": {
+      "invalid": "Invalid relationship with property"
+    },
+    "propertyStatus": {
+      "invalid": "Invalid property status",
+      "required": "Property status is required for sellers"
+    },
+    "sellingMotives": {
+      "invalid": "Invalid selling reason",
+      "required": "Selling reason is required for sellers"
+    },
+    "buyingMotives": {
+      "invalid": "Invalid buying reason",
+      "required": "Buying reason is required for buyers"
+    },
+    "willingPrice": {
+      "min": "Price must be at least $50,000,000",
+      "max": "Price cannot exceed $10,000,000,000,000",
+      "required": "Price is required"
+    },
+    "isInConstruction": {
+      "required": "This field is required",
+      "invalid_type": "Must be true or false"
+    }
+  },
+  "enums": {
+    "typeWay": {
+      "calle": "Street (Calle)",
+      "carrera": "Avenue (Carrera)",
+      "avenida": "Avenue (Avenida)",
+      "diagonal": "Diagonal",
+      "transversal": "Transversal"
+    },
+    "antiquity": {
+      "1": "0 - 1 years",
+      "2": "1 - 8 years",
+      "3": "9 - 15 years",
+      "4": "16 - 30 years",
+      "5": "+ 30 years"
+    },
+    "cities": {
+      "medellin": "Medellín",
+      "bello": "Bello",
+      "itagui": "Itagüí",
+      "envigado": "Envigado",
+      "sabaneta": "Sabaneta",
+      "la_estrella": "La Estrella"
+    },
+    "propertyTypes": {
+      "apartment": "Apartment",
+      "house": "House"
+    },
+    "relationsWithProperty": {
+      "sells": "I am selling",
+      "buys": "I am buying",
+      "agent": "I am a Real Estate Agent"
+    },
+    "propertyStatuses": {
+      "unoccupied": "Vacant",
+      "rented": "Rented",
+      "inhabitates it": "Currently living in it"
+    },
+    "sellingMotives": {
+      "house change": "Moving house",
+      "settle a debt": "Settling a debt",
+      "business opportunity": "Business opportunity",
+      "browsing offers": "Browsing offers",
+      "investment for studies or travel": "Investment for studies or travel",
+      "Change city or live in the countryside": "Moving cities or to the countryside",
+      "I don't want to keep renting": "I don't want to rent anymore",
+      "property division": "Property division"
+    },
+    "buyingMotives": {
+      "proximity to work and schools": "Proximity to work and schools",
+      "investment opportunity": "Investment opportunity",
+      "affordability and financing options": "Affordability and financing options",
+      "interest in newer home": "Interest in a newer home",
+      "bigger house": "Larger house",
+      "desire for a move-in ready home": "Desire for a move-in ready home"
+    }
+  }
+}
