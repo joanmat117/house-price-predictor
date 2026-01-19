@@ -23,7 +23,7 @@ export const BoxRadioInput = ({onValueChange,onLabelClick,value,containsText = t
           <label
             onClick={()=>onLabelClick && onLabelClick(item)}
             key={`${id}-${item}`}
-            className={`border-input  has-data-[state=checked]:border-primary/80 has-focus-visible:border-ring has-focus-visible:ring-ring/50 relative flex flex-col items-center justify-center gap-3 rounded-md border px-2 py-3 text-center cursor-pointer shadow-xs transition-[color,box-shadow] outline-none has-focus-visible:ring-[3px] has-data-disabled:cursor-not-allowed has-data-disabled:opacity-50 transition-all active:scale-95 ${containsText ? 'flex-1 min-w-[120px]' : ' min-w-10 rounded-full!'} ${labelClassName}`}
+            className={`border-input  has-data-[state=checked]:border-primary/80 has-focus-visible:border-ring has-focus-visible:ring-ring/50 relative flex flex-col items-center justify-center gap-3 rounded-md border px-2 py-3 text-center cursor-pointer shadow-xs transition-[color,box-shadow] outline-none has-focus-visible:ring-[3px] has-data-disabled:cursor-not-allowed has-data-disabled:opacity-50 transition-all active:scale-95 bg-background ${containsText ? 'flex-1 min-w-[120px]' : ' min-w-10 rounded-full!'} ${labelClassName}`}
           
           >
             <RadioGroupItem
@@ -32,7 +32,7 @@ export const BoxRadioInput = ({onValueChange,onLabelClick,value,containsText = t
               className='sr-only after:absolute after:inset-0'
               aria-label={`size-radio-${item}`}
             />
-            <p className='text-foreground text-sm leading-none font-medium bg-background'>{optionsTranslation? optionsTranslation[item.toString()] : capitalize(item.toString())}</p>
+            <p className='text-foreground text-sm leading-none font-medium'>{optionsTranslation? optionsTranslation[item.toString()] : capitalize(item.toString())}</p>
           </label>
         ))}
       </RadioGroup>
