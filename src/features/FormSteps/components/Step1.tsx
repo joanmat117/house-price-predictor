@@ -35,6 +35,8 @@ export function Step1(){
     </InputWrapper>
 
     {showMap && latitude && longitude && 
+      <div className="animate-pulse-fade-in transition-300">
+
     <MapSelector
     onPinChange={([lat,lon])=>{
       // Validate coordinates are within bounds
@@ -59,6 +61,7 @@ export function Step1(){
             borderRadius:'20px'
           }}
     />
+    </div>
     }
 
 

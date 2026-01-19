@@ -7,8 +7,8 @@ export const Hero = () => {
    
 
   return (
-    <section className={"overflow-hidden mx-auto flex justify-center items-center flex-1"}>
-      <div className="container mx-auto">
+    <section className={"overflow-hidden w-full bg-[url(@/assets/hero.webp)] bg-no-repeat bg-cover flex flex-col  flex-1"}>
+      <div className=" mx-auto w-full h-full flex-1 flex flex-col justify-center  bg-linear-to-b from-background backdrop-blur-[10px]  backdrop-saturate-200 dark:via-background/90 dark:via-background/40 to-background/40 text-slate-900 dark:text-foreground">
         <div className="flex flex-col w-full gap-5 py-10">
           <div className="relative flex flex-col gap-5 px-3">
             <div
@@ -21,19 +21,19 @@ export const Hero = () => {
                 <div className="size-full rounded-full border"></div>
               </div>
             </div>
-            <span className="mx-auto shadow-lg shadow-green-400/15 flex text-green-600 bg-green-400/20 dark:text-green-500 rounded-full px-3 py-1 items-center justify-center border font-semibold text-sm">
+            <span className="mx-auto shadow-lg shadow-primary-400/15 flex text-white bg-primary  rounded-full px-3 py-1 items-center justify-center  font-semibold text-sm">
               {t.hero.cost.toUpperCase()}
             </span>
-            <h1 className="mx-auto max-w-5xl text-center text-4xl font-[900] text-balance md:text-6xl">
+            <h1 className="mx-auto animate-blurred-fade-in max-w-5xl text-shadow text-shadow-lg text-shadow-black/20 text-center text-4xl font-[900] text-balance md:text-6xl">
               {t.hero.title}
             </h1>
-            <p className="mx-auto max-w-3xl text-center text-muted-foreground md:text-lg">
+            <p className="mx-auto max-w-3xl text-center text-muted-foreground font-semibold  md:text-xl">
               {t.hero.description}
             </p>
             <div className="flex flex-col items-center justify-center gap-3 pt-3 pb-12">
               <HeroInputCta/> 
               {t.hero.accuracy && (
-                <div className="text-xs text-muted-foreground">{t.hero.accuracy}</div>
+                <div className="text-xs text-muted-foreground px-2 py-1 bg-background rounded-full">{t.hero.accuracy}</div>
               )}
             </div>
           </div>

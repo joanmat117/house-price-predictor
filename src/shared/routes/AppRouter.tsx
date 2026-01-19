@@ -13,6 +13,13 @@ export function AppRouter(){
   <Suspense >
 
     <Routes>
+      <Route element={<Layout limits={false} />}>
+
+        <Route
+        path="/"
+        element={<Index/>}
+        />
+      </Route>
 
       <Route element={<Layout/>}>
 
@@ -23,10 +30,6 @@ export function AppRouter(){
         <Route
         path="/results"
         element={<Results/>}
-        />
-        <Route
-        path="/"
-        element={<Index/>}
         />
         <Route
         path="/predict"
