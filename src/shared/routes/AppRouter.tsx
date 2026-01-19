@@ -9,6 +9,7 @@ const Layout = lazy(()=>import('@/shared/layouts/Layout'))
 const Results = lazy(()=>import('@/pages/results'))
 const Terms = lazy(()=>import('@/pages/terms'))
 const PrivacyTerms = lazy(()=>import('@/pages/privacyTerms'))
+const Credits = lazy(()=>import('@/pages/credits'))
 
 export function AppRouter(){
   return <>
@@ -42,8 +43,12 @@ export function AppRouter(){
         element={<Terms/>}
         />
         <Route
-        path="/privacyTerms"
+        path="/privacy-terms"
         element={<PrivacyTerms/>}
+        />
+        <Route
+        path="/credits"
+        element={<Credits/>}
         />
         <Route
         path="*"

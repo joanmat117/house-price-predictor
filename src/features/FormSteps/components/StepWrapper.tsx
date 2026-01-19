@@ -13,7 +13,7 @@ export function StepWrapper({
   
   const {goPrevStep,goNextStep} = useStepperStore()
 
-  return <section className="animate-fade-in w-full">
+  return <section className="animate-fade-in animation-duration-300 w-full">
 
   {children}
   <StepperNavigation

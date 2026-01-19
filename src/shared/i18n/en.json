@@ -9,7 +9,12 @@
       "button": "Get Started"
     },
     "terms": "Terms & Conditions",
-    "privacy": "Privacy"
+    "privacy": "Privacy",
+    "credits":"Credits"
+  },
+  "credits": {
+    "title":"Credits",
+    "description":"The minds and hands behind this project."
   },
   "results": {
     "title": "Prediction Results",

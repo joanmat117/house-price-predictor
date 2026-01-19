@@ -43,7 +43,7 @@ export const Hero = () => {
               )}
             </div>
 
-            <div className="flex items-center justify-center gap-4 pb-4">
+            <div className="flex items-center drop-shadow drop-shadow-sm drop-shadow-background/40 justify-center gap-4 pb-4">
               <Link
                 to="/terms"
                 className="text-xs text-muted-foreground underline hover:text-foreground transition-colors"
@@ -51,10 +51,16 @@ export const Hero = () => {
                 {t.hero.terms}
               </Link>
               <Link
-                to="/privacyTerms"
+                to="/privacy-terms"
                 className="text-xs text-muted-foreground underline hover:text-foreground transition-colors"
               >
                 {t.hero.privacy}
+              </Link>
+              <Link
+                to="/credits"
+                className="text-xs text-muted-foreground underline hover:text-foreground transition-colors"
+              >
+                {t.hero.credits}
               </Link>
             </div>
           </div>

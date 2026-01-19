@@ -34,6 +34,7 @@
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.61.1",
     "react-leaflet": "^5.0.0",
+    "react-markdown": "^10.1.0",
     "react-number-format": "^5.4.4",
     "react-router-dom": "^7.9.6",
     "tailwind-animations": "^1.0.1",
