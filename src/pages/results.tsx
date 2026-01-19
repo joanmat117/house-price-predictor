@@ -9,6 +9,7 @@ import { useLanguage } from "@/shared/hooks/useLanguage"
 import type { PredictionData } from "@/shared/types/PredictionSchema"
 import { formatCOP } from "@/shared/utils/formatCOP"
 import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import quotaExceedSvg from "@/assets/illustrations/season_change.svg"
 import invalidCredentialsSvg from "@/assets/illustrations/void.svg"
 import predictionSuccessSvg from "@/assets/illustrations/analytics.svg"
@@ -18,6 +19,7 @@ export default function Results(){
   
   const t = useTranslations()
   const {language} = useLanguage()
+  const navigate = useNavigate()
 
   const {fields,resetFields} = useFormFieldsStore()
 
@@ -63,6 +65,13 @@ export default function Results(){
       alt="house for sale image"
       className="w-full object-contain opacity-80 mt-5 h-[200px] max-w-xl"
       />
+      <Button
+        className="rounded-full mt-4"
+        variant="outline"
+        onClick={() => navigate('/predict')}
+      >
+        {t.results.predictAgain}
+      </Button>
       </article>
     }
 

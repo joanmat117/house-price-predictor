@@ -15,6 +15,7 @@
     "title": "Prediction Results",
     "latest": "Most recent prediction",
     "onLoading": "Prediction in progress",
+    "predictAgain": "Try Again",
     "errors": {
       "quotaExceed": {
         "title": "You have reached the prediction limit.",
@@ -87,6 +88,7 @@
     "yes": "Yes",
     "no": "No",
     "getPrediction": "Calculate",
+    "getPredictionWithGoogle": "Predict with Google",
     "searchLocation": "Search location",
     "adjustPin": "Adjust location on map",
     "searchAgain": "Search again",

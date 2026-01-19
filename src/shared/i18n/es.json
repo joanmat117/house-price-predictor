@@ -15,6 +15,7 @@
     "title":"Resultados de la predicción",
     "latest":"Predicción más reciente",
     "onLoading":"Predicción en proceso",
+    "predictAgain":"Intentar de nuevo",
     "errors": {
       "quotaExceed": {
         "title":"Ha alcanzado el límite de predicciones.",
@@ -87,6 +88,7 @@
     "yes": "Sí",
     "no": "No",
     "getPrediction":"Calcular",
+    "getPredictionWithGoogle":"Predecir con Google",
     "searchLocation":"Buscar ubicación",
     "adjustPin":"Ajustar ubicación en el mapa",
     "searchAgain":"Buscar de nuevo",

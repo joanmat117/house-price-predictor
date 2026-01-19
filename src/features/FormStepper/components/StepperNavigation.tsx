@@ -1,6 +1,7 @@
 import { Button } from "@/shared/components/ui/button"
 import { useStepperStore } from "@/shared/hooks/useStepperStore"
 import { useTranslations } from "@/shared/hooks/useTranslations"
+import { useAuthentication } from "@/shared/hooks/useAuthentication"
 import { ArrowBigLeft, ArrowBigRight, Calculator} from "lucide-react"
 
 interface Props {
@@ -11,6 +12,7 @@ interface Props {
 export function StepperNavigation({onNextClick,onPrevClick}:Props){
 
   const t = useTranslations()
+  const { isAuthenticated } = useAuthentication()
 
   const {currentStep,maxStep} = useStepperStore()
 
@@ -36,7 +38,7 @@ export function StepperNavigation({onNextClick,onPrevClick}:Props){
       className="rounded-full"
       onClick={onNextClick? ()=>onNextClick() : undefined}
       >
-        {t.buttons.getPrediction}
+        {!isAuthenticated ? t.buttons.getPredictionWithGoogle : t.buttons.getPrediction}
         <Calculator className="size-4"/>
 
       </Button>
