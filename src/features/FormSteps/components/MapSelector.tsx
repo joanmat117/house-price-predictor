@@ -65,14 +65,25 @@ const MapCenterTracker: React.FC<{ onCenterChange: (position: Position) => void;
 };
 
 /**
- * Sets initial map view
+ * Sets initial map view and handles center updates from props
  */
 const MapInitializer: React.FC<{ center: Position; zoom: number }> = ({ center, zoom }) => {
   const map = useMap();
+  const isFirstRender = React.useRef(true);
   
   useEffect(() => {
-    map.setView(center, zoom, { animate: false });
-  }, []);
+    if (isFirstRender.current) {
+      // Initial render: set view without animation
+      map.setView(center, zoom, { animate: false });
+      isFirstRender.current = false;
+    } else {
+      // Subsequent updates: fly to new center with animation
+      map.flyTo(center, zoom, {
+        animate: true,
+        duration: 0.8
+      });
+    }
+  }, [center[0], center[1], zoom, map]);
   
   return null;
 };
