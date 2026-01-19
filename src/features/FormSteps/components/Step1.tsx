@@ -35,6 +35,7 @@ export function Step1(){
     </InputWrapper>
 
     {showMap && latitude && longitude && 
+      <div className="animate-pulse-fade-in transition-300">
 
     <MapSelector
     onPinChange={([lat,lon])=>{
@@ -60,6 +61,7 @@ export function Step1(){
             borderRadius:'20px'
           }}
     />
+    </div>
     }
 
 

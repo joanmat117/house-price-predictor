@@ -117,7 +117,7 @@ export function InputLocation({ setValue, watch, errors, setShowMap, showMap, co
           </div>
 
           <div className="flex gap-2">
-            {!showMap && (
+            {!showMap && latitude && longitude && (
               <Button 
                 variant='outline' 
                 size={'sm'} 
