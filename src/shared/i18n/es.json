@@ -1,8 +1,8 @@
 {
   "hero": {
-    "title": "Avaluador de Viviendas",
+    "title": "Valora tu Vivienda",
     "subtitle": "Valle de Aburrá",
-    "description": "Estimación basada en datos reales del mercado inmobiliario.",
+    "description": "Estimador basado en datos reales del mercado inmobiliario.",
     "accuracy": "Error promedio de ±10%.",
     "cost": "gratis",
     "cta": {
