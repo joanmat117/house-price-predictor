@@ -32,7 +32,7 @@ export const BoxRadioInput = ({onValueChange,onLabelClick,value,containsText = t
               className='sr-only after:absolute after:inset-0'
               aria-label={`size-radio-${item}`}
             />
-            <p className='text-foreground text-sm leading-none font-medium'>{optionsTranslation? optionsTranslation[item.toString()] : capitalize(item.toString())}</p>
+            <p className='text-foreground text-sm leading-none font-medium bg-background'>{optionsTranslation? optionsTranslation[item.toString()] : capitalize(item.toString())}</p>
           </label>
         ))}
       </RadioGroup>
