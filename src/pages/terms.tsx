@@ -57,7 +57,7 @@ export default function TermsAndConditions() {
           </p>
           <p className="mt-2">
             {isEs
-              ? "Para fines oficiales, se recomienda acudir a un avaluador profesional o entidad competente."
+              ? "Para fines oficiales, se recomienda acudir a un profesional o entidad competente."
               : "For official purposes, you should consult a licensed professional appraiser or competent entity."}
           </p>
         </section>
