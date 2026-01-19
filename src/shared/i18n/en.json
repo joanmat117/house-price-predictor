@@ -88,7 +88,7 @@
     "yes": "Yes",
     "no": "No",
     "getPrediction": "Calculate",
-    "getPredictionWithGoogle": "Predict with Google",
+    "getPredictionWithGoogle": "Sign-in with Google to continue",
     "searchLocation": "Search location",
     "adjustPin": "Adjust location on map",
     "searchAgain": "Search again",
