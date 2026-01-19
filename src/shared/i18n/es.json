@@ -3,7 +3,7 @@
     "title": "Avaluador de Viviendas",
     "subtitle": "Valle de Aburrá",
     "description": "Estimación basada en datos reales del mercado inmobiliario.",
-    "accuracy": " Error del ±10% en promedio.",
+    "accuracy": "Error promedio de ±10%.",
     "cost": "gratis",
     "cta": {
       "button": "Empezar"
@@ -22,7 +22,7 @@
         "contact":"Contactar con soporte"
       },
       "invalidCredentials": {
-        "title":"Hay un error en sus credenciales, vuelva a inicar sesión."
+        "title":"Hay un error con tus credenciales. Inicia sesión de nuevo."
       },
       "unknown": {
         "title":"Ha ocurrido un error, reinténtelo más tarde."
@@ -34,7 +34,7 @@
   },
   "signIn": {
     "title":"Accediendo...",
-    "description":"Completando autenticación, por favor espera."
+    "description":"Completando autenticación. Espera un momento."
   },
   "register":{
     "title":"Completa tu perfil",
@@ -42,7 +42,7 @@
     "submitPending":"Registrando...",
     "fullName": {
       "label": "Nombre completo *",
-      "placeholder": "Ingrese su nombre completo"
+      "placeholder": "Escribe tu nombre completo"
     },
     "phoneNumber": {
       "label": "Número de teléfono",
@@ -51,12 +51,12 @@
     },
     "isAgent": {
       "label": "¿Es agente inmobiliario?",
-      "description": "Marque esta opción si es un agente inmobiliario"
+      "description": "Marca esta opción si eres agente inmobiliario"
     },
     "realStateAgency": {
       "label": "Agencia inmobiliaria",
-      "placeholder": "Nombre de su agencia",
-      "description": "Opcional - Solo para agentes inmobiliarios"
+      "placeholder": "Nombre de tu agencia",
+      "description": "Opcional (solo para agentes inmobiliarios)"
     }
   },
   "oauth":{
@@ -90,7 +90,7 @@
     "getPrediction":"Calcular",
     "getPredictionWithGoogle":"Predecir con Google",
     "searchLocation":"Buscar ubicación",
-    "adjustPin":"Ajustar ubicación en el mapa",
+    "adjustPin":"Ajustar en el mapa",
     "searchAgain":"Buscar de nuevo",
     "tryAgain":"Intentar de nuevo"
   },
@@ -126,7 +126,7 @@
       "placeholder": "Cerca de..."
     },
     "city": {
-      "label": "Selecciona tu ciudad",
+      "label": "Selecciona la ciudad",
       "notFound": "Ciudad no disponible"
     },
     "town": {
@@ -136,33 +136,33 @@
     },
     "notableLocation": {
       "label": "Busca un lugar cercano a tu propiedad",
-      "placeholder": "Ej: Centro Comercial El Tesoro, Parque Lleras, Estadio..."
+      "placeholder": "Ej.: Centro Comercial El Tesoro, Parque Lleras, Estadio..."
     },
     "location": {
       "label": "Escribe la dirección de la propiedad",
       "notFound": "Ubicación no encontrada. Intenta con otro lugar cercano.",
       "highConfidence":"Ubicación verificada",
       "mediumConfidence":"Ubicación encontrada",
-      "lowConfidence": "Hemos encontrado algo, pero no estamos seguros",
-      "locationFound": "Ubicación encontrada - verifica en el mapa",
+      "lowConfidence": "Encontramos una coincidencia, pero no estamos seguros.",
+      "locationFound": "Ubicación encontrada. Verifica en el mapa.",
       "showMap":"Ubicar en el mapa",
       "hideMap":"Ocultar mapa",
       "alternativeResults": "Otras ubicaciones encontradas:",
       "oneAlternative": "Encontramos otra opción:",
       "multipleAlternatives": "Encontramos {count} opciones más:",
-      "confidence": "Confianza",
-      "dragPin": "Ajusta la ubicación exacta",
-      "dragPinDescription": "Arrastra el marcador hasta tu propiedad"
+      "confidence": "Nivel de confianza",
+      "dragPin": "Ajusta la ubicación exacta en el mapa",
+      "dragPinDescription": "Arrastra el marcador hasta la ubicación exacta"
     },
     "property_type": {
       "label": "Selecciona el tipo de propiedad",
       "notFound": "Tipo de propiedad no disponible"
     },
     "latitude": {
-      "label": "Ingresa la latitud"
+      "label": "Latitud"
     },
     "longitude": {
-      "label": "Ingresa la longitud"
+      "label": "Longitud"
     },
     "area": {
       "label": "Área total del terreno (m²)"
@@ -217,7 +217,7 @@
   },
   "steps": {
     "step1": {
-      "title": "Ubicación y Tipo"
+      "title": "Ubicación y tipo de propiedad"
     },
     "step2": {
       "title": "Dimensiones"
@@ -226,10 +226,10 @@
       "title": "Características"
     },
     "step4": {
-      "title": "Rol en la Transacción"
+      "title": "Rol en la transacción"
     },
     "step5": {
-      "title": "Información Adicional"
+      "title": "Información adicional"
     }
   },
   "validations": {
@@ -274,24 +274,24 @@
       "lt": "No puede tener más de 9 parqueaderos"
     },
     "hasSauna": {
-      "required": "Este campo es requerido",
-      "invalid_type": "Debe ser verdadero o falso"
+      "required": "Este campo es obligatorio",
+      "invalid_type": "Selecciona Sí o No"
     },
     "hasPool": {
-      "required": "Este campo es requerido",
-      "invalid_type": "Debe ser verdadero o falso"
+      "required": "Este campo es obligatorio",
+      "invalid_type": "Selecciona Sí o No"
     },
     "antiquity": {
-      "min": "La antigüedad debe ser al menos 1 año",
-      "max": "La antigüedad no puede exceder 5 años"
+      "min": "Selecciona una opción de antigüedad",
+      "max": "Selecciona una opción válida de antigüedad"
     },
     "latitude": {
-      "required":"La ubicación es requerida",
+      "required":"La ubicación es obligatoria",
       "min": "Latitud mínima: 6.0",
       "max": "Latitud máxima: 6.5"
     },
     "longitude": {
-      "required":"La ubicación es requerida",
+      "required":"La ubicación es obligatoria",
       "min": "Longitud mínima: -75.6",
       "max": "Longitud máxima: -75.3"
     },
@@ -300,24 +300,24 @@
     },
     "propertyStatus": {
       "invalid": "Estado de la propiedad no válido",
-      "required": "El estado de la propiedad es requerido para vendedores"
+      "required": "El estado de la propiedad es obligatorio para vendedores"
     },
     "sellingMotives": {
       "invalid": "Motivo de venta no válido",
-      "required": "El motivo de venta es requerido para vendedores"
+      "required": "El motivo de venta es obligatorio para vendedores"
     },
     "buyingMotives": {
       "invalid": "Motivo de compra no válido",
-      "required": "El motivo de compra es requerido para compradores"
+      "required": "El motivo de compra es obligatorio para compradores"
     },
     "willingPrice": {
       "min": "El precio debe ser al menos $50,000,000",
       "max": "El precio no puede exceder $10,000,000,000,000",
-      "required": "El precio es requerido"
+      "required": "El precio es obligatorio"
     },
     "isInConstruction": {
-      "required": "Este campo es requerido",
-      "invalid_type": "Debe ser verdadero o falso"
+      "required": "Este campo es obligatorio",
+      "invalid_type": "Selecciona Sí o No"
     }
   },
   "enums": {
@@ -351,12 +351,12 @@
     "relationsWithProperty": {
       "sells": "Vendo",
       "buys": "Compro",
-      "agent": "Soy Agente Inmobiliario"
+      "agent": "Soy agente inmobiliario"
     },
     "propertyStatuses": {
       "unoccupied": "Desocupada",
       "rented": "Arrendada",
-      "inhabitates it": "La habito actualmente"
+      "inhabitates it": "La habito"
     },
     "sellingMotives": {
       "house change": "Cambio de casa",
