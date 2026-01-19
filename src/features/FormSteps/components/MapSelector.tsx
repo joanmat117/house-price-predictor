@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Rectangle, useMapEvents, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -33,15 +33,28 @@ export interface MapSelectorProps {
 
 /**
  * Tracks map center and fires callback on move end, handles click to center
+ * Tracks user-initiated movements to prevent feedback loops
  */
-const MapCenterTracker: React.FC<{ onCenterChange: (position: Position) => void; bounds?: BoundingBox | null }> = ({ onCenterChange, bounds }) => {
+const MapCenterTracker: React.FC<{ 
+  onCenterChange: (position: Position) => void; 
+  bounds?: BoundingBox | null;
+  lastUserPosition: React.MutableRefObject<{ center: Position; zoom: number }>;
+}> = ({ onCenterChange, bounds, lastUserPosition }) => {
   const map = useMap();
+  const isDraggingRef = useRef(false);
   
   useMapEvents({
-    moveend: () => {
+    dragstart: () => {
+      isDraggingRef.current = true;
+    },
+    dragend: () => {
+      // Only update on drag, not zoom
       const center = map.getCenter();
       const lat = center.lat;
       const lng = center.lng;
+      const zoom = map.getZoom();
+      
+      lastUserPosition.current = { center: [lat, lng], zoom };
       
       // Validate within bounds if provided
       if (bounds) {
@@ -52,12 +65,18 @@ const MapCenterTracker: React.FC<{ onCenterChange: (position: Position) => void;
       } else {
         onCenterChange([lat, lng]);
       }
+      
+      isDraggingRef.current = false;
     },
-    click: (e) => {
-      map.flyTo([e.latlng.lat, e.latlng.lng], map.getZoom(), {
-        animate: true,
-        duration: 0.5
-      });
+    zoomend: () => {
+      // Track zoom changes without triggering re-center
+      if (!isDraggingRef.current) {
+        const center = map.getCenter();
+        lastUserPosition.current = { 
+          center: [center.lat, center.lng], 
+          zoom: map.getZoom() 
+        };
+      }
     },
   });
   
@@ -66,8 +85,13 @@ const MapCenterTracker: React.FC<{ onCenterChange: (position: Position) => void;
 
 /**
  * Sets initial map view and handles center updates from props
+ * Only animates when center changes significantly from an external source (search)
  */
-const MapInitializer: React.FC<{ center: Position; zoom: number }> = ({ center, zoom }) => {
+const MapInitializer: React.FC<{ 
+  center: Position; 
+  zoom: number;
+  lastUserPosition: React.MutableRefObject<{ center: Position; zoom: number }>;
+}> = ({ center, zoom, lastUserPosition }) => {
   const map = useMap();
   const isFirstRender = React.useRef(true);
   
@@ -75,15 +99,28 @@ const MapInitializer: React.FC<{ center: Position; zoom: number }> = ({ center, 
     if (isFirstRender.current) {
       // Initial render: set view without animation
       map.setView(center, zoom, { animate: false });
+      lastUserPosition.current = { center, zoom };
       isFirstRender.current = false;
-    } else {
-      // Subsequent updates: fly to new center with animation
-      map.flyTo(center, zoom, {
+      return;
+    }
+    
+    // Check if this is a significant change from last known position
+    const [lastLat, lastLng] = lastUserPosition.current.center;
+    const threshold = 0.0001; // ~11 meters
+    const isSignificantChange = 
+      Math.abs(center[0] - lastLat) > threshold || 
+      Math.abs(center[1] - lastLng) > threshold;
+    
+    // Only fly to new center if it's a significant external change (e.g., from search)
+    // Don't update zoom - let user control that
+    if (isSignificantChange) {
+      map.flyTo(center, map.getZoom(), {
         animate: true,
         duration: 0.8
       });
+      lastUserPosition.current = { center, zoom: map.getZoom() };
     }
-  }, [center[0], center[1], zoom, map]);
+  }, [center[0], center[1], map, lastUserPosition]);
   
   return null;
 };
@@ -103,6 +140,11 @@ export const MapSelector: React.FC<MapSelectorProps> = ({
   className = '',
 }) => {
   const [bbox, setBbox] = useState<BoundingBox | null>(initialBbox);
+  // Shared ref to track the last position from user interaction (drag/zoom/click)
+  const lastUserPosition = useRef<{ center: Position; zoom: number }>({
+    center: initialPin,
+    zoom
+  });
 
   useEffect(() => {
     setBbox(initialBbox);
@@ -155,8 +197,8 @@ export const MapSelector: React.FC<MapSelectorProps> = ({
           noWrap={true}
         />
         
-        <MapInitializer center={initialPin} zoom={zoom} />
-        <MapCenterTracker onCenterChange={handleCenterChange} bounds={bbox} />
+        <MapInitializer center={initialPin} zoom={zoom} lastUserPosition={lastUserPosition} />
+        <MapCenterTracker onCenterChange={handleCenterChange} bounds={bbox} lastUserPosition={lastUserPosition} />
         
         {bbox && (
           <Rectangle
