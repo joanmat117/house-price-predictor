@@ -27,9 +27,6 @@ export default function CreditsView() {
         <h1 className="text-4xl font-extrabold tracking-tight mb-4">
           {t.credits.title}
         </h1>
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          {t.credits.description} 
-        </p>
       </header>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
