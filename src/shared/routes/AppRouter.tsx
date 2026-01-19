@@ -7,6 +7,7 @@ const NotFound = lazy(()=>import('@/pages/notFound'))
 const GoogleCallback = lazy(()=>import('@/pages/googleCallback'))
 const Layout = lazy(()=>import('@/shared/layouts/Layout'))
 const Results = lazy(()=>import('@/pages/results'))
+const Terms = lazy(()=>import('@/pages/terms'))
 
 export function AppRouter(){
   return <>
@@ -34,6 +35,10 @@ export function AppRouter(){
         <Route
         path="/predict"
         element={<Predict/>}
+        />
+        <Route
+        path="/terms"
+        element={<Terms/>}
         />
         <Route
         path="*"

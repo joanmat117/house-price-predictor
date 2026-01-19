@@ -7,7 +7,8 @@
     "cost": "gratis",
     "cta": {
       "button": "Empezar"
-    }
+    },
+    "terms": "Términos y Condiciones"
   },
   "results":{
     "title":"Resultados de la predicción",

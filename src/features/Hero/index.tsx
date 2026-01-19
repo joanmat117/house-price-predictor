@@ -1,5 +1,6 @@
 import { useTranslations } from "@/shared/hooks/useTranslations";
 import { HeroInputCta } from "./components/HeroInputCta";
+import { Link } from "react-router-dom";
 
 export const Hero = () => {
   
@@ -40,6 +41,15 @@ export const Hero = () => {
               {t.hero.accuracy && (
                 <div className="text-xs text-muted-foreground px-2 py-1 bg-background rounded-full">{t.hero.accuracy}</div>
               )}
+            </div>
+
+            <div className="flex justify-center pb-4">
+              <Link
+                to="/terms"
+                className="text-xs text-muted-foreground underline hover:text-foreground transition-colors"
+              >
+                {t.hero.terms}
+              </Link>
             </div>
           </div>
         </div>
