@@ -1,15 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { MapContainer, TileLayer, Rectangle, Marker, useMapEvents, useMap, Popup } from 'react-leaflet';
-import L from 'leaflet';
+import { MapContainer, TileLayer, Rectangle, useMapEvents, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
-// Solucionar iconos rotos en React Leaflet
-delete (L.Icon.Default.prototype as any)._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-});
 // =========== TIPOS ===========
 export type Position = [number, number]; // [lat, lng]
 export type BoundingBox = [Position, Position]; // [[sw_lat, sw_lng], [ne_lat, ne_lng]]
@@ -18,19 +10,16 @@ export interface MapSelectorProps {
   /** Bounding box inicial para resaltar un área */
   initialBbox?: BoundingBox | null;
   
-  /** Posición inicial del PIN */
-  initialPin: Position ;
+  /** Posición inicial del centro */
+  initialPin: Position;
   
-  /** Callback cuando el PIN cambia de posición */
+  /** Callback cuando el centro del mapa cambia */
   onPinChange?: (position: Position) => void;
-  
-  /** Callback cuando el bounding box cambia */
-  onBboxChange?: (bbox: BoundingBox | null) => void;
   
   /** Estilos CSS para el contenedor del mapa */
   mapStyle?: React.CSSProperties;
   
-  /** Nivel de zoom inicial (2 = vista mundo) */
+  /** Nivel de zoom inicial */
   zoom?: number;
   
   /** Centro inicial del mapa */
@@ -38,47 +27,52 @@ export interface MapSelectorProps {
   
   /** Clases CSS adicionales */
   className?: string;
-  
-  /** Si es true, permite arrastrar el marcador */
-  draggable?: boolean;
-  
-  /** Si es true, permite hacer clic en el mapa para colocar PIN */
-  clickToPlace?: boolean;
-}
-
-interface MapClickHandlerProps {
-  onPinPlaced: (position: Position) => void;
-  enabled: boolean;
 }
 
 // =========== COMPONENTES INTERNOS ===========
 
 /**
- * Maneja los clics en el mapa para colocar un PIN
+ * Tracks map center and fires callback on move end, handles click to center
  */
-const MapClickHandler: React.FC<MapClickHandlerProps> = ({ onPinPlaced, enabled }) => {
+const MapCenterTracker: React.FC<{ onCenterChange: (position: Position) => void; bounds?: BoundingBox | null }> = ({ onCenterChange, bounds }) => {
+  const map = useMap();
+  
   useMapEvents({
-    click: (e) => {
-      if (enabled) {
-        onPinPlaced([e.latlng.lat, e.latlng.lng]);
+    moveend: () => {
+      const center = map.getCenter();
+      const lat = center.lat;
+      const lng = center.lng;
+      
+      // Validate within bounds if provided
+      if (bounds) {
+        const [[swLat, swLng], [neLat, neLng]] = bounds;
+        if (lat >= swLat && lat <= neLat && lng >= swLng && lng <= neLng) {
+          onCenterChange([lat, lng]);
+        }
+      } else {
+        onCenterChange([lat, lng]);
       }
     },
+    click: (e) => {
+      map.flyTo([e.latlng.lat, e.latlng.lng], map.getZoom(), {
+        animate: true,
+        duration: 0.5
+      });
+    },
   });
+  
   return null;
 };
 
 /**
- * Component to recenter map when pin position changes
+ * Sets initial map view
  */
-const MapRecenter: React.FC<{ center: Position }> = ({ center }) => {
+const MapInitializer: React.FC<{ center: Position; zoom: number }> = ({ center, zoom }) => {
   const map = useMap();
   
   useEffect(() => {
-    map.setView(center, map.getZoom(), {
-      animate: true,
-      duration: 0.8
-    });
-  }, [center[0], center[1], map]);
+    map.setView(center, zoom, { animate: false });
+  }, []);
   
   return null;
 };
@@ -86,7 +80,7 @@ const MapRecenter: React.FC<{ center: Position }> = ({ center }) => {
 // =========== COMPONENTE PRINCIPAL ===========
 
 /**
- * Componente selector de mapa con bounding box y PIN arrastrable
+ * Map selector with CSS-centered pin that tracks map center
  */
 export const MapSelector: React.FC<MapSelectorProps> = ({
   initialBbox = null,
@@ -96,51 +90,44 @@ export const MapSelector: React.FC<MapSelectorProps> = ({
   zoom = 2,
   center = [20, 0],
   className = '',
-  draggable = true,
-  clickToPlace = true,
 }) => {
   const [bbox, setBbox] = useState<BoundingBox | null>(initialBbox);
-
 
   useEffect(() => {
     setBbox(initialBbox);
   }, [initialBbox]);
 
-  /**
-   * Maneja la colocación de un nuevo PIN
-   */
-  const handlePinPlaced = useCallback((position: Position) => {
+  const handleCenterChange = useCallback((position: Position) => {
     onPinChange(position);
   }, [onPinChange]);
 
-  /**
-   * Maneja el arrastre del marcador
-   */
-  const handleMarkerDragEnd = useCallback((event: L.DragEndEvent) => {
-    const marker = event.target;
-    const position = marker.getLatLng();
-    const newPosition: Position = [position.lat, position.lng];
-    
-    onPinChange(newPosition);
-  }, [onPinChange]);
-
-  /**
-   * Obtiene el color del bounding box basado en su tamaño
-   */
   const getBboxColor = useCallback((): string => {
     if (!bbox) return '#3388ff';
     
     const [sw, ne] = bbox;
     const area = Math.abs((ne[0] - sw[0]) * (ne[1] - sw[1]));
     
-    if (area > 100) return '#ff4444'; // Grande: rojo
-    if (area > 10) return '#ffaa00';  // Mediano: naranja
-    return '#00aa44';                 // Pequeño: verde
+    if (area > 100) return '#ff4444';
+    if (area > 10) return '#ffaa00';
+    return '#00aa44';
   }, [bbox]);
 
- 
   return (
-    <div className={`map-selector-container ${className}`}>
+    <div className={`map-selector-container relative ${className}`}>
+      {/* CSS Centered Pin */}
+      <div 
+        className="absolute left-1/2 top-1/2 z-[1000] pointer-events-none"
+        style={{ transform: 'translate(-50%, -100%)' }}
+      >
+        <svg width="32" height="42" viewBox="0 0 32 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path 
+            d="M16 0C7.163 0 0 7.163 0 16c0 12 16 26 16 26s16-14 16-26c0-8.837-7.163-16-16-16z" 
+            fill="#3b82f6"
+          />
+          <circle cx="16" cy="16" r="6" fill="white"/>
+        </svg>
+      </div>
+      
       <MapContainer
         center={center}
         zoom={zoom}
@@ -151,17 +138,15 @@ export const MapSelector: React.FC<MapSelectorProps> = ({
         maxBoundsViscosity={1.0}
         minZoom={11}
       >
-        {/* Capa base del mapa */}
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           maxZoom={19}
           noWrap={true}
         />
         
-        {/* Recenter map when position changes */}
-        <MapRecenter center={initialPin} />
+        <MapInitializer center={initialPin} zoom={zoom} />
+        <MapCenterTracker onCenterChange={handleCenterChange} bounds={bbox} />
         
-        {/* Bounding box si existe */}
         {bbox && (
           <Rectangle
             bounds={bbox}
@@ -172,35 +157,9 @@ export const MapSelector: React.FC<MapSelectorProps> = ({
               dashArray: '5, 5',
               className: 'bbox-rectangle'
             }}
-            eventHandlers={{
-              click: () => {
-                console.log('Bounding box clickeado:', bbox);
-              }
-            }}
           />
         )}
-        
-        {/* Marcador arrastrable */}
-        <Marker
-          position={initialPin as Position}
-          draggable={draggable}
-          eventHandlers={{
-            dragend: handleMarkerDragEnd,
-          }}
-        >
-          <Popup>
-            <div className="flex flex-col gap-1">
-              <div className="rounded-full font-bold py-1 px-2 bg-black text-white">Lat: <code>{initialPin[0].toFixed(6)}</code></div>
-              <div  className="rounded-full font-bold py-1 px-2 bg-black text-white">Lng: <code>{initialPin[1].toFixed(6)}</code></div>
-            </div>
-          </Popup>
-        </Marker>
-        
-        {/* Componentes auxiliares */}
-        <MapClickHandler onPinPlaced={handlePinPlaced} enabled={clickToPlace} />
-        </MapContainer>
-      
-          </div>
+      </MapContainer>
+    </div>
   );
 };
-
