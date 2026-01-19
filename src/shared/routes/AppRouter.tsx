@@ -8,6 +8,7 @@ const GoogleCallback = lazy(()=>import('@/pages/googleCallback'))
 const Layout = lazy(()=>import('@/shared/layouts/Layout'))
 const Results = lazy(()=>import('@/pages/results'))
 const Terms = lazy(()=>import('@/pages/terms'))
+const PrivacyTerms = lazy(()=>import('@/pages/privacyTerms'))
 
 export function AppRouter(){
   return <>
@@ -39,6 +40,10 @@ export function AppRouter(){
         <Route
         path="/terms"
         element={<Terms/>}
+        />
+        <Route
+        path="/privacyTerms"
+        element={<PrivacyTerms/>}
         />
         <Route
         path="*"

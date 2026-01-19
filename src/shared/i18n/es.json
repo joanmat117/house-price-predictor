@@ -8,7 +8,8 @@
     "cta": {
       "button": "Empezar"
     },
-    "terms": "Términos y Condiciones"
+    "terms": "Términos y Condiciones",
+    "privacy": "Privacidad"
   },
   "results":{
     "title":"Resultados de la predicción",
