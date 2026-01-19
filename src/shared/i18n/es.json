@@ -88,7 +88,7 @@
     "yes": "Sí",
     "no": "No",
     "getPrediction":"Calcular",
-    "getPredictionWithGoogle":"Inicia sesión con Google para continuar",
+    "requireGoogle":"Requiere inicio de sesión con Google",
     "searchLocation":"Buscar ubicación",
     "adjustPin":"Ajustar en el mapa",
     "searchAgain":"Buscar de nuevo",

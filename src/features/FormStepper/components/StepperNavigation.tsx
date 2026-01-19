@@ -17,13 +17,14 @@ export function StepperNavigation({onNextClick,onPrevClick}:Props){
   const {currentStep,maxStep} = useStepperStore()
 
   return <>
-    <div className={`flex items-center my-5 ${currentStep > 1?'justify-between':'justify-center'} gap-2.5`}>
+    <div className={`flex items-start my-5 ${currentStep > 1?'justify-between':'justify-center'} gap-2.5`}>
       {currentStep > 1 && <Button variant="outline" className="rounded-full" onClick={onPrevClick?()=>onPrevClick():undefined} disabled={currentStep === 1}>
           <ArrowBigLeft className="size-4"/>
         {t.buttons.previous}
       </Button>
       }
       {currentStep !== maxStep?
+
       <Button
         variant="default"
         className={`rounded-full ${currentStep === 1 && 'w-full max-w-md mt-4'}`}
@@ -33,15 +34,22 @@ export function StepperNavigation({onNextClick,onPrevClick}:Props){
         {t.buttons.next}
         <ArrowBigRight className="size-4" />
       </Button>:
+      <div className="flex flex-col items-end gap-1">
       <Button
       variant='default'
-      className="rounded-full"
+      className="rounded-full w-full max-w-[300px]"
       onClick={onNextClick? ()=>onNextClick() : undefined}
       >
-        {!isAuthenticated ? t.buttons.getPredictionWithGoogle : t.buttons.getPrediction}
+        {t.buttons.getPrediction}
         <Calculator className="size-4"/>
 
       </Button>
+      {!isAuthenticated && <span 
+        className='text-xs text-muted-foreground'
+        >
+        {t.buttons.requireGoogle}
+      </span>}
+      </div>
       }
     </div>
 
