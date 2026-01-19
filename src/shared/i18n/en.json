@@ -1,6 +1,7 @@
 {
   "hero": {
-    "title": "Home Price Estimator - Valle de Aburrá",
+    "title": "Property Price Estimator",
+    "subtitle": "Valle de Aburrá",
     "description": "Estimation based on real estate market data.",
     "accuracy": "Average error of ±10%.",
     "cost": "free",

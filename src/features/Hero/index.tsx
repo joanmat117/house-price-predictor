@@ -24,9 +24,14 @@ export const Hero = () => {
             <span className="mx-auto shadow-lg shadow-primary-400/15 flex text-white bg-primary  rounded-full px-3 py-1 items-center justify-center  font-semibold text-sm">
               {t.hero.cost.toUpperCase()}
             </span>
-            <h1 className="mx-auto animate-blurred-fade-in max-w-5xl text-shadow text-shadow-lg text-shadow-black/20 text-center text-4xl font-[900] text-balance md:text-6xl">
-              {t.hero.title}
-            </h1>
+            <div className="space-y-0">
+              <h1 className="mx-auto animate-blurred-fade-in max-w-5xl text-shadow text-shadow-lg text-shadow-black/20 text-center text-4xl font-[900] text-balance md:text-6xl">
+                {t.hero.title}
+              </h1>
+              <h2 className="mx-auto animate-blurred-fade-in max-w-5xl text-shadow text-shadow-lg text-shadow-black/20 text-center text-4xl font-[900] text-balance md:text-6xl">
+                {t.hero.subtitle}
+              </h2>
+            </div>
             <p className="mx-auto max-w-3xl text-center text-muted-foreground font-semibold  md:text-xl">
               {t.hero.description}
             </p>
